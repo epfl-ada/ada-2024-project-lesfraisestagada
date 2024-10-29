@@ -4,4 +4,5 @@ sentencepiece==0.2.0
 scipy==1.13.0
 matplotlib==3.8.4
 wandb==0.17.2
-numpy== ...
+numpy==2.1.2
+country_list==1.1.0
