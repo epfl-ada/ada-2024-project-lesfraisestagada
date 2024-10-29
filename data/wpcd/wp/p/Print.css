@@ -1,0 +1,169 @@
+body	{
+	margin: 20px;
+	padding: 0;
+	color: #000;
+	font: 100%/1.2 Arial, Verdana, Helvetica, sans-serif;
+	background: #fff;
+	}
+
+h1 {
+	letter-spacing: 0.1em;
+ 	margin: 0 0 3px 0;
+	border-bottom: 2px solid black;
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 1.4em;
+}
+h1 a {
+	text-decoration: none;
+}
+#siteguide {
+	display: none;
+}
+#sitesearch {
+	display: none;
+}
+#bread {
+	border-bottom: 1px dotted black;
+	padding: 5px 0;
+	font-size: 0.77em;
+	margin: 0;
+}
+#nav {
+	display: none;
+}
+#news { 
+	display: none;
+}
+
+/* ----- */
+
+a {
+	text-decoration: underline;
+}
+
+h2 {
+	letter-spacing: 0.01em;
+ 	margin: 15px 0 0.3em 0;
+	padding: 0;
+}
+h3 {
+	letter-spacing: 0.01em;
+ 	margin: 20px 0 0.4em 0;
+	padding: 0;
+}
+
+/* Paras & Text */
+p {
+	margin: 0 16px 0.7em 0;	
+	line-height: 1.2em;
+}
+
+p.country_links {
+	display: none;
+}
+
+span.access	{
+	display: none;
+}
+
+/* Images */
+img	{
+	border: 0;
+	margin: 0 20px 10px 0;
+	padding: 0;
+}
+img.left {
+	float: left;
+	margin: 0 20px 10px 0;
+	padding: 0;
+}
+img.right {
+	float: right;
+	margin: 0 0 10px 20px;
+	padding: 0;
+}
+img.centre {
+	display: block;
+	margin: 0 auto 10px auto;
+	padding: 0;
+}
+
+/* Lists */
+#content ul {
+	margin: 10px 0 20px 40px;
+	padding: 0;
+	list-style-image: url(../../wp/b/Bullet.gif);
+}
+#content li {
+	padding: 0 0 10px 0	;
+	margin: 7px 0 7px 0;
+}
+
+/* Special Bits */
+div.clearboth {
+	clear: both;
+}
+
+/* TABLES */
+
+table {
+}
+table th {
+}
+table tr {
+}
+table td {
+}
+
+/* FORMS */
+
+form {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+fieldset {
+	padding: 10px 20px 10px 20px;
+	margin: 20px 0 20px 0;
+}
+legend {
+	font-weight: bold;
+	padding: 0 5px 0 5px;
+}
+label {
+	font-weight: bold;
+	display: block;
+	margin: 0 0 3px 0;
+}
+input, textarea {
+	padding: 2px;
+	margin: 0 0 5px 0;
+}
+select {
+	margin: 0 0 5px 0;
+}
+input.but {
+	padding: 2px;
+	font-weight: bold;
+	margin: 10px 10px 10px 0;
+}
+
+
+#footer {
+	clear: both;
+	border-top: 1px solid black;
+	padding: 5px;
+	margin: 20px 0 0 0;
+}
+#footer p {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	font-size: 0.77em;
+	line-height: 1.6em;
+}
+
+div#previewpost {
+	display: none;
+}

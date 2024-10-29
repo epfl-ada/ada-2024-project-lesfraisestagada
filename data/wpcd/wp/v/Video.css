@@ -1,0 +1,70 @@
+/* SOS Video Callout CSS */
+
+/* Naivgation */
+#content #navcontainer {
+	background: white;
+	border: 2px solid #FF9900;
+	border-bottom: 7px solid #FF9900;
+	margin: 20px 0 -7px 20px;
+	padding: 0;
+}
+#content ul#navlist {
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	display: block;
+}
+#content #navlist li {
+	display: inline;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+#content #navlist a {
+	padding: 2px 6px;
+	margin: 0;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	text-decoration: none;
+	font-size: 0.8em;
+	border-right: 2px solid #F90;
+	display: block;
+	float: left;
+}
+#content #navlist a:link, #content #navlist a:visited {
+	color: black;
+	background: white;
+}
+#content #navlist a:hover, #content #navlist a#selected {
+	color: white;
+	background-color: #F90;
+}
+#content #navcontainer span {
+	display: block;
+	clear: left;
+}
+
+/* Village Text */
+p.vv-sub {
+	font-size: 0.77em;
+	background: #003399;
+	color: #fff;
+	padding: 3px;
+	margin: 0;
+	font-weight: bold;
+	font-style: italic;
+}
+
+p.vv-copy {
+	font-size: 0.77em;
+	padding: 3px;
+	margin: 0 0 10px 0;
+}
+
+div.video {
+	padding: 5px;
+	border: 2px solid #003399;
+	margin: 0;
+	background: #FFCC66;
+	width: 290px;
+}

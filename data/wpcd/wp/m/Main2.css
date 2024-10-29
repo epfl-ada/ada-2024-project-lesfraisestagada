@@ -1,0 +1,226 @@
+body
+{
+  font-family: Gill Sans, Arial, Helvetica, sans-serif;
+  font-size: small;
+  color: #003399;
+  font-weight: bold;
+  margin: 10px;
+  background: white;
+}
+
+H1 { font-size: large; }
+H2 { font-size: medium; }
+
+IMG {  border-color: white; }
+IMG.left { float: left; margin: 1em 20px 1em 0; }
+IMG.right { float: right; margin: 1em 0 1em 20px; }
+
+P { margin: 1em 0 1em 0; padding: 0; }
+
+CODE { color: #003399;; }
+
+LI { margin: 1em 0 1em 0; padding: 0; }
+
+A { text-decoration: none; }
+A:link    { color: #003399; }
+A:visited { color: #003399 }
+A:hover   { text-decoration: underline }
+
+div#all
+{
+  max-width: 900px;
+}
+
+div#menu
+{
+  font-size: medium;
+  float: right;
+  width: 10em;
+  margin: 0 0 20px 20px;
+  color: #003399;
+}
+
+div#menu * td
+{
+  background-color: #62b4ee;
+}
+
+
+div#main
+{
+  margin: 0;
+}
+
+div#main A { text-decoration: underline; }
+
+
+.MenuHeader
+{
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 13pt;
+ font-weight: bold;
+ white-space: nowrap;
+ margin: 12px 0px 8px;
+ color: 003399;
+ text-align: center;
+}
+
+.MenuLevel1
+{
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 10pt;
+ font-weight: bold;
+ white-space: nowrap;
+ margin: 10px 0px 0px;
+ color: #003399;
+}
+
+.MenuLevel2
+{
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 8pt;
+ font-weight: bold;
+ white-space: nowrap;
+ margin: 10px 0px 0px 15px;
+ color: #003399;
+}
+
+.Heading
+{
+ font-family: Comic Sans MS, Arial, Helvetica, sans-serif;
+ font-size: 16pt;
+ font-weight: bold;
+ margin-top: 0;
+color: #003399;
+}
+
+.DetailHeading
+{
+ font-family: Comic Sans MS, Arial, Helvetica, sans-serif;
+ font-size: 13pt;
+ font-weight: normal;
+ color: #003399;
+}
+
+.PopupPictureTitle
+{
+ font-family: Comic Sans MS, Arial, Helvetica, sans-serif;
+ font-size: small;
+ font-weight: normal;
+ color: #003399;
+}
+
+.SmallLink
+{
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ font-size: xx-small;
+ font-weight: bold;
+ color: #003399;
+}
+
+.DetailText
+{
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ font-size: small;
+}
+
+.ExtraInfo
+{
+ color: #003399;
+}
+
+.IntroText
+{
+ color: #003399;
+ margin-top: 0;
+ font-size: 10pt;
+}
+
+.Display
+{
+ font-family: Comic Sans MS, Arial, Helvetica, sans-serif;
+ font-size: 24pt;
+ font-weight: bold;
+ color: #003399;
+}
+
+.BG
+{
+ background-color: #ffcc66;
+
+/*
+Alternative may be #FF9933
+Originally was #FFCC33
+*/
+}
+
+div.picbox
+{
+  position: relative;
+  left: 0px;
+  top: 0px;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+img.clipped
+{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0;
+  z-index: 2;
+}
+
+img.clipper
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
+  margin: 0;
+}
+
+span.xt
+{
+color: white;
+}
+
+span.xt:hover
+{
+text-decoration: underline;
+}
+
+form { margin: 0px; }
+
+form td, select, input, textarea, .formlabel, .formtext, .formtextbold, .formheading
+{
+  font-size: 11px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.formlabel
+{
+  font-weight: bold;
+  padding-top: 3px;
+}
+
+.formtextbold
+{
+  font-weight: bold;
+}
+
+.formheading
+{
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+h1.formtext
+{
+  font-size: 18px;
+  font-weight: bold;
+}
+
