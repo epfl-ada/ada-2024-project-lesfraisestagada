@@ -37,7 +37,7 @@ def load_articles_dataframe(path = "./data/wikispeedia_paths-and-graph/"):
     Returns:
         pandas.dataframe: The loaded dataframe
     """
-    return pd.read_csv(path + "articles.tsv", names = ["name"] ,skiprows=12, sep="\t")
+    return pd.read_csv(path + "articles.tsv", names = ["articles"] ,skiprows=12, sep="\t")
 
 
 def load_categories_dataframe(path = "./data/wikispeedia_paths-and-graph/"):

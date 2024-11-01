@@ -164,3 +164,5 @@ cython_debug/
 /data/plaintext_articles
 /data/wikispeedia_paths-and-graph
 /data/wpcd
+
+.history
