@@ -1,3 +1,4 @@
-data/wpcd/* filter=lfs diff=lfs merge=lfs -text
-data/wikispeedia_paths-and-graph/* filter=lfs diff=lfs merge=lfs -text
-data/plaintext_articles/* filter=lfs diff=lfs merge=lfs -text
+# data/wpcd/* filter=lfs diff=lfs merge=lfs -text
+# data/wikispeedia_paths-and-graph/* filter=lfs diff=lfs merge=lfs -text
+# data/plaintext_articles/* filter=lfs diff=lfs merge=lfs -text
+# data/country_occurences.csv filter=lfs diff=lfs merge=lfs -text
