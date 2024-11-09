@@ -9,3 +9,6 @@ country_list==1.1.0
 torch
 wordcloud
 networkx[default]
+transformers
+bitsandbytes
+accelerate>=0.26.0

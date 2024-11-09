@@ -115,3 +115,27 @@ def plaintext_files_iterator(path = "./data/plaintext_articles/"):
         file_path = os.path.join(path, filename)
         if os.path.isfile(file_path):
             yield file_path
+            
+
+def file_finder(path = "./data/plaintext_articles/", article_name = None):
+    """Find a file in the directory
+
+    Args:
+        path (str, optional): File folder to search for. Defaults to "./data/plaintext_articles/".
+        article_name (str, optional): File name to search for. Defaults to None.
+
+    Returns:
+        file: file reader
+    """
+    
+    if article_name is None:
+        return None
+    
+    for filename in os.listdir(path):
+        file_path = os.path.join(path, filename)
+        if os.path.isfile(file_path):
+            if article_name in filename:
+                with open(file_path, 'r',encoding="utf-8") as f:
+                    content = f.read()
+                    return content
+    return None
