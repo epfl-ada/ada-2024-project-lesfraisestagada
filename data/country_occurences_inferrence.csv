@@ -13,7 +13,7 @@
 15th_century,spain,oman,7,6
 15th_Marine_Expeditionary_Unit,iraq,united states,11,5
 16th_century,oman,russia,13,6
-16_Cygni,cygnus,,0,
+16_Cygni,,,,
 16_Cygni_Bb,,,,
 1755_Lisbon_earthquake,portugal,,6,
 17th_century,france,oman,13,7
@@ -43,7 +43,7 @@
 3rd_century,oman,china,5,2
 3_Juno,,,,
 4-2-0,united states,,0,
-4-4-0,united states,,0,
+4-4-0,,,,
 4-6-0,united states,,0,
 47_Ursae_Majoris,,,,
 47_Ursae_Majoris_b,,,,
@@ -56,10 +56,10 @@
 55_Cancri_d,,,,
 55_Cancri_e,,,,
 5th_century,oman,ireland,7,2
-6-2-0,,,,
+6-2-0,united states,,0,
 6th_century,china,oman,5,3
 7th_century,china,india,5,2
-8th_century,,,,
+8th_century,united kingdom,,0,
 90377_Sedna,chile,chad,2,2
 9th_century,oman,iraq,6,2
 A._E._J._Collins,india,france,3,2
@@ -78,8 +78,8 @@ Abbot,oman,france,5,4
 Abel_Tasman,new zealand,australia,8,8
 Aberdeen,france,zimbabwe,3,2
 Aberration_of_light,,,,
-Aberystwyth,wales,,0,
-Abhidhamma_Pitaka,bhutan,,0,
+Aberystwyth,,,,
+Abhidhamma_Pitaka,,,,
 Abidjan,burkina faso,niger,2,2
 Abkhazia,georgia,russia,111,51
 Able_Archer_83,united states,russia,12,5
@@ -97,16 +97,16 @@ Accra,ghana,,19,
 Acetic_acid,germany,oman,2,2
 Acetone,,,,
 Achilles,oman,laos,7,2
-Achilles_tendon,,,,
-Acid_rain,united states,,0,
-Acorn_Computers,england,,0,
+Achilles_tendon,greece,,0,
+Acid_rain,,,,
+Acorn_Computers,,,,
 Actinium,,,,
 Action_potential,,,,
 Actor,oman,india,5,3
 Acts_of_Union_1707,united kingdom,ireland,6,6
 Actuary,ireland,france,3,2
 AC_DC,australia,new zealand,17,2
-Adam_Smith,scotland,,0,
+Adam_Smith,,,,
 Addis_Ababa,ethiopia,djibouti,26,2
 Adelaide,australia,vietnam,74,2
 Adenosine_triphosphate,,,,
@@ -166,7 +166,7 @@ Albrecht_D%C3%BCrer,italy,germany,8,7
 Albrecht_Rodenbach,belgium,,4,
 Alchemy,egypt,oman,21,13
 Alcibiades,italy,greece,3,2
-Alcohol,france,,0,
+Alcohol,,,,
 ALCO_FA,mexico,,6,
 Aleksandr_Pushkin,russia,oman,26,6
 Aleksandr_Vasilevsky,russia,japan,22,6
@@ -181,7 +181,7 @@ Algebra,india,egypt,11,3
 Algeria,algeria,france,121,15
 Algerian_Civil_War,algeria,mali,39,4
 Algiers,algeria,oman,16,9
-Algol,perseus,,0,
+Algol,,,,
 Algoma_Central_Railway,canada,,0,
 Algorithm,mali,india,4,2
 Alice%27s_Adventures_in_Wonderland,israel,japan,3,3
@@ -192,7 +192,7 @@ Alliterative_verse,norway,,0,
 Allosaurus,australia,portugal,4,2
 All_Blacks,new zealand,south africa,66,34
 All_your_base_are_belong_to_us,japan,,5,
-All_You_Need_Is_Love_%28The_JAMs_song%29,scotland,,0,
+All_You_Need_Is_Love_%28The_JAMs_song%29,united kingdom,,0,
 Almaty,kazakhstan,russia,8,2
 Almond,israel,syria,4,2
 Alpaca,peru,australia,9,6
@@ -249,7 +249,7 @@ Andriyivskyy_Descent,russia,,6,
 Andromeda_Galaxy,,,,
 Andy_Warhol,slovakia,,2,
 Anemia,mali,,2,
-Angelica,iceland,,0,
+Angelica,norway,,0,
 Angel_shark,australia,japan,3,2
 Angkor,cambodia,,2,
 Angkor_Wat,cambodia,greece,8,2
@@ -285,7 +285,7 @@ Antigua_and_Barbuda,india,barbados,6,3
 Antimony,,,,
 Antlion,,,,
 Antoine_Lavoisier,france,guinea,8,3
-Anton%C3%ADn_Dvo%C5%99%C3%A1k,czech republic.,,0,
+Anton%C3%ADn_Dvo%C5%99%C3%A1k,,,,
 Antonio_Vivaldi,oman,italy,2,2
 Anton_Alexander_von_Werner,russia,,3,
 Antwerp,belgium,south africa,5,4
@@ -307,7 +307,7 @@ Arable_land,oman,israel,3,2
 Arab_League,egypt,iraq,25,13
 Aradia%2C_or_the_Gospel_of_the_Witches,oman,,9,
 Aral_Sea,uzbekistan,kazakhstan,9,7
-Arcadia_%28play%29,england.,,0,
+Arcadia_%28play%29,,,,
 Archaeoastronomy,egypt,oman,5,4
 Archaeology,united states,egypt,5,4
 Archaeopteryx,germany,,10,
@@ -398,7 +398,7 @@ Australian_rules_football,australia,new zealand,126,4
 Austria,austria,oman,132,18
 Autism,united states,,3,
 Autobianchi_Primula,italy,,0,
-Autocracy,russia,,0,
+Autocracy,,,,
 Automated_teller_machine,canada,jersey,7,4
 Automatic_number_plate_recognition,mali,oman,5,2
 Automobile,france,germany,7,7
@@ -410,7 +410,7 @@ Avacha_Volcano,russia,,3,
 Avalanche,switzerland,france,3,3
 Avatar__The_Last_Airbender,united states,oman,3,2
 Avocado,mexico,chile,8,4
-Avon_Gorge,england,,0,
+Avon_Gorge,,,,
 Avro_Lancaster,canada,australia,9,6
 Axe,australia,poland,3,2
 Ayaan_Hirsi_Ali,netherlands,mali,20,15
@@ -419,7 +419,7 @@ Aymer_de_Valence%2C_2nd_Earl_of_Pembroke,france,,4,
 Azerbaijan,azerbaijan,armenia,104,23
 Azerbaijani_people,azerbaijan,iran,129,116
 Aztec,mexico,china,36,5
-A_cappella,,,,
+A_cappella,united states,,0,
 A_Christmas_Carol,oman,,2,
 A_Tale_of_a_Tub,oman,ireland,5,2
 A_Wrinkle_in_Time,oman,,4,
@@ -451,7 +451,7 @@ Bangkok,thailand,china,26,5
 Bangladesh,bangladesh,india,96,19
 Banjul,gambia,,7,
 Banknote,united states,,2,
-Banksy,england,,0,
+Banksy,,,,
 Bank_of_China_%28Hong_Kong%29,china,,55,
 Bantu,south africa,zimbabwe,6,4
 Barack_Obama,iraq,kenya,12,8
@@ -478,7 +478,7 @@ Basketball,united states,india,9,5
 Basking_shark,norway,,2,
 Basset_Hound,france,united states,3,2
 Bassoon,france,italy,4,2
-Bass_%28fish%29,,,,
+Bass_%28fish%29,united states,,0,
 Bat-eared_Fox,mali,,2,
 Bat,malaysia,mali,2,2
 Bath%2C_Somerset,oman,georgia,20,9
@@ -555,10 +555,10 @@ Benjamin_Mountfort,new zealand,oman,23,4
 Benjamin_of_Tudela,spain,,0,
 Benzene,united states,china,2,2
 Ben_Jonson,oman,denmark,14,2
-Ben_Nevis,scotland,,0,
+Ben_Nevis,,,,
 Berber_languages,algeria,morocco,18,13
 Beriberi,japan,,12,
-Berkelium,,,,
+Berkelium,united states,,0,
 Berlin,germany,russia,46,11
 Berlin_Wall,germany,hungary,40,2
 Bermuda,bermuda,united states,85,5
@@ -584,7 +584,7 @@ Biofuel,germany,united states,3,3
 Bioinformatics,,,,
 Biology,,,,
 Bionicle__Mask_of_Light,united states,,0,
-Biosphere,,,,
+Biosphere,united states,,0,
 Biotechnology,iran,,2,
 Bird,cuba,china,5,2
 Bird_migration,australia,canada,5,3
@@ -600,9 +600,9 @@ Black-backed_Jackal,mali,,2,
 Black-footed_Cat,south africa,mali,4,2
 Black-winged_Stilt,australia,,3,
 Blackbird,sweden,,0,
-Blackcap,poland,,0,
+Blackcap,united kingdom,,0,
 Blackjack,australia,,2,
-Blackpool,england,,0,
+Blackpool,,,,
 Blacktip_reef_shark,cuba,,2,
 Black_Death,france,iceland,7,7
 Black_hole,,,,
@@ -621,7 +621,7 @@ Blokus,france,,0,
 Blood_type,,,,
 Bluegrass_music,japan,united states,2,2
 Bluetooth,denmark,sweden,2,2
-Blue_Jay,united states,,0,
+Blue_Jay,canada,,0,
 Blue_Peter,united kingdom,,2,
 Blue_shark,mali,,2,
 Blue_Tit,united kingdom,,0,
@@ -634,7 +634,7 @@ Bobcat,canada,united states,5,5
 Bob_Dylan,australia,jersey,2,2
 Bob_Marley,jamaica,france,24,4
 Bodyline,australia,india,39,3
-Body_mass_index,belgium,,0,
+Body_mass_index,,,,
 Boeing_747,japan,china,19,7
 Bog,ireland,germany,7,6
 Bogot%C3%A1,colombia,spain,30,3
@@ -651,7 +651,7 @@ Booby,,,,
 Book,oman,egypt,10,5
 Book_of_Common_Prayer,oman,australia,12,6
 Book_of_Kells,ireland,,3,
-Boolean_logic,ireland,,0,
+Boolean_logic,,,,
 Borage,germany,,2,
 Boris_Becker,germany,australia,15,9
 Boron,turkey,united states,3,2
@@ -713,7 +713,7 @@ Brussels,belgium,luxembourg,20,4
 Brute_force_attack,,,,
 Bryce_Canyon_National_Park,united states,,4,
 Btrieve,,,,
-BT_Tower,england,,0,
+BT_Tower,,,,
 Bucharest,oman,romania,110,105
 Buckingham_Palace,united kingdom,,0,
 Buckminster_Fuller,st. martin,japan,3,2
@@ -734,7 +734,7 @@ Butter,united states,india,10,8
 Button,,,,
 Byzantine_Empire,oman,italy,90,33
 B_vitamins,,,,
-C%2B%2B,united states,,0,
+C%2B%2B,,,,
 C%C3%A6dmon,russia,,3,
 C%C3%B4te_d%27Ivoire,france,liberia,8,6
 C._S._Lewis,ireland,oman,14,6
@@ -748,16 +748,16 @@ Cai_Lun,china,,2,
 Calcite,iceland,united states,3,2
 Calcium,,,,
 Calcium_chloride,,,,
-Calculus,,,,
+Calculus,india,,0,
 Calgary,canada,china,41,5
 California,united states,mexico,15,5
 California_Southern_Railroad,united states,,5,
 Californium,,,,
 Calligraphy,india,oman,10,7
-Caloris_Basin,mercury,,0,
+Caloris_Basin,,,,
 Calvin_and_Hobbes,united states,,0,
 Calvin_Coolidge,united states,oman,7,2
-Camarasaurus,united states,,0,
+Camarasaurus,,,,
 Cambodia,cambodia,vietnam,103,15
 Cambrian,china,oman,3,3
 Cambrian_explosion,australia,,2,
@@ -810,7 +810,7 @@ Carl_Lewis,united states,india,4,2
 Carl_Sagan,kuwait,,2,
 Carnivore,mali,,2,
 Caroline_Island,kiribati,antarctica,20,2
-Carolingian_Gospel_Book_%28British_Library%2C_MS_Add._11848%29,france,,0,
+Carolingian_Gospel_Book_%28British_Library%2C_MS_Add._11848%29,,,,
 Carolus_Linnaeus,sweden,netherlands,7,5
 Carrot,afghanistan,,2,
 Casablanca_%28film%29,germany,oman,10,6
@@ -824,21 +824,21 @@ Cat,egypt,united states,7,4
 Cataract,,,,
 Cataract_surgery,india,,3,
 Cathedral_of_Magdeburg,germany,oman,8,7
-Catherine_Cranston,scotland,,0,
+Catherine_Cranston,,,,
 Catherine_II_of_Russia,russia,oman,59,7
-Catholic_social_teaching,,,,
+Catholic_social_teaching,italy,,0,
 Cattle,india,sweden,7,3
 Cat_Stevens,united states,india,6,4
 Cave,united states,france,3,3
 Cayman_Islands,cayman islands,jamaica,42,7
-Celeriac,france,,0,
-Celery,ireland,,0,
+Celeriac,,,,
+Celery,france,,0,
 Celine_Dion,canada,united states,9,3
 Cello,oman,iceland,3,2
 Cell_%28biology%29,,,,
 Celtic_F.C.,ireland,netherlands,32,8
 Celtic_mythology,oman,ireland,13,5
-Celtic_Park,scotland,,0,
+Celtic_Park,,,,
 Central_African_Republic,central african republic,france,19,11
 Central_processing_unit,,,,
 Ceratopsidae,canada,,10,
@@ -871,12 +871,12 @@ Chemical_element,oman,,2,
 Chemical_synapse,,,,
 Chemistry,egypt,,2,
 Chennai,india,peru,42,4
-Chepstow_Bridge,wales,,0,
+Chepstow_Bridge,,,,
 Chernobyl_disaster,ukraine,belarus,15,14
 Chess,china,india,3,3
 Chester_A._Arthur,united states,,4,
 Chestnut,japan,,2,
-Chew_Magna,england,,0,
+Chew_Magna,,,,
 Chew_Stoke,oman,,3,
 Chew_Valley,oman,,2,
 Chew_Valley_Lake,oman,united kingdom,3,2
@@ -889,14 +889,14 @@ Child,,,,
 Children%27s_Crusade,france,germany,5,4
 Children%27s_rights_movement,united states,ukraine,2,2
 Chile,chile,argentina,181,9
-Chiltern_Hills,england,,0,
+Chiltern_Hills,,,,
 Chimpanzee,mali,angola,2,2
 China,china,taiwan,121,15
 Chinese_language,china,oman,50,21
 Chinese_Rites_controversy,china,oman,14,3
 Chinyingi,zambia,,3,
 Chives,oman,,2,
-Chlorine,united states,,0,
+Chlorine,,,,
 Chocolate,belgium,italy,3,3
 Chola_dynasty,india,peru,13,4
 Cholera,india,bangladesh,9,5
@@ -910,7 +910,7 @@ Christopher_Columbus,spain,cuba,18,5
 Christopher_Wren,france,,2,
 Chris_Evert,australia,oman,14,6
 Chromatic_aberration,,,,
-Chromatophore,australia,,0,
+Chromatophore,,,,
 Chromium,kazakhstan,,2,
 Church_of_England,oman,ireland,10,6
 Church_of_Ireland,ireland,oman,61,5
@@ -944,7 +944,7 @@ Clone_Wars_%28Star_Wars%29,iraq,vietnam,3,3
 Clothing,oman,japan,4,3
 Cloud,india,australia,2,2
 Coal,united states,china,7,6
-Coal_Tit,,,,
+Coal_Tit,poland,,0,
 Cobalt,china,russia,2,2
 Coccinellidae,,,,
 Cochineal,mexico,spain,5,2
@@ -976,7 +976,7 @@ Columbia_River,united states,canada,8,5
 Columbine_High_School_massacre,ireland,united states,7,4
 Columbus%2C_Ohio,united states,italy,10,3
 Comet,,,,
-Comet_Hale-Bopp,,,,
+Comet_Hale-Bopp,united states,,0,
 Comet_Halley,japan,iran,2,2
 Comet_Hyakutake,japan,,3,
 Comet_Shoemaker-Levy_9,,,,
@@ -986,7 +986,7 @@ Comma_Johanneum,syria,oman,2,2
 Commodore_64,japan,united states,4,3
 Commonwealth_Games,canada,australia,16,16
 Common_agouti,mali,brazil,2,2
-Common_Basilisk,,,,
+Common_Basilisk,costa rica,,0,
 Common_cold,china,united states,4,3
 Common_Cuckoo,,,,
 Common_Eider,norway,,0,
@@ -1000,10 +1000,10 @@ Communism,russia,china,15,15
 Community,iraq,iran,2,2
 Comoros,comoros,france,33,11
 Compact_Disc,japan,,0,
-Company_%28law%29,united kingdom,,0,
+Company_%28law%29,,,,
 Compsognathus,france,portugal,2,2
 Computational_chemistry,mali,,2,
-Computer,england,,0,
+Computer,,,,
 Computer_and_video_games,japan,switzerland,3,2
 Computer_programming,,,,
 Computer_science,,,,
@@ -1013,7 +1013,7 @@ Condoleezza_Rice,israel,iran,64,39
 Conflict,israel,ireland,3,2
 Confucianism,china,singapore,18,8
 Confucius,china,taiwan,15,6
-Congo_River,democratic republic of the congo,,0,
+Congo_River,,,,
 Consolation_of_Philosophy,,,,
 Constantine_I,oman,italy,16,3
 Constantine_II_of_Scotland,ireland,,4,
@@ -1027,7 +1027,7 @@ Continental_crust,,,,
 Control_car_%28rail%29,austria,switzerland,5,3
 Convention_on_the_International_Trade_in_Endangered_Species_of_Wild_Flora_and_Fauna,south africa,zimbabwe,5,2
 Convention_on_the_Rights_of_the_Child,canada,mali,4,3
-Cookiecutter_shark,brazil,,0,
+Cookiecutter_shark,,,,
 Cook_Islands,cook islands,new zealand,36,13
 Cooperative,japan,united states,5,3
 Coot,,,,
@@ -1040,16 +1040,16 @@ Corinthian_War,greece,cyprus,11,4
 Cormorant,new zealand,japan,3,2
 Cornea,oman,,0,
 Cornell_University,qatar,united states,15,10
-Corn_oil,,,,
+Corn_oil,united states,,0,
 Coronation_Street,united kingdom,canada,5,3
-Corporate_finance,,,,
+Corporate_finance,united states,,0,
 Corporation,united states,canada,8,7
 Corrosion,united states,,2,
 Corundum,,,,
 Cosmic_inflation,mali,,3,
 Cosmic_microwave_background_radiation,,,,
 Costa_Rica,costa rica,nicaragua,90,5
-Costume_design,usa,,0,
+Costume_design,,,,
 Cotopaxi,ecuador,,4,
 Cotswolds,oman,,2,
 Cotton,india,egypt,26,7
@@ -1079,8 +1079,8 @@ Criticism_of_the_War_on_Terrorism,iraq,united states,25,17
 Croatia,croatia,slovenia,83,16
 Crocodile,australia,guinea,13,4
 Crohn%27s_disease,mali,,3,
-Crossbill,,,,
-Cross_Fell,england,,0,
+Crossbill,canada,,0,
+Cross_Fell,,,,
 Crow,australia,mali,5,3
 Crown_Jewels_of_the_United_Kingdom,united kingdom,india,5,2
 Crusades,oman,france,17,10
@@ -1093,7 +1093,7 @@ CS_gas,vietnam,iraq,4,3
 Cuba,cuba,spain,269,21
 Cubeb,china,india,5,5
 Cubism,france,oman,2,2
-Cuckmere_Haven,england,,0,
+Cuckmere_Haven,,,,
 Cultivar,,,,
 Cultural_diversity,,,,
 Cultural_identity,,,,
@@ -1106,7 +1106,7 @@ Cyberpunk,oman,china,12,2
 Cyclamen,israel,somalia,4,2
 Cyclone_Percy,tokelau,cook islands,12,8
 Cyclone_Rosita,australia,,9,
-Cyclops,greece,,0,
+Cyclops,,,,
 Cymbopogon,india,australia,7,5
 Cyprus,cyprus,turkey,115,27
 Cyril_Clarke,united kingdom,,0,
@@ -1120,7 +1120,7 @@ Dad%27s_Army,united kingdom,,0,
 Dada,georgia,france,3,3
 Dakar,senegal,cape verde,18,3
 Dakota%2C_Minnesota_and_Eastern_Railroad,united states,,7,
-Daley_Thompson,england,,0,
+Daley_Thompson,,,,
 Dallas%2C_Texas,united states,mexico,21,3
 Dam,australia,germany,3,2
 Damascus,syria,oman,30,25
@@ -1128,7 +1128,7 @@ Damascus_steel,india,japan,8,4
 Damon_Hill,jordan,australia,15,4
 Dance,india,sri lanka,12,5
 Dandelion,japan,canada,2,2
-Daniel_Day-Lewis,england,,0,
+Daniel_Day-Lewis,ireland,,0,
 Daniel_Ellsberg,vietnam,iraq,8,2
 Danny_Deever,india,,4,
 Danske_Statsbaner,denmark,,4,
@@ -1139,7 +1139,7 @@ Dark_Ages,oman,united states,16,2
 Darling_River,australia,,5,
 Darmstadtium,germany,,0,
 Darth_Vader,chad,,2,
-Dartmoor,england,,0,
+Dartmoor,,,,
 Das_Kapital,germany,,0,
 Data_Encryption_Standard,united states,,0,
 David_Attenborough,united kingdom,,0,
@@ -1150,12 +1150,12 @@ David_Copperfield_%28novel%29,oman,australia,7,6
 David_Helvarg,antarctica,united states,5,3
 David_Heymann,united states,,0,
 David_Hilbert,mali,russia,5,4
-David_Hume,scotland,,0,
+David_Hume,,,,
 David_III_of_Tao,georgia,armenia,30,11
 David_Livingstone,zambia,malawi,3,2
 Davis_Cup,united states,australia,144,115
 Davy_Jones%27_Locker,india,,2,
-Day,ireland,,0,
+Day,,,,
 Dayuan,ghana,china,17,12
 Dead_Sea,jordan,israel,21,11
 Dead_Sea_scrolls,oman,jordan,5,4
@@ -1185,7 +1185,7 @@ Desmond_Tutu,south africa,israel,23,9
 Despotism,,,,
 Detroit%2C_Michigan,united states,canada,16,7
 Devonian,china,vietnam,2,2
-Dewey_Square,usa,,0,
+Dewey_Square,,,,
 Diabetes_mellitus,india,united states,3,2
 Diamond,india,oman,12,3
 Diamond_cut,india,peru,7,3
@@ -1201,7 +1201,7 @@ Differential_geometry_and_topology,,,,
 Diffuse_interstellar_band,australia,,2,
 Dik-dik,mali,,2,
 Dill,iran,,0,
-Dilophosaurus,usa,,0,
+Dilophosaurus,,,,
 Dimetrodon,,,,
 Dingo,australia,mali,16,2
 Dinosaur,china,antarctica,6,4
@@ -1209,7 +1209,7 @@ Diplodocus,united states,,0,
 Directdebit,united kingdom,,0,
 Directive_Principles_in_India,india,ireland,25,2
 Disneyland_Railroad,jersey,,2,
-Distilled_beverage,,,,
+Distilled_beverage,germany,,0,
 Dixie_Mission,china,united states,26,18
 Djibouti,djibouti,mali,53,30
 Dmitri_Mendeleev,russia,,16,
@@ -1220,7 +1220,7 @@ Dodo,mauritius,turkey,11,3
 Dog,united states,mali,6,4
 Doha,qatar,,36,
 Dolphin,japan,australia,4,4
-Domesday_Book,england.,,0,
+Domesday_Book,,,,
 Domesticated_turkey,turkey,united states,104,6
 Domestic_AC_power_plugs_and_sockets,australia,japan,17,15
 Domestic_goat,nigeria,niger,3,3
@@ -1228,7 +1228,7 @@ Dominica,dominica,united kingdom,69,6
 Dominican_Republic,dominica,dominican republic,67,36
 Donald_Bradman,australia,south africa,24,2
 Donald_Duck,sweden,denmark,5,4
-Donald_Knuth,usa.,,0,
+Donald_Knuth,,,,
 Donation,united kingdom,,0,
 Doom,united states,,0,
 Dorset,oman,,6,
@@ -1259,26 +1259,26 @@ Dundee,india,croatia,2,2
 Dundee_United_F.C.,ireland,sweden,5,4
 Dune,china,namibia,6,3
 Dunnock,united kingdom,,0,
-Dunstable_Downs,england,,0,
+Dunstable_Downs,,,,
 Duran_Duran,united states,oman,6,5
 Durham,slovakia,russia,2,2
-Durham_Cathedral,england,,0,
+Durham_Cathedral,,,,
 Durian,malaysia,singapore,15,13
 Dutch_language,netherlands,belgium,35,30
 Du_Fu,china,japan,6,3
 DVD,japan,,0,
 Dwight_D._Eisenhower,germany,united states,10,8
-Dysprosium,france,,0,
+Dysprosium,,,,
 E.T._the_Extra-Terrestrial_%28Atari_2600%29,mexico,,4,
 E._E._Cummings,oman,mexico,6,2
 E._P._Wigner,austria,hungary,3,2
 Eagle,oman,niger,11,7
 Eagle_Scout_%28Boy_Scouts_of_America%29,united states,,0,
 Earless_seal,mali,argentina,2,2
-Earl_of_Shaftesbury,england,,0,
+Earl_of_Shaftesbury,,,,
 Earth%27s_atmosphere,mali,,3,
 Earth,antarctica,india,4,3
-Earthquake,japan,,0,
+Earthquake,,,,
 Earwax,new zealand,,2,
 East-West_Schism,oman,romania,15,5
 EastEnders,canada,australia,3,3
@@ -1304,7 +1304,7 @@ Edema,,,,
 Edgar_Allan_Poe,france,oman,6,3
 Edible_salt,china,canada,3,2
 Edinburgh,united kingdom,georgia,6,4
-Edmond_Halley,england,,0,
+Edmond_Halley,,,,
 Edmonton,canada,germany,28,2
 Edmund_Burke,ireland,france,7,7
 Edmund_Hillary,new zealand,nepal,10,4
@@ -1316,7 +1316,7 @@ Edward_III_of_England,france,oman,12,3
 Edward_II_of_England,france,ireland,25,5
 Edward_IV_of_England,france,oman,5,2
 Edward_I_of_England,france,ireland,14,2
-Edward_Jenner,england,,0,
+Edward_Jenner,,,,
 Edward_Teller,hungary,russia,6,5
 Edward_the_Confessor,oman,,3,
 Edward_VIII_of_the_United_Kingdom,india,france,11,7
@@ -1331,7 +1331,7 @@ Egg_%28food%29,united states,mali,3,2
 Egypt,egypt,israel,212,14
 Egyptian_pyramids,egypt,,15,
 Eifel_Aqueduct,oman,france,28,2
-Eilmer_of_Malmesbury,england,,0,
+Eilmer_of_Malmesbury,,,,
 Einsteinium,united states,,0,
 Elagabalus,oman,syria,17,3
 Eldfell,iceland,,18,
@@ -1343,7 +1343,7 @@ Electric_charge,,,,
 Electric_field,,,,
 Electromagnetic_radiation,,,,
 Electron,mali,,3,
-Electronics,,,,
+Electronics,united states,,0,
 Electronic_amplifier,,,,
 Electron_beam_welding,france,,0,
 Elementary_algebra,,,,
@@ -1354,7 +1354,7 @@ Elephant,india,sri lanka,23,12
 Elephant_bird,madagascar,,2,
 Elephant_shrew,mali,,3,
 Elfin-woods_Warbler,puerto rico,united states,6,2
-Elias_Ashmole,england,,0,
+Elias_Ashmole,,,,
 Eliminative_materialism,,,,
 Elizabethan_Poor_Law_%281601%29,ireland,united kingdom,5,3
 Elizabeth_Fry,oman,,2,
@@ -1369,7 +1369,7 @@ El_Salvador,el salvador,honduras,59,10
 Emacs,,,,
 Emanuel_Swedenborg,sweden,netherlands,79,2
 EMD_BL2,united states,,2,
-EMD_F7,united states,,0,
+EMD_F7,canada,,0,
 EMD_GP30,united states,,0,
 Emirate,united arab emirates,,0,
 Emma_Roberts,united states,,0,
@@ -1381,15 +1381,15 @@ Employment,united states,,3,
 Emu,australia,cuba,21,4
 Enceladus_%28moon%29,,,,
 Encyclop%C3%A6dia_Britannica,united states,egypt,4,3
-Endoscopic_foreign_body_retrieval,canada,,0,
+Endoscopic_foreign_body_retrieval,,,,
 Energy,iraq,,2,
 Engineering,canada,,2,
 England,united kingdom,oman,20,15
 England_expects_that_every_man_will_do_his_duty,ireland,france,2,2
 English_Channel,france,oman,13,10
 English_language,united states,australia,9,9
-English_monarchs_family_tree,england,,0,
-English_peasants%27_revolt_of_1381,england,,0,
+English_monarchs_family_tree,,,,
+English_peasants%27_revolt_of_1381,,,,
 English_poetry,oman,georgia,16,4
 English_Reformation,oman,germany,9,2
 Enigma_machine,japan,germany,5,4
@@ -1399,7 +1399,7 @@ Enzyme_kinetics,,,,
 Eocene,antarctica,mali,5,4
 Epaminondas,greece,oman,30,2
 Epazote,united states,,2,
-Epic_of_Gilgamesh,babylon,,0,
+Epic_of_Gilgamesh,,,,
 Episcopal_polity,oman,sweden,13,3
 Equal_Protection_Clause,united states,,9,
 Equatorial_Guinea,guinea,equatorial guinea,49,37
@@ -1428,21 +1428,21 @@ Eukaryote,,,,
 Euphrates,syria,turkey,10,10
 Eurasian_Bullfinch,poland,,0,
 Eurasian_Collared_Dove,,,,
-Eurasian_Eagle_Owl,russia,,0,
+Eurasian_Eagle_Owl,poland,,0,
 Eurasian_Jay,poland,,0,
 Eurasian_Oystercatcher,faroe islands,,3,
 Euro,france,germany,8,8
 Europe,oman,russia,30,22
-European_Goldfinch,european,,0,
+European_Goldfinch,,,,
 European_Greenfinch,united kingdom,,0,
-European_Kingfisher,austria,,0,
+European_Kingfisher,germany,,0,
 European_Parliament,luxembourg,belgium,4,3
 European_Space_Agency,russia,germany,27,13
 European_Union,germany,oman,17,16
 Europium,france,,0,
 Eurovision_Song_Contest,france,united kingdom,12,12
 Euston_Manifesto,iraq,israel,10,4
-Eustreptospondylus,england,,0,
+Eustreptospondylus,,,,
 Evanton,united kingdom,,2,
 Evan_Rachel_Wood,china,,2,
 Eva_Per%C3%B3n,argentina,oman,58,20
@@ -1458,14 +1458,14 @@ Extrasolar_planet,mali,,3,
 Extraterrestrial_life,,,,
 Eye,mali,,4,
 Eyelid,,,,
-Eye_%28cyclone%29,,,,
+Eye_%28cyclone%29,united states,,0,
 Ezra_Pound,italy,united states,15,6
 F-35_Lightning_II,australia,united states,10,8
 F-4_Phantom_II,israel,united states,14,13
 FairTax,united states,georgia,15,4
-Fair_Isle,scotland,,0,
+Fair_Isle,,,,
 Falcon,new zealand,australia,3,2
-Falkirk_Wheel,scotland,,0,
+Falkirk_Wheel,,,,
 Falkland_Islands,falkland islands,argentina,27,21
 Family,oman,guinea,8,4
 Famine,china,india,15,13
@@ -1478,7 +1478,7 @@ Fauna_of_Australia,australia,new zealand,166,3
 Feather,india,,3,
 Federal_Bureau_of_Investigation,united states,egypt,26,2
 Federated_States_of_Micronesia,micronesia,united states,26,4
-Fedora_Core,united states,,0,
+Fedora_Core,,,,
 Fed_Cup,united states,australia,46,39
 Feldspar,,,,
 Felice_Beato,japan,china,25,12
@@ -1494,7 +1494,7 @@ Fern,antarctica,japan,4,3
 Fertile_Crescent,jordan,israel,6,3
 Fertilizer,chile,australia,2,2
 Fetal_alcohol_spectrum_disorder,mali,united states,6,3
-Ffestiniog_Railway,wales,,0,
+Ffestiniog_Railway,,,,
 Fiberglass,,,,
 Fiction,,,,
 Fidel_Castro,cuba,united states,176,17
@@ -1557,11 +1557,11 @@ Formic_acid,,,,
 Formula_One,india,monaco,6,5
 Forrest_Gump,united states,vietnam,4,4
 Forth,,,,
-Forth_Bridge_%28railway%29,scotland,,0,
+Forth_Bridge_%28railway%29,,,,
 Forth_Road_Bridge,united states,,2,
 Fort_de_Chartres,india,,2,
 Fossil,china,bolivia,2,2
-Fossil_fuel,,,,
+Fossil_fuel,united states,,0,
 Fossil_record,china,bolivia,2,2
 Fourteenth_Amendment_to_the_United_States_Constitution,united states,india,38,6
 Fox,mali,,2,
@@ -1621,7 +1621,7 @@ Galaxy,,,,
 Galeras,colombia,,3,
 Galerina,,,,
 Galileo_Galilei,oman,,3,
-Gallery_of_the_Kings_and_Queens_of_England,england,,0,
+Gallery_of_the_Kings_and_Queens_of_England,,,,
 Gallimimus,mongolia,,2,
 Gallium,france,,2,
 Galveston_Hurricane_of_1900,mexico,cuba,5,5
@@ -1654,14 +1654,14 @@ Genetic_code,,,,
 Geneva,switzerland,france,10,7
 Genghis_Khan,mongolia,china,59,22
 Genoa,italy,oman,8,6
-Gentoo_penguin,antarctica,,0,
+Gentoo_penguin,,,,
 Geography,oman,,4,
 Geography_of_Africa,south africa,ethiopia,6,6
 Geography_of_India,india,bangladesh,159,8
 Geography_of_Ireland,ireland,mali,61,5
 Geography_of_Texas,mexico,united states,8,4
 Geology,france,,2,
-Geology_of_Dorset,england,,0,
+Geology_of_Dorset,,,,
 Geology_of_the_Grand_Canyon_area,japan,,2,
 Geometry,oman,,2,
 Georgetown%2C_Guyana,guyana,united states,46,2
@@ -1669,7 +1669,7 @@ George_Byron%2C_6th_Baron_Byron,oman,greece,6,5
 George_Eliot,oman,germany,4,2
 George_Fox,netherlands,ireland,3,2
 George_H._W._Bush,united states,iraq,17,10
-George_Herbert,england,,0,
+George_Herbert,,,,
 George_III_of_the_United_Kingdom,ireland,united kingdom,14,12
 George_II_of_Great_Britain,austria,oman,10,6
 George_IV_of_the_United_Kingdom,united kingdom,ireland,12,8
@@ -1709,10 +1709,10 @@ Glaciology,switzerland,,2,
 Glasgow,united kingdom,italy,5,4
 Glass,egypt,oman,8,8
 Glasses,dominica,china,2,2
-Glastonbury_Festival,england,,0,
+Glastonbury_Festival,,,,
 GlaxoSmithKline,united kingdom,new zealand,11,2
 Gliding,germany,australia,6,3
-Gliese_876,australia,,0,
+Gliese_876,,,,
 Gliese_876_b,,,,
 Gliese_876_c,,,,
 Gliese_876_d,,,,
@@ -1778,26 +1778,26 @@ Great_comet,,,,
 Great_Comet_of_1882,south africa,,0,
 Great_Cormorant,ireland,,0,
 Great_Crested_Grebe,united kingdom,,0,
-Great_hammerhead,,,,
+Great_hammerhead,united states,,0,
 Great_Lakes,canada,united states,6,6
 Great_Lakes_Storm_of_1913,canada,united states,2,2
 Great_Moravia,slovakia,hungary,25,13
 Great_Pyramid_of_Giza,egypt,india,27,2
-Great_Red_Spot,jupiter,,0,
+Great_Red_Spot,,,,
 Great_Rift_Valley,jordan,israel,7,3
 Great_Salt_Lake,jordan,chile,5,2
 Great_Spotted_Woodpecker,poland,,0,
 Great_Tit,india,,2,
 Great_Wall_of_China,china,mongolia,21,2
 Great_white_shark,south africa,australia,5,5
-Great_Yarmouth,england,,0,
+Great_Yarmouth,,,,
 Greco-Buddhism,india,japan,45,10
 Greece,greece,turkey,102,13
 Greek_mythology,oman,greece,25,5
 Greek_War_of_Independence,oman,greece,63,36
 Greenhouse_effect,,,,
 Greenland,greenland,denmark,91,18
-Green_Woodpecker,united kingdom,,0,
+Green_Woodpecker,germany,,0,
 Gregorian_chant,oman,finland,28,3
 Gregor_Mendel,austria,,2,
 Greg_LeMond,france,jersey,15,3
@@ -1826,13 +1826,13 @@ Gustav_Holst,algeria,latvia,2,2
 Guyana,guyana,india,119,11
 Gyeongju,south korea,japan,13,4
 Gypsum,brazil,mexico,2,2
-H%C3%A4nsel_und_Gretel,,,,
+H%C3%A4nsel_und_Gretel,germany,,0,
 H.D.,switzerland,oman,5,5
 H5N1,china,thailand,6,5
 Habsburg_Spain,spain,france,116,42
 Hadrian%27s_Wall,oman,,33,
 Haemophilia,oman,,2,
-Hafnium,denmark,,0,
+Hafnium,,,,
 Haiti,haiti,france,77,7
 Haji_Mohammad_Suharto,indonesia,japan,85,12
 Halfbeak,india,,2,
@@ -1840,8 +1840,8 @@ Halloween,ireland,australia,27,18
 Hamburg,germany,russia,33,5
 Hamilton-Burr_duel,jersey,united states,6,2
 Hammurabi,iran,,0,
-Hampshire,england,,0,
-Hampstead_Heath,england,,0,
+Hampshire,,,,
+Hampstead_Heath,united kingdom,,0,
 Hannibal_Barca,oman,italy,88,36
 Hanoi,vietnam,china,26,6
 Haraldsk%C3%A6r_Woman,oman,denmark,21,10
@@ -1859,7 +1859,7 @@ Harvest,germany,,2,
 Hasekura_Tsunenaga,japan,spain,116,36
 Hassium,germany,,0,
 Hatshepsut,egypt,oman,30,8
-Hawaiian_Goose,hawaii,,0,
+Hawaiian_Goose,,,,
 Hawfinch,poland,,0,
 Hawk-Eye,australia,,3,
 Hawk,france,madagascar,2,2
@@ -1872,7 +1872,7 @@ HD_28185,,,,
 HD_28185_b,,,,
 Health,,,,
 Heard_Island_and_McDonald_Islands,australia,antarctica,10,2
-Heat,england,,0,
+Heat,united kingdom,,0,
 Hebrew_calendar,israel,oman,6,2
 Hebrew_language,israel,oman,44,17
 Hebrides,isle of man,norway,3,2
@@ -1900,9 +1900,9 @@ Henry_I_of_England,oman,,2,
 Henry_James,oman,italy,5,3
 Henry_Moore,oman,russia,3,2
 Henry_Morrison_Flagler,panama,,2,
-Henry_Morton_Stanley,wales,,0,
+Henry_Morton_Stanley,,,,
 Henry_Purcell,india,,2,
-Henry_Rollins,usa,,0,
+Henry_Rollins,,,,
 Henry_VIII_of_England,ireland,france,14,14
 Henry_VII_of_England,france,oman,8,3
 Henry_VI_of_England,france,ireland,20,3
@@ -2017,7 +2017,7 @@ Ho_Chi_Minh_City,vietnam,cambodia,72,8
 Hrafnkels_saga,iceland,,25,
 HSBC,india,china,7,7
 HTTP_cookie,mali,united states,4,2
-Hubbard_Glacier,alaska,,0,
+Hubbard_Glacier,canada,,0,
 Hubble%27s_law,,,,
 Hubble_Deep_Field,,,,
 Hubble_Space_Telescope,,,,
@@ -2069,7 +2069,7 @@ Hydrogen_peroxide,,,,
 Hydrology,,,,
 Hyena,mali,,2,
 Hymenoptera,,,,
-Hypsilophodon,england,,0,
+Hypsilophodon,,,,
 H_II_region,,,,
 Ibn_Battuta,morocco,mali,7,6
 Ice,russia,iran,2,2
@@ -2078,7 +2078,7 @@ Iceland_hotspot,iceland,,14,
 Ice_age,australia,canada,2,2
 Ice_hockey,canada,united states,29,12
 Ice_sheet,greenland,antarctica,10,6
-Ichthyosaur,,,,
+Ichthyosaur,germany,,0,
 Idit_Harel_Caperton,israel,china,9,2
 Idolatry,israel,,3,
 Igneous_rock,oman,,2,
@@ -2180,7 +2180,7 @@ Italian_Renaissance,italy,france,38,16
 Italian_War_of_1521,france,spain,24,9
 Italo_disco,oman,germany,3,2
 Italy,italy,oman,100,18
-ITunes,united states,,0,
+ITunes,,,,
 Ivan_IV_of_Russia,russia,lithuania,26,5
 Ivory-billed_Woodpecker,cuba,,3,
 Ivory,chad,,2,
@@ -2189,10 +2189,10 @@ I_Want_to_Hold_Your_Hand,united states,united kingdom,5,3
 J%C3%B3rv%C3%ADk,oman,,2,
 J%C3%B3zef_Pi%C5%82sudski,poland,russia,72,39
 J._J._Thomson,united kingdom,,0,
-J._K._Rowling,england,,0,
+J._K._Rowling,,,,
 J._M._W._Turner,united kingdom,france,4,2
 J._R._R._Tolkien,oman,south africa,7,5
-J._S._Fry_%26_Sons,england,,0,
+J._S._Fry_%26_Sons,united kingdom,,0,
 Jackal,mali,namibia,2,2
 Jackanory,united kingdom,,0,
 Jackdaw,poland,,0,
@@ -2220,7 +2220,7 @@ James_Lovelock,united kingdom,,0,
 James_Monroe,united states,france,8,3
 James_Stewart_%28actor%29,india,russia,8,8
 James_T._Aubrey%2C_Jr.,united states,,2,
-James_Watt,scotland,,0,
+James_Watt,,,,
 Jane_Austen,oman,,8,
 Jane_Eyre,oman,india,6,4
 Jane_Fonda,vietnam,israel,18,7
@@ -2260,7 +2260,7 @@ Johann_Sebastian_Bach,germany,,9,
 Johann_Wolfgang_Goethe,oman,germany,10,7
 Johnny_Appleseed,sweden,india,8,7
 Johnston_Atoll,united states,,5,
-John_A.T._Robinson,england,,0,
+John_A.T._Robinson,,,,
 John_Adams,united states,france,17,11
 John_Bull_%28locomotive%29,jersey,united states,12,2
 John_Cabot,spain,portugal,3,2
@@ -2269,16 +2269,16 @@ John_Constable,oman,france,2,2
 John_Dee,poland,france,2,2
 John_F._Kennedy,cuba,united states,20,13
 John_F._Kennedy_assassination,united states,,6,
-John_Flamsteed,england.,,0,
+John_Flamsteed,,,,
 John_Henninger_Reagan,united states,,2,
 John_Howard,australia,iraq,55,8
 John_Locke,united states,netherlands,3,2
-John_Logie_Baird,scotland,,0,
+John_Logie_Baird,,,,
 John_Marshall,united states,france,18,4
 John_Maynard_Keynes,united kingdom,,0,
 John_McEnroe,australia,united states,6,4
 John_Millington_Synge,ireland,oman,5,3
-John_Milton,england,,0,
+John_Milton,,,,
 John_of_England,oman,france,7,7
 John_Pershing,united states,france,30,11
 John_Seigenthaler%2C_Sr.,united states,,0,
@@ -2312,7 +2312,7 @@ Jupiter_%28mythology%29,oman,,10,
 Jurassic,,,,
 Juvenile_delinquency,united states,,2,
 Jyllands-Posten_Muhammad_cartoons_controversy,denmark,egypt,20,3
-K%C4%ABlauea,usa,,0,
+K%C4%ABlauea,,,,
 Kaffir_lime,indonesia,cambodia,4,3
 Kakapo,new zealand,cuba,13,5
 Kakariki,new zealand,,4,
@@ -2350,7 +2350,7 @@ Kipchaks_in_Georgia,georgia,,41,
 Kiribati,kiribati,christmas island,40,3
 Kite_%28bird%29,,,,
 Kitsch,oman,,4,
-Klinefelter%27s_syndrome,,,,
+Klinefelter%27s_syndrome,united states,,0,
 Knights_of_Columbus,united states,canada,12,3
 Kochi_%28India%29,india,portugal,47,2
 Kofi_Annan,ghana,united states,7,4
@@ -2367,7 +2367,7 @@ Krazy_Kat,united states,,0,
 Krill,japan,russia,8,3
 Krypton,germany,,0,
 Kuala_Lumpur,malaysia,india,32,7
-Kubla_Khan,england,,0,
+Kubla_Khan,,,,
 Kuiper_belt,,,,
 Kurt_Cobain,france,oman,7,2
 Kuru_%28disease%29,guinea,cuba,3,3
@@ -2392,7 +2392,7 @@ Lake_Kariba,zimbabwe,zambia,5,4
 Lake_Kivu,rwanda,,13,
 Lake_Malawi,malawi,tanzania,23,9
 Lake_Mead,united states,,0,
-Lake_Powell,arizona,,0,
+Lake_Powell,united states,,0,
 Lake_Superior,canada,,3,
 Lake_Tahoe,india,united states,2,2
 Lake_Tanganyika,tanzania,zambia,6,2
@@ -2408,7 +2408,7 @@ Landscape,,,,
 Land_%28economics%29,,,,
 Language,mali,india,2,2
 LANSA_Cuzco_Crash,peru,,8,
-Lanthanum,france,,0,
+Lanthanum,,,,
 Laos,laos,vietnam,50,16
 Laozi,china,,2,
 Last_Supper,germany,oman,2,2
@@ -2423,7 +2423,7 @@ Laurent_Fignon,france,,20,
 Lavender,oman,india,4,2
 Law,france,oman,14,11
 Lawn,united states,,5,
-Lawrencium,united states,,0,
+Lawrencium,,,,
 Laws_in_Wales_Acts_1535%E2%80%931542,ireland,united kingdom,6,5
 Layla,united kingdom,,0,
 La_Grande_Arm%C3%A9e,russia,austria,42,22
@@ -2433,13 +2433,13 @@ Lead,oman,,5,
 League_of_Nations,japan,germany,22,19
 Leaning_Tower_of_Pisa,italy,,0,
 Lebanon,lebanon,syria,153,56
-Leeds,england,,0,
+Leeds,,,,
 Lego,denmark,switzerland,4,2
 Leicester,oman,india,15,8
 Leif_Ericson,iceland,greenland,5,5
 Leisure,,,,
 Lemon,india,,2,
-Lemon_balm,,,,
+Lemon_balm,united states,,0,
 Lemon_myrtle,australia,,5,
 Lens_%28anatomy%29,,,,
 Leonardo_da_Vinci,france,italy,12,10
@@ -2475,11 +2475,11 @@ Lima,peru,japan,23,5
 Limerick,ireland,united states,14,4
 Lincoln_%28automobile%29,united states,,2,
 Lincoln_Town_Car,canada,united states,2,2
-Lindisfarne_Gospels,england,,0,
+Lindisfarne_Gospels,,,,
 Linear_algebra,jordan,,2,
 Linguistics,mali,india,5,3
 Link_%28The_Legend_of_Zelda%29,japan,,2,
-Linnet,united kingdom,,0,
+Linnet,poland,,0,
 Linus_Pauling,france,united states,3,3
 Linus_Torvalds,finland,,4,
 Linux,united states,,2,
@@ -2525,26 +2525,26 @@ Lithium_aluminium_hydride,,,,
 Lithuania,lithuania,russia,114,19
 Little_Women,japan,oman,3,2
 Liverpool,ireland,georgia,4,3
-Liverpool_and_Manchester_Railway,england,,0,
+Liverpool_and_Manchester_Railway,,,,
 Liverpool_F.C.,spain,france,10,5
 Llandudno,united kingdom,oman,3,2
 Llywelyn_the_Great,ireland,oman,4,3
 Local_community,,,,
 Local_government_in_the_United_Kingdom,ireland,united kingdom,14,8
-Loch,scotland,,0,
-Loch_Ness,scotland,,0,
+Loch,,,,
+Loch_Ness,,,,
 Logba_language,togo,ghana,9,8
 Logic,mali,india,6,3
 Logistics,united states,,2,
 Lom%C3%A9,togo,sierra leone,7,2
 London,oman,united kingdom,13,5
 London_Bridge,oman,,2,
-London_sewerage_system,england,,0,
+London_sewerage_system,,,,
 London_Underground,united kingdom,,0,
-London_Zoo,england,,0,
+London_Zoo,,,,
 Lone_Wolf_%28gamebooks%29,united states,,2,
 Long-billed_Vulture,india,,7,
-Long-tailed_Tit,europe,,0,
+Long-tailed_Tit,,,,
 Longship,norway,portugal,8,3
 Long_pepper,chile,,2,
 Looney_Tunes,united states,,0,
@@ -2561,7 +2561,7 @@ Louis_Freeh,united states,jersey,8,3
 Louis_Jordan,jordan,oman,92,2
 Louis_Pasteur,france,,4,
 Louis_XIV_of_France,france,spain,131,53
-Lovage,,,,
+Lovage,germany,,0,
 Love,oman,mali,7,2
 Lucy%2C_Lady_Duff-Gordon,oman,,2,
 Ludwig_van_Beethoven,oman,austria,6,3
@@ -2571,7 +2571,7 @@ Luminiferous_aether,,,,
 Lunar_eclipse,,,,
 Lung_cancer,mali,united states,4,3
 Lusaka,zambia,,14,
-Lutetium,,,,
+Lutetium,france,,0,
 Luxembourg,luxembourg,germany,92,7
 Luxembourg_%28city%29,luxembourg,france,77,4
 Lyme_disease,guinea,united states,4,3
@@ -2581,7 +2581,7 @@ Lyon,france,oman,11,6
 M%2AA%2AS%2AH_%28TV_series%29,united states,north korea,6,6
 M-10001,united states,,0,
 M-10003-6,united states,,0,
-M1_motorway,england.,,0,
+M1_motorway,,,,
 M25_motorway,united kingdom,,0,
 M6_motorway,hungary,,2,
 Macau,china,portugal,24,9
@@ -2599,11 +2599,11 @@ Magellanic_Penguin,argentina,chile,4,3
 Maghreb,morocco,algeria,10,8
 Magic__The_Gathering,japan,russia,5,2
 Maglev_train,japan,germany,5,5
-Magma,australia,,0,
+Magma,,,,
 Magna_Carta,oman,france,5,4
-Magnesium,,,,
+Magnesium,australia,,0,
 Magnet,,,,
-Magnetism,china,,0,
+Magnetism,,,,
 Magpie,australia,,4,
 Mahabharata,india,,13,
 Mahatma_Gandhi,india,south africa,111,23
@@ -2627,7 +2627,7 @@ Malwa_%28Madhya_Pradesh%29,india,mali,33,3
 Mamenchisaurus,china,,4,
 Mammal,mali,,18,
 Mammoth,russia,india,6,3
-Mammoth_Cave_National_Park,usa.,,0,
+Mammoth_Cave_National_Park,,,,
 Mancala,ethiopia,egypt,6,2
 Manchester,china,united kingdom,8,5
 Manchester_United_F.C.,ireland,jersey,6,6
@@ -2647,7 +2647,7 @@ Marcel_Lefebvre,france,switzerland,6,3
 Marcel_Proust,france,,4,
 Marco_Polo,china,croatia,14,5
 Marcus_Allen,oman,,2,
-Marc_Pugh,england,,0,
+Marc_Pugh,,,,
 Margaret_Sanger,oman,japan,7,2
 Margaret_Thatcher,south africa,ireland,9,9
 Margate,ukraine,germany,2,2
@@ -2679,7 +2679,7 @@ Marxism,china,russia,17,11
 Mary_II_of_England,france,ireland,9,7
 Mary_I_of_England,spain,oman,12,11
 Mary_I_of_Scotland,france,oman,23,4
-Mary_Kingsley,england,,0,
+Mary_Kingsley,,,,
 Mary_Seacole,jamaica,panama,20,17
 Mary_Somerville,oman,,2,
 Maseru,lesotho,south africa,8,4
@@ -2689,12 +2689,12 @@ Mass_Rapid_Transit_%28Singapore%29,singapore,china,19,5
 Material_properties_of_diamond,brazil,australia,2,2
 Mathematical_analysis,india,,2,
 Mathematics,,,,
-Matilda_of_Boulogne,england,,0,
+Matilda_of_Boulogne,,,,
 Matrix_%28mathematics%29,jordan,,2,
 Matsuo_Bash%C5%8D,japan,,5,
 Matter,,,,
-Matthew_Brettingham,england,,0,
-Mauna_Loa,usa,,0,
+Matthew_Brettingham,,,,
+Mauna_Loa,,,,
 Mauritania,mauritania,israel,56,4
 Mauritius,mauritius,india,67,14
 Mausoleum_of_Maussollos,greece,malta,3,2
@@ -2705,7 +2705,7 @@ Max_Weber,india,china,13,7
 Maya_civilization,guatemala,mexico,7,5
 Maya_mythology,oman,guatemala,6,2
 Mayotte,mayotte,france,29,15
-Mbabane,swaziland,,0,
+Mbabane,,,,
 McFly_%28band%29,uganda,,3,
 Meander,turkey,,2,
 Measles,,,,
@@ -2734,12 +2734,12 @@ Mercia,oman,,2,
 Mercury_%28element%29,united states,china,7,4
 Mercury_%28planet%29,japan,,2,
 Merrimack_River,united states,,3,
-Merseburg_Incantations,,,,
+Merseburg_Incantations,germany,,0,
 Mesopotamia,syria,oman,23,7
 Mestizo,india,philippines,18,11
 Metal,,,,
 Metallurgy,,,,
-Metamorphic_rock,estonia,,0,
+Metamorphic_rock,,,,
 Meteor,,,,
 Meteorological_history_of_Hurricane_Katrina,mexico,united states,5,4
 Meteorology,,,,
@@ -2748,9 +2748,9 @@ Metric_expansion_of_space,,,,
 Mexico,mexico,united states,130,20
 Mexico_City,mexico,united states,111,2
 Miami%2C_Florida,cuba,united states,24,14
-Michael_Faraday,england,,0,
+Michael_Faraday,,,,
 Michael_Jordan,jordan,jersey,201,6
-Michael_Ramsey,england,,0,
+Michael_Ramsey,,,,
 Michael_Woodruff,australia,japan,9,5
 Michelangelo,oman,libya,5,4
 Michigan_State_University,united states,antarctica,10,2
@@ -2766,7 +2766,7 @@ Miguel_de_Cervantes,oman,spain,29,9
 Mikhail_Gorbachev,russia,armenia,32,16
 Milan,italy,austria,25,6
 Miles_Davis,japan,spain,4,2
-Milgram_experiment,,,,
+Milgram_experiment,united states,,0,
 Military_dictatorship,pakistan,panama,4,2
 Military_history_of_Canada,canada,france,98,11
 Military_history_of_France,france,oman,96,20
@@ -2777,7 +2777,7 @@ Milkshake,united kingdom,united states,2,2
 Milky_Way,,,,
 Milk_thistle,italy,,0,
 Millard_Fillmore,united states,mexico,4,3
-Milton_Keynes,england,,0,
+Milton_Keynes,,,,
 Mind,,,,
 Mineral,,,,
 Ming_Dynasty,china,japan,32,11
@@ -2833,11 +2833,11 @@ Montserrat,montserrat,united kingdom,42,3
 Monty_Python,oman,brazil,3,3
 Moon,united states,russia,5,4
 Moon_landing,united states,russia,5,3
-Moore%27s_Law,,,,
+Moore%27s_Law,united states,,0,
 Moorgate,united kingdom,,0,
 Moorhen,australia,,0,
 Morecambe_and_Wise,united kingdom,,0,
-Morecambe_Bay,england,,0,
+Morecambe_Bay,,,,
 Moringa_oleifera,india,philippines,11,7
 Mormon,united states,,0,
 Mormon_Trail,united states,mexico,4,2
@@ -2854,7 +2854,7 @@ Mountain_Gorilla,uganda,rwanda,4,3
 Mount_Baker,united states,,2,
 Mount_Everest,nepal,china,21,5
 Mount_Kilimanjaro,tanzania,,8,
-Mount_Nyiragongo,democratic republic of the congo,,0,
+Mount_Nyiragongo,,,,
 Mount_Osmond%2C_South_Australia,australia,,7,
 Mount_Pinatubo,philippines,,4,
 Mount_Rainier,united states,,2,
@@ -2946,7 +2946,7 @@ Neil_Young,canada,chad,3,2
 Nelson_Mandela,south africa,canada,27,6
 Nematode,,,,
 Neoclassicism,oman,france,13,5
-Neodymium,,,,
+Neodymium,china,,0,
 Neon,,,,
 Nepal,nepal,india,125,32
 Nepenthes_rajah,malaysia,,6,
@@ -2966,7 +2966,7 @@ Newsround,united kingdom,,0,
 New_Caledonia,new caledonia,france,58,10
 New_Delhi,india,united states,17,2
 New_England_Patriots,jersey,india,11,2
-New_Forest,england.,,0,
+New_Forest,,,,
 New_moon,,,,
 New_York_City,united states,jersey,35,9
 New_York_City_Subway_nomenclature,jamaica,,4,
@@ -2980,11 +2980,11 @@ Nickel,russia,canada,3,2
 Nicobar_Long-tailed_Macaque,india,mali,4,2
 Nicolaus_Copernicus,poland,russia,13,11
 Niels_Bohr,denmark,,5,
-Nigella,italy,,0,
+Nigella,egypt,,0,
 Niger,niger,france,114,8
 Nigeria,niger,nigeria,197,187
 Niger_River,niger,guinea,38,6
-Nightingale,england,,0,
+Nightingale,,,,
 Nikolai_Rimsky-Korsakov,russia,india,16,2
 Nikola_Tesla,serbia,united states,21,6
 Nile,egypt,ethiopia,36,12
@@ -3026,7 +3026,7 @@ Nostradamus,france,italy,5,2
 Nottingham,oman,zimbabwe,5,2
 Nouakchott,mauritania,,9,
 Novel,oman,france,99,8
-Novelty_%28locomotive%29,ireland,,0,
+Novelty_%28locomotive%29,,,,
 Nuclear_fission,germany,denmark,3,3
 Nuclear_power,united states,india,20,11
 Nuclear_weapon,united states,russia,9,7
@@ -3047,12 +3047,12 @@ Odysseus,oman,mali,9,2
 Odyssey,egypt,,2,
 Oenothera,mexico,,2,
 Ohm,,,,
-Oil_painting,italy,,0,
+Oil_painting,,,,
 Oil_refinery,united states,iran,3,2
-Oil_reservoir,,,,
+Oil_reservoir,united states,,0,
 Okapi,egypt,mali,2,2
 Olaudah_Equiano,niger,sierra leone,2,2
-Old_English_language,england,,0,
+Old_English_language,,,,
 Old_Nubian_language,egypt,,0,
 Old_Swiss_Confederacy,switzerland,oman,5,3
 Oleg_of_Novgorod,oman,,2,
@@ -3067,11 +3067,11 @@ Olympic_Games,united states,greece,24,16
 Oman,oman,pakistan,54,2
 Omega-3_fatty_acid,,,,
 One_Flew_Over_the_Cuckoo%27s_Nest_%28novel%29,oman,,2,
-One_Foot_in_the_Grave,united kingdom,,0,
+One_Foot_in_the_Grave,,,,
 Onion,egypt,india,4,2
 Onion_dome,russia,,21,
 OpenBSD,canada,,0,
-OpenOffice.org,,,,
+OpenOffice.org,germany,,0,
 Open_cluster,,,,
 Open_source,australia,,2,
 Opera,russia,france,13,6
@@ -3098,7 +3098,7 @@ Organism,,,,
 Organization,,,,
 Orion_Nebula,,,,
 Orkney,norway,iceland,7,2
-Ormulum,england,,0,
+Ormulum,,,,
 Ornithischia,,,,
 Oroonoko,oman,ghana,9,4
 Osaka,japan,china,17,4
@@ -3128,7 +3128,7 @@ Ozone_depletion,antarctica,new zealand,5,3
 P%C3%B3voa_de_Varzim,portugal,oman,22,17
 Pablo_Picasso,spain,france,8,3
 Pac-Man,japan,,6,
-Pachycephalosaurus,united states,,0,
+Pachycephalosaurus,canada,,0,
 Pacific_Ocean,china,united states,13,12
 Painting,india,oman,38,19
 Pakistan,pakistan,india,151,24
@@ -3152,7 +3152,7 @@ Papal_conclave,oman,italy,31,5
 Paprika,croatia,serbia,2,2
 Papua_New_Guinea,guinea,papua new guinea,83,46
 Paraguay,paraguay,brazil,48,12
-Parasaurolophus,canada,,0,
+Parasaurolophus,,,,
 Paricut%C3%ADn,mexico,,0,
 Paris,france,oman,62,10
 Park,australia,ireland,4,3
@@ -3161,8 +3161,8 @@ Parliament_of_Canada,canada,united kingdom,35,2
 Parliament_of_Malaysia,malaysia,singapore,26,3
 Parliament_of_the_United_Kingdom,ireland,united kingdom,23,12
 Parrot,spain,india,2,2
-Parsley,italy,,0,
-Parsnip,united kingdom,,0,
+Parsley,greece,,0,
+Parsnip,,,,
 Parthenon,greece,oman,6,6
 Pashtun_people,afghanistan,pakistan,49,33
 Passenger_Pigeon,united states,,3,
@@ -3186,9 +3186,9 @@ Pel%C3%A9,brazil,mexico,39,3
 Pelagic_zone,,,,
 Pellagra,italy,spain,2,2
 Pelycosaur,mali,,3,
-Penda_of_Mercia,england.,,0,
+Penda_of_Mercia,,,,
 Penguin,antarctica,new zealand,7,3
-Pennine_Way,england,,0,
+Pennine_Way,,,,
 Pennsylvania_Railroad,jersey,lebanon,6,3
 Pentateuch,israel,egypt,11,4
 People%27s_Republic_of_China,china,japan,142,14
@@ -3198,7 +3198,7 @@ Perfect_number,,,,
 Pericles,egypt,greece,7,6
 Periodic_table,russia,,2,
 Periodic_table_%28large_version%29,,,,
-Perl,united states,,0,
+Perl,,,,
 Permian,antarctica,china,2,2
 Pernicious_anemia,,,,
 Persian_Empire,iran,oman,44,19
@@ -3206,7 +3206,7 @@ Persian_Gulf,iran,oman,8,6
 Persian_literature,iran,afghanistan,35,12
 Perth%2C_Western_Australia,australia,india,47,7
 Peru,peru,chile,243,16
-Peterborough_Chronicle,england,,0,
+Peterborough_Chronicle,,,,
 Peter_Grimes,jersey,,2,
 Peter_I_of_Russia,russia,sweden,26,5
 Peter_Paul_Rubens,spain,,2,
@@ -3214,7 +3214,7 @@ Pete_Sampras,united states,australia,44,24
 Petroleum,iraq,russia,8,8
 Phase_%28matter%29,,,,
 Pheidippides,greece,,5,
-Phenylketonuria,norway,,0,
+Phenylketonuria,,,,
 Philadelphia,united states,jersey,21,14
 Philately,india,,2,
 Philippines,philippines,spain,59,8
@@ -3226,11 +3226,11 @@ Phineas_Gage,united states,,0,
 Phishing,japan,united states,2,2
 Phla-Pher%C3%A1_languages,benin,niger,13,3
 Phoenix_%28spacecraft%29,mali,,2,
-Phoenix_Zoo,usa.,,0,
+Phoenix_Zoo,,,,
 Phonograph_cylinder,united states,,0,
 Phosphorus,china,oman,3,2
 Phosphorus_tribromide,,,,
-Phosphorus_trichloride,germany,,0,
+Phosphorus_trichloride,poland,,0,
 Phosphoryl_chloride,,,,
 Photography,,,,
 Photon,mali,jordan,2,2
@@ -3244,7 +3244,7 @@ Pi,india,mali,5,2
 Piano,united states,,2,
 Piccadilly_Circus,united kingdom,,0,
 Picts,ireland,oman,11,10
-Pied_Avocet,england,,0,
+Pied_Avocet,united kingdom,,0,
 Pig,mali,egypt,2,2
 Pigeon,australia,niger,8,4
 Pigment,russia,india,3,2
@@ -3274,7 +3274,7 @@ Pluto,japan,oman,3,2
 Plutonium,united states,japan,3,2
 Plymouth,united kingdom,spain,4,2
 Pneumonia,united states,united kingdom,3,2
-Pochard,poland,,0,
+Pochard,france,,0,
 Podcasting,,,,
 Poetry,japan,oman,5,5
 Poetry_of_the_United_States,united states,mali,10,3
@@ -3304,7 +3304,7 @@ Pompeii,oman,italy,14,4
 Pond,united states,,2,
 PONG,,,,
 Pontiac%27s_Rebellion,india,france,113,7
-Pony,ireland,,0,
+Pony,,,,
 Poor_Law,ireland,chad,3,2
 Pope,oman,italy,38,6
 Pope_Benedict_XVI,germany,oman,11,10
@@ -3327,7 +3327,7 @@ Postman_Pat,japan,new zealand,3,2
 Potassium,germany,,2,
 Potassium_iodide,ireland,,2,
 Potassium_nitrate,,,,
-Potato,chile,,0,
+Potato,,,,
 Pottery,japan,egypt,9,2
 Poultry,turkey,,4,
 Pound_sterling,united kingdom,ireland,10,8
@@ -3357,7 +3357,7 @@ Project_Vanguard,united states,,5,
 Promethium,,,,
 Propaganda,iraq,united states,19,12
 Property,united states,oman,3,3
-Prospecting,australia,,0,
+Prospecting,,,,
 Prostate_cancer,united states,mali,5,2
 Protactinium,,,,
 Protein,,,,
@@ -3407,7 +3407,7 @@ Rabbit,spain,australia,2,2
 Rabies,united states,united kingdom,16,5
 Rabindranath_Tagore,india,united states,27,4
 Race,india,united states,23,18
-Radar,kwajalein,,0,
+Radar,,,,
 Radhanite,china,india,10,6
 Radio,united states,japan,4,2
 Radio_frequency,,,,
@@ -3440,7 +3440,7 @@ Rebecca_Helferich_Clarke,united states,,2,
 Recorder,germany,oman,5,2
 Recycling,bangladesh,brazil,5,3
 Redshift,,,,
-Redwing,united kingdom,,0,
+Redwing,ireland,,0,
 Redwood_National_and_State_Parks,united states,,0,
 Red_dwarf,,,,
 Red_giant,,,,
@@ -3448,8 +3448,8 @@ Red_Kite,cape verde,,8,
 Red_Panda,china,nepal,12,5
 Red_rain_in_Kerala,india,,6,
 Red_Sea,egypt,israel,8,4
-Reed_Bunting,poland,,0,
-Reed_Warbler,poland,,0,
+Reed_Bunting,norway,,0,
+Reed_Warbler,,,,
 Refining,,,,
 Refrigerator_car,united states,russia,7,3
 Regent%27s_Park,united kingdom,,0,
@@ -3472,7 +3472,7 @@ RER,france,luxembourg,5,2
 Restoration_comedy,oman,china,8,6
 Restoration_literature,oman,france,18,7
 Retina,,,,
-Retinol,united states,,0,
+Retinol,,,,
 Retreat_of_glaciers_since_1850,antarctica,greenland,10,9
 Revised_Standard_Version,oman,,3,
 Revolution,russia,china,2,2
@@ -3487,7 +3487,7 @@ Rhythm_and_blues,united states,,3,
 Rice,japan,china,19,13
 Richard_Feynman,russia,brazil,4,3
 Richard_Francis_Burton,india,oman,10,4
-Richard_III_%28play%29,england,,0,
+Richard_III_%28play%29,,,,
 Richard_III_of_England,oman,,2,
 Richard_II_of_England,france,ireland,5,3
 Richard_I_of_England,france,cyprus,14,13
@@ -3515,14 +3515,14 @@ Robert_Oppenheimer,mexico,united states,7,6
 Robert_Owen,united states,india,3,3
 Robert_Peel,israel,united kingdom,8,8
 Robert_Schumann,oman,russia,7,2
-Robert_Stephenson,england,,0,
+Robert_Stephenson,,,,
 Robinson_Crusoe,brazil,chile,3,2
 Roche_limit,,,,
 Rockall,iceland,ireland,21,17
 Rocky_Mountains,mexico,canada,5,4
-Rock_Bunting,morocco,,0,
+Rock_Bunting,albania,,0,
 Rock_of_Gibraltar,gibraltar,,13,
-Rock_Pigeon,ireland,,0,
+Rock_Pigeon,united kingdom,,0,
 Rococo,france,germany,6,3
 Roentgenium,germany,,0,
 Romania,oman,romania,222,200
@@ -3554,9 +3554,9 @@ Royal_Dutch_Shell,netherlands,united kingdom,7,4
 Royal_Geographical_Society,united kingdom,,0,
 Royal_Grammar_School_Worcester,australia,,2,
 Royal_Marines,united kingdom,united states,5,5
-Royal_National_Theatre,england,,0,
+Royal_National_Theatre,,,,
 Royal_Navy,united kingdom,bermuda,13,5
-Royal_Parks_of_London,united kingdom,,0,
+Royal_Parks_of_London,,,,
 RSS_%28file_format%29,russia,,2,
 Rubidium,,,,
 Rubik%27s_Cube,hungary,,2,
@@ -3576,7 +3576,7 @@ Rutherford_B._Hayes,united states,paraguay,5,3
 Rwanda,rwanda,niger,71,20
 Rwandan_Genocide,rwanda,united states,115,12
 S%C3%A3o_Paulo,brazil,japan,40,10
-S%C3%A3o_Tom%C3%A9,são tomé and príncipe,,0,
+S%C3%A3o_Tom%C3%A9,,,,
 S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe,portugal,angola,7,6
 S%C3%B8ren_Kierkegaard,denmark,,7,
 S-mine,germany,france,8,3
@@ -3596,12 +3596,12 @@ Sakurajima,japan,,3,
 Saladin,egypt,syria,16,10
 Salford,france,germany,4,2
 Salsa_music,cuba,colombia,43,11
-Salt,united states,,0,
+Salt,,,,
 Saltasaurus,argentina,,2,
 Salt_Lake_City%2C_Utah,jordan,united states,7,6
 Salvador_Dal%C3%AD,spain,oman,7,2
 Samantha_Smith,russia,united states,8,5
-Samarium,,,,
+Samarium,france,,0,
 Samoa,samoa,new zealand,92,13
 Samuel_Beckett,ireland,france,6,5
 Samuel_Taylor_Coleridge,oman,malta,6,2
@@ -3635,14 +3635,14 @@ Saurischia,,,,
 Sauropodomorpha,,,,
 Sauroposeidon,united states,,0,
 Sauropsid,mali,,2,
-Saxicola,,,,
+Saxicola,united kingdom,,0,
 Saxophone,taiwan,china,4,3
 Scandium,sweden,,0,
 Scanian_%28linguistics%29,sweden,oman,8,3
 Scattered_disc,,,,
-Scelidosaurus,england,,0,
+Scelidosaurus,,,,
 Scent_of_a_Woman,oman,cuba,9,2
-Schatzki_ring,,,,
+Schatzki_ring,united states,,0,
 Scheme_programming_language,mali,,2,
 Schizophrenia,mali,india,5,3
 Schr%C3%B6dinger_equation,mali,,2,
@@ -3654,7 +3654,7 @@ Scotch_College%2C_Perth,australia,france,27,2
 Scotland,united kingdom,ireland,18,13
 Scotland_in_the_High_Middle_Ages,ireland,oman,14,10
 Scots_language,ireland,oman,13,4
-Scottish_Episcopal_Church,scotland,,0,
+Scottish_Episcopal_Church,,,,
 Scottish_Gaelic_language,ireland,oman,6,2
 Scottish_Highlands,iran,,2,
 Scottish_mythology,ireland,oman,4,3
@@ -3672,7 +3672,7 @@ Sean_Connery,india,oman,10,5
 Sears_Catalog_Home,united states,,5,
 Season,oman,,2,
 Seattle%2C_Washington,united states,oman,16,3
-Seawater,,,,
+Seawater,finland,,0,
 Sea_level_rise,greenland,antarctica,29,16
 Sea_of_Galilee,jordan,israel,10,9
 Second_Boer_War,south africa,australia,22,15
@@ -3695,11 +3695,11 @@ Sequoia,united states,,0,
 Serbia,serbia,oman,181,30
 Serbia_and_Montenegro,serbia,montenegro,51,37
 Serenity_%28film%29,iran,australia,10,7
-Sermon_on_the_Mount,israel,,0,
+Sermon_on_the_Mount,,,,
 Sesame,india,,3,
 Sesame_Street,china,united states,7,6
 Set,united kingdom,,0,
-Severn_crossing,united kingdom,,0,
+Severn_crossing,,,,
 Seychelles,seychelles,india,56,4
 Sgt._Pepper%27s_Lonely_Hearts_Club_Band,india,united kingdom,6,4
 Shabo_language,oman,ethiopia,3,2
@@ -3741,7 +3741,7 @@ Silver,mexico,peru,3,2
 Sim%C3%B3n_Bol%C3%ADvar,venezuela,colombia,16,13
 Simca_Vedette,france,brazil,3,2
 SimCity,japan,australia,3,2
-Sinclair_Research_Ltd,england,,0,
+Sinclair_Research_Ltd,,,,
 Singapore,singapore,malaysia,207,12
 Sino-German_cooperation_%281911-1941%29,china,germany,83,55
 Sino-Roman_relations,oman,china,39,22
@@ -3764,16 +3764,16 @@ Snaefell_Mountain_Railway,isle of man,,4,
 Snake_charming,india,egypt,18,4
 Snow,afghanistan,japan,2,2
 Snowball_Earth,,,,
-Snowdonia,wales,,0,
-Snowdonia_National_Park,wales,,0,
-Snowy_Owl,,,,
+Snowdonia,,,,
+Snowdonia_National_Park,,,,
+Snowy_Owl,canada,,0,
 Snow_Goose,mexico,canada,4,2
 Socialism,russia,germany,8,5
 Social_anxiety,,,,
 Social_capital,australia,,2,
 Social_contract_%28Malaysia%29,malaysia,singapore,45,9
 Society,united kingdom,united states,2,2
-Society_of_Merchant_Venturers,england,,0,
+Society_of_Merchant_Venturers,,,,
 Sociocultural_evolution,united states,,6,
 Sociology,,,,
 Socrates,oman,,4,
@@ -3782,7 +3782,7 @@ Sodium,,,,
 Sodium_hydroxide,united states,,2,
 Sodium_sulfate,,,,
 Soil,china,germany,3,2
-Soils_retrogression_and_degradation,,,,
+Soils_retrogression_and_degradation,france,,0,
 Soil_moisture,,,,
 Soil_pH,,,,
 Soil_profile,,,,
@@ -3833,7 +3833,7 @@ Spanish_conquest_of_the_Inca_Empire,peru,spain,22,5
 Spanish_Inquisition,spain,oman,35,6
 Spanish_language,spain,oman,31,14
 Sparrow,australia,mali,3,2
-Sparrowhawk,,,,
+Sparrowhawk,united kingdom,,0,
 Speaker_of_the_British_House_of_Commons,oman,united kingdom,3,2
 Speaker_of_the_United_States_House_of_Representatives,united states,jersey,7,5
 Special_relativity,,,,
@@ -3850,8 +3850,8 @@ Split_infinitive,oman,,2,
 Sponsorship_Directdebit,united kingdom,,0,
 Sport,greece,egypt,3,2
 Spotted_Flycatcher,germany,,0,
-Spring_%28season%29,united states,,0,
-Spring_Heeled_Jack,england,,0,
+Spring_%28season%29,,,,
+Spring_Heeled_Jack,,,,
 Sputnik_1,russia,,4,
 Sputnik_2,australia,russia,2,2
 Sputnik_program,russia,,2,
@@ -3879,7 +3879,7 @@ Star_Trek__Deep_Space_Nine,united states,,4,
 Star_Trek__The_Original_Series,oman,united states,4,4
 Star_Wars,oman,vietnam,4,2
 Star_Wars_Episode_IV__A_New_Hope,canada,japan,4,4
-Statistics,germany,,0,
+Statistics,,,,
 Statue_of_Zeus_at_Olympia,greece,,0,
 Steam_engine,sweden,,2,
 Steel,egypt,china,7,4
@@ -3889,9 +3889,9 @@ Stem_cell,canada,,0,
 Stephen_Harper,canada,israel,26,10
 Stephen_Hawking,united states,china,2,2
 Stephen_Jay_Gould,united states,,0,
-Stephen_of_England,england,,0,
+Stephen_of_England,,,,
 Stephen_Trigg,israel,,2,
-Steve_Davis,england,,0,
+Steve_Davis,,,,
 Stickleback,faroe islands,,2,
 Still_Game,oman,france,4,3
 Stingray,jordan,israel,3,2
@@ -3905,16 +3905,16 @@ Storm_of_October_1804,canada,jersey,3,2
 Stornoway,canada,oman,2,2
 Stourbridge_Lion,united states,,2,
 Strait_of_Malacca,malaysia,china,6,5
-Stratford-upon-Avon,england,,0,
+Stratford-upon-Avon,,,,
 String_theory,,,,
-Stroke,,,,
+Stroke,united states,,0,
 Strontium,,,,
 Struthiomimus,canada,,2,
 Stuttering,mali,oman,5,4
 Stuttgart,germany,russia,21,6
 Styracosaurus,poland,,2,
 St_Buryan,iran,,2,
-St_Michael%27s_Mount,england,,0,
+St_Michael%27s_Mount,,,,
 St_Paul%27s_Cathedral,oman,,3,
 Sub-Saharan_Africa,mali,guinea,4,3
 Suburbs_of_Johannesburg,south africa,,13,
@@ -3930,7 +3930,7 @@ Sugar_beet,russia,france,5,4
 Suikinkutsu,japan,,13,
 Suleiman_the_Magnificent,oman,hungary,40,16
 Sulfur,united states,new zealand,3,3
-Sulfuric_acid,united states,,0,
+Sulfuric_acid,,,,
 Sultan,oman,malaysia,15,5
 Sumac,mexico,,3,
 Sumatra,india,indonesia,5,5
@@ -3981,7 +3981,7 @@ Symmetry,india,china,2,2
 Synthesizer,japan,oman,8,2
 Syria,syria,israel,207,20
 T-34,russia,germany,7,4
-T._D._Judah,,,,
+T._D._Judah,canada,,0,
 T._S._Eliot,oman,germany,2,2
 Tacitean_studies,oman,jordan,5,3
 Tagoi_language,sudan,,0,
@@ -3994,7 +3994,7 @@ Tamarind,india,mexico,5,4
 Tamil_language,india,sri lanka,19,13
 Tamil_people,india,sri lanka,44,39
 Tank,russia,germany,7,5
-Tansy,,,,
+Tansy,france,,0,
 Tantalum,australia,,2,
 Tanzania,tanzania,mali,74,21
 Taoism,china,taiwan,17,7
@@ -4004,7 +4004,7 @@ Tashkent,russia,uzbekistan,22,8
 Tasmanian_Devil,australia,mali,9,3
 Tawny_Owl,united kingdom,,0,
 Tay-Sachs_disease,israel,,6,
-Tay_Rail_Bridge,scotland,,0,
+Tay_Rail_Bridge,,,,
 Tea,japan,china,38,32
 Technetium,japan,china,3,2
 Technology,egypt,belgium,2,2
@@ -4025,9 +4025,9 @@ Tenzing_Norgay,nepal,india,4,4
 Tenzin_Gyatso%2C_14th_Dalai_Lama,china,india,17,12
 Terbium,,,,
 Terik,kenya,,0,
-Tern,canada,,0,
+Tern,iceland,,0,
 Terrorism,israel,russia,5,4
-TeX,,,,
+TeX,united states,,0,
 Textile,pakistan,,2,
 TGV,france,belgium,20,9
 Thailand,thailand,china,55,4
@@ -4035,7 +4035,7 @@ Thalassemia,india,pakistan,4,2
 Thallium,russia,china,5,2
 Theatre,india,united kingdom,6,4
 Theatre_in_the_round,united states,,0,
-Theatre_Royal%2C_Drury_Lane,united kingdom,,0,
+Theatre_Royal%2C_Drury_Lane,,,,
 Theodore_Roosevelt,panama,colombia,16,14
 Therizinosaurus,mongolia,,2,
 Thermodynamics,,,,
@@ -4051,7 +4051,7 @@ The_Beano,united kingdom,,0,
 The_Beatles,australia,canada,25,24
 The_Beatles_discography,canada,oman,7,4
 The_Blitz,united kingdom,,0,
-The_Broads,england.,,0,
+The_Broads,,,,
 The_Brothers_Karamazov,russia,oman,12,6
 The_Canadian,canada,,5,
 The_Cantos,china,france,8,8
@@ -4063,7 +4063,7 @@ The_Children%27s_Machine,cambodia,united states,5,3
 The_Country_Wife,china,oman,10,6
 The_Count_of_Monte_Cristo,france,,3,
 The_Curious_Incident_of_the_Dog_in_the_Night-time,united kingdom,,0,
-The_Dandy,scotland,,0,
+The_Dandy,united kingdom,,0,
 The_Fairy-Queen,oman,,4,
 The_Famous_Five_%28characters%29,new zealand,australia,2,2
 The_Fens,oman,,4,
@@ -4077,7 +4077,7 @@ The_Hobbit,croatia,vietnam,3,2
 The_Holocaust,germany,oman,31,17
 The_Illuminatus%21_Trilogy,united states,mali,3,2
 The_Importance_of_Being_Earnest,japan,,2,
-The_Iron_Bridge,england,,0,
+The_Iron_Bridge,,,,
 The_King%27s_Regiment_%28Liverpool%29,india,france,11,8
 The_Last_Supper_%28Leonardo%29,oman,italy,3,2
 The_Legend_of_Zelda_series,japan,,14,
@@ -4095,16 +4095,16 @@ The_Origin_of_Species,united states,,2,
 The_Oz_books,australia,united states,2,2
 The_Picture_of_Dorian_Gray,oman,,3,
 The_Pilgrim%27s_Progress,mali,,3,
-The_Quatermass_Experiment,uk,,0,
-The_Relapse,england,,0,
+The_Quatermass_Experiment,,,,
+The_Relapse,,,,
 The_Rime_of_the_Ancient_Mariner,australia,oman,4,4
 The_Rite_of_Spring,russia,,6,
 The_Rolling_Stones,france,new zealand,3,2
 The_Seagull,oman,russia,3,2
 The_Shawshank_Redemption,mexico,,2,
 The_Simpsons,united states,japan,5,3
-The_Smiths,england,,0,
-The_Supremes,united states,,0,
+The_Smiths,,,,
+The_Supremes,,,,
 The_Temptations,oman,united kingdom,2,2
 The_Wall_Street_Journal,united states,china,2,2
 The_Waste_Land,israel,switzerland,2,2
@@ -4116,8 +4116,8 @@ Thomas_Aquinas,oman,dominica,9,6
 Thomas_Becket,oman,,2,
 Thomas_Cranmer,oman,,3,
 Thomas_Edison,jersey,united states,13,5
-Thomas_Gainsborough,england,,0,
-Thomas_Hobbes,england,,0,
+Thomas_Gainsborough,,,,
+Thomas_Hobbes,,,,
 Thomas_Jefferson,united states,france,17,9
 Thomas_Malthus,india,russia,5,2
 Thomas_More,oman,mali,5,2
@@ -4263,7 +4263,7 @@ Turks_and_Caicos_Islands,bahamas,canada,8,7
 Turmeric,india,,7,
 Turner_syndrome,mali,oman,14,2
 Turquoise,egypt,iran,8,6
-Turtle,united states,,0,
+Turtle,,,,
 Tutsi,rwanda,burundi,22,5
 Tuvalu,tuvalu,united states,68,6
 Tycho_Brahe,denmark,oman,6,3
@@ -4277,7 +4277,7 @@ U.S._Route_66,mexico,united states,17,2
 U.S._state,united states,india,23,9
 U2,ireland,united states,16,3
 Ubuntu_%28Linux_distribution%29,south africa,,0,
-Uffington_White_Horse,england,,0,
+Uffington_White_Horse,,,,
 Uganda,uganda,niger,90,22
 Ukraine,ukraine,russia,117,54
 Ukulele,iran,,2,
@@ -4316,7 +4316,7 @@ Unix,united states,,0,
 Ununbium,germany,,0,
 Ununhexium,russia,,0,
 Ununoctium,russia,,0,
-Ununpentium,russia,,0,
+Ununpentium,,,,
 Ununquadium,,,,
 Ununtrium,japan,,2,
 Upsilon_Andromedae,,,,
@@ -4336,7 +4336,7 @@ Vacutainer,,,,
 Valpara%C3%ADso,chile,germany,26,3
 Vampire,oman,romania,19,11
 Vampire_bat,mali,,2,
-Vanadium,,,,
+Vanadium,south africa,,0,
 Vancouver,canada,georgia,28,8
 Vanilla,mexico,réunion,9,9
 Vanuatu,vanuatu,australia,60,8
@@ -4348,7 +4348,7 @@ Vegetable,,,,
 Vegetation,russia,united states,3,2
 Velociraptor,mongolia,china,12,3
 Venezuela,venezuela,colombia,98,12
-Venn_diagram,united kingdom,,0,
+Venn_diagram,,,,
 Venus,oman,united states,3,3
 Venus_and_Adonis_%28opera%29,,,,
 Vernon_Kell,united kingdom,,0,
@@ -4452,8 +4452,8 @@ Western_Roman_Empire,oman,italy,96,9
 Western_Sahara,morocco,western sahara,45,38
 Westminster_Abbey,france,,2,
 Westminster_System,australia,ireland,11,5
-Weston-super-Mare,england,,0,
-Westport_Country_Playhouse,connecticut.,,0,
+Weston-super-Mare,,,,
+Westport_Country_Playhouse,united states,,0,
 West_Bank,israel,jordan,133,44
 West_Flemish,belgium,france,2,2
 West_Virginia,united states,india,9,4
@@ -4472,13 +4472,13 @@ Whitethroat,,,,
 White_cliffs_of_Dover,france,,3,
 White_Mountain_art,united states,,0,
 White_Wagtail,japan,,2,
-Whitney_Joins_The_JAMs,uk,,0,
+Whitney_Joins_The_JAMs,united kingdom,,0,
 Whooping_Crane,canada,,0,
 Wigeon,united kingdom,,0,
 Wikimedia_Foundation,united states,,0,
-Wikinews,,,,
+Wikinews,united states,,0,
 Wikipedia,japan,united states,5,3
-Wikipedia_Text_of_the_GNU_Free_Documentation_License,usa,,0,
+Wikipedia_Text_of_the_GNU_Free_Documentation_License,,,,
 Wikisource,,,,
 Wikispecies,,,,
 Wildebeest,mali,,2,
@@ -4486,9 +4486,9 @@ Wild_cat,india,turkey,4,2
 Willem_Barents,russia,,0,
 William_and_Mary,united kingdom,,0,
 William_Butler_Yeats,ireland,oman,6,5
-William_Edington,england,,0,
+William_Edington,,,,
 William_Ewart_Gladstone,israel,ireland,16,7
-William_Gilbert,england,,0,
+William_Gilbert,,,,
 William_Gladstone,israel,ireland,16,7
 William_Harvey,mali,,3,
 William_Henry_Harrison,india,united states,9,4
@@ -4498,7 +4498,7 @@ William_III_of_England,france,ireland,24,20
 William_II_of_England,france,,6,
 William_IV_of_the_United_Kingdom,united kingdom,germany,10,4
 William_I_of_England,france,,3,
-William_Mahone,usa,,0,
+William_Mahone,,,,
 William_McKinley,united states,philippines,5,4
 William_N._Page,united states,,0,
 William_Pitt_the_Younger,india,ireland,7,6
@@ -4559,7 +4559,7 @@ X_Window_System,,,,
 X_Window_System_protocols_and_architecture,,,,
 Yagan,australia,united kingdom,20,6
 Yak,mali,mongolia,2,2
-Yamoussoukro,côte d'ivoire,,0,
+Yamoussoukro,,,,
 Yangtze_River,china,,23,
 Yarralumla%2C_Australian_Capital_Territory,australia,india,14,3
 Yeast,egypt,australia,2,2
@@ -4573,7 +4573,7 @@ Yes_Minister,australia,,2,
 Yeti,bhutan,nepal,2,2
 Yom_Kippur_War,israel,egypt,176,107
 York,oman,ghana,3,2
-Yorkshire_Dales,england,,0,
+Yorkshire_Dales,,,,
 Yotsuya_Kaidan,japan,,9,
 You%27re_Still_the_One,australia,oman,4,4
 Ytterbium,,,,
@@ -4588,7 +4588,7 @@ Zambezi,zambia,mozambique,26,9
 Zambia,zambia,niger,112,19
 Zara_Yaqob,ethiopia,egypt,8,4
 Zebra,mali,kenya,3,2
-Zebra_shark,australia,,0,
+Zebra_shark,,,,
 Zeus,oman,mali,5,2
 Zhang_Qian,china,india,11,9
 Zheng_He,china,mongolia,29,4

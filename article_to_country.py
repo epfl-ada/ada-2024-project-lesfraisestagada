@@ -103,7 +103,7 @@ if __name__ == "__main__":
             
             for country_ in countries:
                 if country_.lower() in country.lower():
-                    new_counts.loc[article, "Top_1_name"] = country_
+                    new_counts.loc[article, "Top_1_name"] = country_.lower()
                     new_counts.loc[article, "Top_1_count"] = 0
                     break
                     
