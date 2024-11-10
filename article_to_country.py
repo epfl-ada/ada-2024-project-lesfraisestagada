@@ -3,7 +3,7 @@ from src.data.some_dataloader import *
 from collections import defaultdict
 from tqdm import tqdm
 from llm_classifier import Generator
-
+import re
 
 
 def country_occurences_in_files():
@@ -20,14 +20,15 @@ def country_occurences_in_files():
 
     counts = defaultdict(dict)
 
-    for file_ in plaintext_files_iterator():
+    for file_ in tqdm(plaintext_files_iterator()):
         filename = os.path.splitext(file_.split('/')[-1])[0]
         with open(file_, 'r', encoding="utf-8") as f:
             content = f.read()
             content = content.lower()
             for country in countries:
-                country = country.lower()
-                counts[country][filename] = content.count(country)
+                country_pattern = r'\b' + re.escape(country.lower()) + r'\b'
+                count = len(re.findall(country_pattern, content)) 
+                counts[country][filename] = count
                 
     df = pd.DataFrame(counts)
     return df
@@ -70,6 +71,7 @@ if __name__ == "__main__":
     df_counts = filter_top_k(df, k=2, N=1)
     
     nan_df = df_counts[df_counts.isna().all(axis=1)]
+    print(f"Number of articles with no countries: {len(nan_df)}")
     
     generator = Generator(local_compute=True, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama')
     model, tokenizer = generator.load_model()
