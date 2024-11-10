@@ -28,7 +28,7 @@ def country_occurences_in_files():
             for country in countries:
                 country_pattern = r'\b' + re.escape(country.lower()) + r'\b'
                 count = len(re.findall(country_pattern, content)) 
-                counts[country][filename] = count
+                counts[country.lower()][filename] = count
                 
     df = pd.DataFrame(counts)
     return df
