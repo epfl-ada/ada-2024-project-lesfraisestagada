@@ -116,4 +116,4 @@ if __name__ == "__main__":
     nan_df = new_counts[new_counts.isna().all(axis=1)]
     print(f"Number of articles with no countries after completion with llama: {len(nan_df)}")
 
-    new_counts.to_csv('data/country_occurences_inferrence.csv')
+    new_counts.to_csv('data/country_occurences.csv')

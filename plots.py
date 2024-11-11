@@ -60,11 +60,13 @@ def paths_to_country(df, country_clicks, finished = True):
         end_article = row["path"][-1]
         
         if start_article != '<' and end_article != '<':
-        
-            start_country = country_clicks.loc[start_article]["Top_1_name"]
-            end_country = country_clicks.loc[end_article]["Top_1_name"]
-            
-            l.append(f"{start_country} -> {end_country}")
+            try:
+                start_country = country_clicks.loc[start_article]["Top_1_name"]
+                end_country = country_clicks.loc[end_article]["Top_1_name"]
+                
+                l.append(f"{start_country} -> {end_country}")
+            except:
+                pass
             
     
     res = pd.DataFrame(l, columns=["links"])
@@ -74,5 +76,5 @@ def paths_to_country(df, country_clicks, finished = True):
     if finished:
         plt.title("Top 100 country connections between the start and end of a finished path")
     else:
-        plt.title("Top 100 country connections between the start and end of an unfinished path")
+        plt.title("Bottom 100 country connections between the start and end of an unfinished path")
     plt.show()
