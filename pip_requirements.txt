@@ -4,7 +4,7 @@ sentencepiece
 scipy
 matplotlib
 wandb
-numpy
+numpy==1.26.4
 country_list
 torch
 wordcloud
