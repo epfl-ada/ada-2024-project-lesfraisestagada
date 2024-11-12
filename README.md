@@ -12,8 +12,17 @@ Wikipedia contains a larger proportion of articles about Western culture, or are
 
 By answering those questions we will uncover some of the cultural biases that are deeply interspered into modern Internet. The data we are working with is part of the Wikipedia from 2007, containing 4604 articles on very diverse subjects. The biases, if biases we find, will be biases that apply to 2007 and Wikipedia, as well as the Internet in general, has likely become more inclusive in terms of smaller countries in more recent years. 
 
+
 ## Data
 
+- `plaintext_articles`: **Plain text content of the 4604 Wikipedia articles in .txt format**, ordered by alphabetical order (A to Z). Those are the articles through which the players could navigate.
+- `wikispeedia-paths-and-graph`: Navigation paths and Wikipedia hyperlink graph (without article content)
+    - `articles.tsv`: **The list of all articles**
+    - `categories.tsv`:  **Hierarchical categories of all articles**, categories like *subject.Countries* or *subject.Geography.Natural_Disaster*, the main category of the articles. 
+    - `links.tsv`: **The list of all links between articles**, in one column the source page and in the second column all pages that are link in the source page 
+    - `paths_finished.tsv`: **Successful (i.e., finished) Wikispeedia paths** from a source to a target (reached!!) page
+    - `paths_unfinished`: **Unsuccessful (i.e., unfinished) Wikispeedia paths** from a source to a target (not reached) page
+    - `shortest-path-distance-matrix.txt`: **The shortest-path distances between all pairs of articles**, computed using the Floyd-Warshall algorithm. This is what the computer would use to solve the Wikispeedia game!
 
 ## Research questions
 1. Are there cultural biases intrinsic to the Wikipedia graph?
