@@ -8,7 +8,12 @@ was mostly used by people from Western culture. [references?] In this project, w
 Wikispeedia. Are people playing Wikispeedia more likely to click on articles linked to Western countries? What are
 the most used articles in Wikispeedia paths? Are there unconscious biases in the way players choose their paths in
 Wikispeedia? Do they tend to follow paths that connect articles from Western countries? If yes, why? Is it because
-Wikipedia contains a larger proportion of articles about Western culture, or are the players themselves biased?
+Wikipedia contains a larger proportion of articles about Western culture, or are the players themselves biased? 
+
+By answering those questions we will uncover some of the cultural biases that are deeply interspered into modern Internet. The data we are working with is part of the Wikipedia from 2007, containing 4604 articles on very diverse subjects. The biases, if biases we find, will be biases that apply to 2007 and Wikipedia, as well as the Internet in general, has likely become more inclusive in terms of smaller countries in more recent years. 
+
+## Data
+
 
 ## Research questions
 1. Are there cultural biases intrinsic to the Wikipedia graph?
@@ -26,13 +31,16 @@ linked to a cultural bias?
    could this be an explanation?
    * Is there something inherent to the way players play the game?
 
-## Methods [draft]
+## Methods 
 
 ### Assign countries to articles
 First, we assign one or multiple countries to each articles of the Wikispeedia dataset. This will then be useful to
-determine to which region of the world (and thus culture) a given article belongs to. 
+determine to which region of the world (and thus to which culture) a given article belongs to. To assign each article to a country we did two things: 
 
-[TBD: How do we do this?]
+- regex text search
+- llm instructed to extract a country in articles that did not explicit mentions of countries (explain count = 0 for those articles) 
+
+Some articles remained without any country?? 
 
 Possible ways include:
 * Scan in right "infobox" table for reference to a country
@@ -40,17 +48,27 @@ Possible ways include:
 for example with a threshold on the number of occurrences of a country in the article text?)
 * What to do if an article does not relate to a country? -> throw it away
 
-[TBD: Should we be more fine-grained than countries?]
 
-We can try to assign cities to articles instead of countries for a more precise analysis. But we might end up with fewer
+
+(We can try to assign cities to articles instead of countries for a more precise analysis. But we might end up with fewer
 articles to analyze since it is probably harder to relate an article to a city than to a country (more articles will
-have references to countries than to cities)
+have references to countries than to cities))
 
 ### 1. Are there cultural biases intrinsic to the Wikipedia graph?
 
-[TBD]
+- For each country we computed the number of articles that related to this country
+- We then displayed the distribution of country occurrences (most and least occurring countries)
 
 ### 2. Are there cultural biases in the way players play Wikispeedia?
+#### 2.1. Clicks
+Here we were interested in understanding whether there is a cultural bias in the way players of the Wikispeedia game click on articles, meaning whether some articles are clicked more often and whether some countries are associated to articles that are more often clicked. 
+
+- Merge all paths in the Wikispedia game (i.e. ```data/paths_finished.csv``` and ```data/paths_unfinished.csv```)
+- Count the occurrences of each article in those paths 
+- Plot the distribution of the article occurrences 
+- Plot the distribution of the countries associated to those articles
+- Normalize the click count of countries with respect the the number of occurrences of those countries 
+
 
 #### Computing metrics
 
