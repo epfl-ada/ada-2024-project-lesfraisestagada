@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
+import scipy
 from ast import literal_eval
 
 def plot_res_stats_model(res):
@@ -78,3 +80,30 @@ def paths_to_country(df, country_clicks, finished = True):
     else:
         plt.title("Bottom 100 country connections between the start and end of an unfinished path")
     plt.show()
+
+
+def plot_regression_clicks_links(data, x, y, ax, position, x_label, y_label, title):
+    """ Plot scatter plot of the data and display regression line with equation and R-squared.
+
+    Args:
+        data (pd.DataFrame): a DataFrame with x and y as columns
+        x (str): name of the column that we want to plot on the x-axis 
+        y (str): name of the column that we want to plot on the y-axis
+        ax: axis on which we plot 
+        position (list): x-y position of the regression equation
+        x_label (str): name of x-axis
+        y_label (str): name of y-axis
+        title (str): the title of the plot
+   
+    """
+    plot = sns.regplot(data=data, x=x, y=y, ax=ax, order=1, line_kws={'color':'red'}, robust=True) # downweight the influence of outliers(1 outlier on the plot!)
+    
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    ax.set_title(title)
+
+    # Compute the regression
+    slope, intercept, r, p, sterr = scipy.stats.linregress(x=plot.get_lines()[0].get_xdata(),
+                                                        y=plot.get_lines()[0].get_ydata())
+    # Add regression equation to the plot
+    ax.text(position[0], position[1], f"y = {round(intercept, 2)} + {round(slope, 2)} * x \n R-squared = {round(r, 2)}")
