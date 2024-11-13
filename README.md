@@ -44,22 +44,9 @@ linked to a cultural bias?
 First, we assign one or multiple countries to each articles of the Wikispeedia dataset. This will then be useful to
 determine to which region of the world (and thus to which culture) a given article belongs to. To assign each article to a country we did two things: 
 
-- regex text search
-- llm instructed to extract a country in articles that did not explicit mentions of countries (explain count = 0 for those articles) 
-
-Some articles remained without any country?? 
-
-Possible ways include:
-* Scan in right "infobox" table for reference to a country
-* Scan in entire article for reference to a country (see how we can prevent unrelated countries from being assigned,
-for example with a threshold on the number of occurrences of a country in the article text?)
-* What to do if an article does not relate to a country? -> throw it away
-
-
-
-(We can try to assign cities to articles instead of countries for a more precise analysis. But we might end up with fewer
-articles to analyze since it is probably harder to relate an article to a city than to a country (more articles will
-have references to countries than to cities))
+- First a naive approach is used by doing a text search and finding all the country string names inside the plaintext. This is done with help of a regex that matches all the countries in all the files. The results are then parsed in a table containing as index the article name and as columns all the possible countries on earth along with the number of occurences in the specific article. After this the top 2 countries per articles are kept. This approach resulted in 1412 articles having no country assigned to them. By going manually through them it can be seen that as a human some articles can be further classified to countries even if the country name is not explicetly mentionned in the text.
+- Two LLM's were tested (Qwen and Llama) and only Llama (a Meta LLM) was retained in order to assign the missing articles to countries. For this to be done the LLM was downloaded locally and used for inference on the plaintext articles. This approach allowed to classify 525 new articles having no country assigned to them. Articles classified with help of the LLM have a "Top_1_count" of 0 meaning 0 occurences of the exact country name in the article but stil able to be inferred by an llm.
+- Some articles remained without countries. This is due to the fact that they can't be classified (for example objects, stars, raw materials...)  
 
 ### 1. Are there cultural biases intrinsic to the Wikipedia graph?
 
@@ -124,17 +111,22 @@ paths that contain more Western culture articles.]
 ## Proposed timeline [current TODOs]
 
 ### Week 28.10 - 01.11
-- [ ]  Group articles by country and city (Jeremy)
+- [x]  Group articles by country first naïve approach (Jeremy)
 - [ ]  Readme (Bryan jusqu’à jeudi, Oriane après)
 - [ ]  Compute success/fail ratio → which articles have high success, high failure. Correlation with countries ? (Théo)
 - [ ]  Compute usage of articles, draw distribution, extract most used, correlation with countries (Claire)
 
-### TODOs left
+### Week 01.11 - 08.11
+- [x] refine country calssification with help of an llm in order to have more articles (Jérémy)
 - [ ]  Visualisation on a map
 - [ ]  Links between countries (paths)
-    - [ ]  transform article paths with country paths to find links between countries → edges on the map
+   - [ ]  transform article paths with country paths to find links between countries → edges on the map
 - [ ]  Random walk thing ?
 - [ ]  Question 1 ?
+
+### Week 08.11 - 15.11
+- [x] Statistical analysis on the number of clicks an article get in function of different features (Jérémy)
+- [x] Can we explain the variance in player's click counts with the number of links leading in and out of articles (Jérémy)
 
 ## Quickstart
 
