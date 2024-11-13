@@ -37,7 +37,7 @@ linked to a cultural bias?
 3. How can we explain the players' biases?
    * What is the distribution of countries among start / target articles for the Wikispeedia games? If it is not balanced, could this be an explanation?
    * Does it simply derive from the fact that the Wikipedia graph is already biased in itself? (change question --> page rank le B)
-   *Can we explain the variance in player's click counts with the number of links leading in and out of article?
+   * Can we explain the variance in player's click counts with the number of links leading in and out of article?
    * Is there something inherent to the way players play the game?
 
 ## Methods 
