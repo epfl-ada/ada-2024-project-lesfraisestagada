@@ -5,15 +5,13 @@
 In the last few centuries, Western societies like Europe and the USA have become wealthier and wealthier compared to
 African or Asian countries. This has also come with a faster technological development, meaning that the early internet
 was mostly used by people from Western culture. [references?] In this project, we will analyze the impact this had on
-Wikispeedia. Are people playing Wikispeedia more likely to click on articles linked to Western countries? What are
-the most used articles in Wikispeedia paths? Are there unconscious biases in the way players choose their paths in
-Wikispeedia? Do they tend to follow paths that connect articles from Western countries? If yes, why? Is it because
+[Wikispeedia](https://dlab.epfl.ch/wikispeedia/play/), an online game built on 4604 Wikipedia articles from 2007 during which players are navigating from a given start and end article only through the links contained in the articles. We intend to answer several questions: Are people players more likely to click on articles linked to Western countries? What are
+the most used articles in Wikispeedia paths? Are there unconscious biases in the way players choose their paths? Do they tend to follow paths that connect articles from Western countries? Is that because
 Wikipedia contains a larger proportion of articles about Western culture, or are the players themselves biased? 
-
-By answering those questions we will uncover some of the cultural biases that are deeply interspered into modern Internet. The data we are working with is part of the Wikipedia from 2007, containing 4604 articles on very diverse subjects. The biases, if biases we find, will be biases that apply to 2007 and Wikipedia, as well as the Internet in general, has likely become more inclusive in terms of smaller countries in more recent years. 
 
 
 ## Data
+The articles that we will use have been borrowed from a 4,600-article version of Wikipedia that was once available at the 2007 Wikipedia Selection for schools. We have the content of the articles as well as data of the Wikispeedia games. 
 
 - `plaintext_articles`: **Plain text content of the 4604 Wikipedia articles in .txt format**, ordered by alphabetical order (A to Z). Those are the articles through which the players could navigate.
 - `wikispeedia-paths-and-graph`: Navigation paths and Wikipedia hyperlink graph (without article content)
