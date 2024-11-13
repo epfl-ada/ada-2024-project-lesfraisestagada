@@ -35,9 +35,9 @@ linked to a cultural bias?
    * What articles are most likely to cause a player to stop the game? What makes those articles "dead ends"? What does
    this have to do with the country of these articles?
 3. How can we explain the players' biases?
-   * Does it simply derive from the fact that the Wikipedia graph is already biased in itself?
-   * What is the distribution of countries among start / target articles for the Wikispeedia games? If it is not balanced,
-   could this be an explanation?
+   * What is the distribution of countries among start / target articles for the Wikispeedia games? If it is not balanced, could this be an explanation?
+   * Does it simply derive from the fact that the Wikipedia graph is already biased in itself? (change question --> page rank le B)
+   *Can we explain the variance in player's click counts with the number of links leading in and out of article?
    * Is there something inherent to the way players play the game?
 
 ## Methods 
