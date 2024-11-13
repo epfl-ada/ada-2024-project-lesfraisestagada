@@ -4,6 +4,8 @@ import pandas as pd
 import seaborn as sns
 import scipy
 from ast import literal_eval
+from collections import Counter
+
 
 def plot_res_stats_model(res):
     variables = res.params.index
@@ -72,23 +74,39 @@ def paths_to_country(df, country_clicks, finished = True):
             except:
                 pass
             
+            
+    start_counts = Counter(start)
+    end_counts = Counter(end)
     
-    res = pd.DataFrame({"start": start, 
-                        "end": end})
-    res_start_sorted = res.value_counts().index.sort_values("start", ascending=False).head(100)
-    sns.countplot(data=res_start_sorted, x="start")
+    start_sorted = dict(sorted(start_counts.items(), key=lambda item: item[1], reverse=True)[:40])
+    end_sorted = dict(sorted(end_counts.items(), key=lambda item: item[1], reverse=True)[:40])
 
-    res_end_sorted = res.value_counts().index.sort_values("end", ascending=False).head(100)
-    sns.countplot(data=res_end_sorted, x="end")
-    #res["start"].groupby("start").size().sort_values(ascending=False).head(100).plot(kind="bar", figsize=(20, 5))
-    #res["stop"].groupby("stop").size().sort_values(ascending=False).head(100).plot(kind="bar", figsize=(20, 5))
-    plt.ylabel("Number of links between countries")
-    plt.xlabel("Country links")
+    fig, axs = plt.subplots(1, 2 if finished else 1, figsize=(14, 6))
+
     if finished:
-        plt.title("Top 100 country connections between the start and end of a finished path")
-    else:
-        plt.title("Bottom 100 country connections between the start and end of an unfinished path")
+        # Plot the start list occurrences
+        axs[0].bar(start_sorted.keys(), start_sorted.values(), color="skyblue")
+        axs[0].set_title("Start Country Occurrences" + " (Finished Paths)" if finished else "Start Country Occurrences" + " (Unfinished Paths)")
+        axs[0].tick_params(axis='x', rotation=90)
+        axs[0].set_ylabel("Occurrences")
+
+    else :
+        axs.bar(start_sorted.keys(), start_sorted.values(), color="skyblue")
+        axs.set_title("Start Country Occurrences" + " (Finished Paths)" if finished else "Start Country Occurrences" + " (Unfinished Paths)")
+        axs.tick_params(axis='x', rotation=90)
+        axs.set_ylabel("Occurrences")
+        
+    if finished:
+        # Plot the end list occurrences
+        axs[1].bar(end_sorted.keys(), end_sorted.values(), color="salmon")
+        axs[1].set_title("End Country Occurrences" + " (Finished Paths)" if finished else "Start Country Occurrences" + " (Unfinished Paths)")
+        axs[1].tick_params(axis='x', rotation=90)
+        axs[1].set_ylabel("Occurrences")
+
+    # Adjust layout and display
+    plt.tight_layout()
     plt.show()
+    
 
 
 def plot_regression_clicks_links(data, x, y, ax, position, x_label, y_label, title):
