@@ -49,14 +49,15 @@ def plot_country_to_country(df):
     df.groupby("links").size().sort_values(ascending=False).head(100).plot(kind="bar", figsize=(20, 5))
     plt.ylabel("Number of links between countries")
     plt.xlabel("Country links")
-    plt.title("Top 100 country links by occurences")
+    plt.title("Figure 4: Top 100 country links by occurences")
     plt.show()
     
 
 def paths_to_country(df, country_clicks, finished = True):
     country_clicks.dropna(subset=["Top_1_name"], inplace=True)
 
-    l = []
+    start = []
+    end = []
     for idx, row in df.iterrows():
         start_article = row["path"][0]
         end_article = row["path"][-1]
@@ -66,13 +67,21 @@ def paths_to_country(df, country_clicks, finished = True):
                 start_country = country_clicks.loc[start_article]["Top_1_name"]
                 end_country = country_clicks.loc[end_article]["Top_1_name"]
                 
-                l.append(f"{start_country} -> {end_country}")
+                start.append(start_country)
+                end.append(end_country)
             except:
                 pass
             
     
-    res = pd.DataFrame(l, columns=["links"])
-    res.groupby("links").size().sort_values(ascending=False).head(100).plot(kind="bar", figsize=(20, 5))
+    res = pd.DataFrame({"start": start, 
+                        "end": end})
+    res_start_sorted = res.value_counts().index.sort_values("start", ascending=False).head(100)
+    sns.countplot(data=res_start_sorted, x="start")
+
+    res_end_sorted = res.value_counts().index.sort_values("end", ascending=False).head(100)
+    sns.countplot(data=res_end_sorted, x="end")
+    #res["start"].groupby("start").size().sort_values(ascending=False).head(100).plot(kind="bar", figsize=(20, 5))
+    #res["stop"].groupby("stop").size().sort_values(ascending=False).head(100).plot(kind="bar", figsize=(20, 5))
     plt.ylabel("Number of links between countries")
     plt.xlabel("Country links")
     if finished:
