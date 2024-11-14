@@ -99,3 +99,37 @@ def links_into_articles(links):
         num_links_in["name_links_in"].iloc[article] = links.iloc[list_links_in[article][1]]['linkSource'].tolist()
     
     return num_links_in
+
+
+def find_pairs(paths):
+    """ Find all pairs of articles within game paths. If a path is [a, b, c, <, d], this function finds every path between articles so 
+    [(a,b), (b,c), (b,d)].
+
+    Args: game paths with every article split
+
+    Returns: 
+        List: a list containing every pair of articles found in the game paths
+    """
+
+    all_pairs = []
+
+    # Iterate over all rows of paths
+    for i in range(len(paths)): 
+        # preprocess to get rid of "<" and not loose path information > [a, b, <, c] becomes [a, c]
+        new_row = []
+
+        for j in range(len(paths.iloc[i])):
+            if paths.iloc[i][j] != '<': 
+                new_row.append(paths.iloc[i][j])
+
+            else :
+                new_row.pop()
+        new_row = pd.Series(new_row)
+
+        # For each row with a path [a,b,c,d], we create a list of [(a,b), (b,c), (c,d)]
+        pairs_row = [(new_row.iloc[j], new_row.iloc[j+1]) for j in range(len(new_row) - 1)]
+
+        # Pairs found for each rows are combined in a unique list
+        all_pairs = all_pairs + pairs_row
+
+    return all_pairs
