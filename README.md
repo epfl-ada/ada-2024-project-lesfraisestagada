@@ -55,6 +55,15 @@ Here we were interested in understanding whether there is a cultural bias in the
 - Plot the distribution of the countries associated to those articles
 - Normalize the click count of countries with respect the the number of occurrences of those countries
 
+#### 2.2. Highway paths
+In this part, the focus is made on player's behaviour to investigate whether they use some paths more often than others. Those frequently used paths are called "highway paths".
+- Extract each game path from paths_finished.csv and paths_unfinished.csv as a list
+- Create a new list with every 1-unit long path between articles (returns to previous articles '<' are carefully taken care of by removing the last article accessed from the list)
+- Convert the list of pairs into a Pandas DataFrame and counts the number of time that each pair appear using .value_counts()
+- Normalize the number of occurences of each pair by the total number of pairs found
+- Associate each pair of article to the top 1 country of both articles
+- Plot the distribution of the pair occurences within all game paths
+- Repeat a similar procedure for 2-unit long path between articles by extracting trios of articles from game paths
 
 #### Computing metrics
 
