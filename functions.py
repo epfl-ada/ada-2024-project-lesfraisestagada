@@ -294,3 +294,38 @@ def get_articles_before_go_back(unfinished_paths, unique_dead_end_countries):
 
     return sorted_before_last_article
 
+
+def analyze_last_articles_in_unfinished_paths(unfinished_paths, unique_dead_end_countries):
+    """
+    Analyzes the last articles in unfinished paths and identifies which of them are known dead-end countries.
+
+    Args:
+        unfinished_paths (pd.DataFrame): DataFrame containing paths in unfinished articles, with 'path' column.
+        unique_dead_end_countries (pd.DataFrame): DataFrame of dead-end countries with 'Top_1_name' column.
+
+    Returns:
+        pd.DataFrame: DataFrame with last articles in unfinished paths that are also dead-end countries.
+    """
+    # Split the paths into lists of articles
+    unfinished_paths['articles'] = unfinished_paths['path'].astype(str).str.split(';')
+
+    # Extract the last article (country) from each unfinished path
+    unfinished_paths['last_article'] = unfinished_paths['articles'].apply(lambda x: x[-1] if isinstance(x, list) and len(x) > 0 else None)
+
+    # Count occurrences of each last article
+    last_article_counts = unfinished_paths['last_article'].value_counts().reset_index()
+    last_article_counts.columns = ['last_article', 'count']
+
+    # Standardize format for merging by removing underscores and converting to lowercase
+    last_article_counts['cleaned_last_article'] = last_article_counts['last_article'].str.replace('_', ' ').str.lower()
+    unique_dead_end_countries['cleaned_country'] = unique_dead_end_countries['Top_1_name'].str.replace('_', ' ').str.lower()
+
+    # Merge to identify last articles in unfinished paths that are also known dead-end countries
+    last_dead_end_countries = last_article_counts.merge(
+        unique_dead_end_countries, 
+        left_on='cleaned_last_article', 
+        right_on='cleaned_country', 
+        how='inner'
+    )
+
+    return last_dead_end_countries
