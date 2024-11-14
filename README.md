@@ -4,23 +4,15 @@
 ## Abstract
 In the last few centuries, Western societies like Europe and the USA have become wealthier and wealthier compared to
 African or Asian countries. This has also come with a faster technological development, meaning that the early internet
-was mostly used by people from Western culture. [references?] In this project, we will analyze the impact this had on
+was mostly used by people from Western culture [1](https://upload.wikimedia.org/wikipedia/commons/4/4a/Decolonizing_Wikipedia.pdf). In this project, we will analyze the impact this had on
 [Wikispeedia](https://dlab.epfl.ch/wikispeedia/play/), an online game built on 4604 Wikipedia articles from 2007 during which players are navigating from a given start and end article only through the links contained in the articles. We intend to answer several questions: Are people players more likely to click on articles linked to Western countries? What are
 the most used articles in Wikispeedia paths? Are there unconscious biases in the way players choose their paths? Do they tend to follow paths that connect articles from Western countries? Is that because
 Wikipedia contains a larger proportion of articles about Western culture, or are the players themselves biased? 
 
 
 ## Data
-The articles that we will use have been borrowed from a 4,600-article version of Wikipedia that was once available at the 2007 Wikipedia Selection for schools. We have the content of the articles as well as data of the Wikispeedia games. 
+The articles that we will use have been borrowed from a 4,600-article version of Wikipedia that was once available at the 2007 Wikipedia Selection for schools. We have the content of the articles (*data/plaintext_articles*) as well as data of the Wikispeedia games (*data/wikispeedia-paths-and-graph*). 
 
-- `plaintext_articles`: **Plain text content of the 4604 Wikipedia articles in .txt format**, ordered by alphabetical order (A to Z). Those are the articles through which the players could navigate.
-- `wikispeedia-paths-and-graph`: Navigation paths and Wikipedia hyperlink graph (without article content)
-    - `articles.tsv`: **The list of all articles**
-    - `categories.tsv`:  **Hierarchical categories of all articles**, categories like *subject.Countries* or *subject.Geography.Natural_Disaster*, the main category of the articles. 
-    - `links.tsv`: **The list of all links between articles**, in one column the source page and in the second column all pages that are link in the source page 
-    - `paths_finished.tsv`: **Successful (i.e., finished) Wikispeedia paths** from a source to a target (reached!!) page
-    - `paths_unfinished`: **Unsuccessful (i.e., unfinished) Wikispeedia paths** from a source to a target (not reached) page
-    - `shortest-path-distance-matrix.txt`: **The shortest-path distances between all pairs of articles**, computed using the Floyd-Warshall algorithm. This is what the computer would use to solve the Wikispeedia game!
 
 ## Research questions
 1. Are there cultural biases intrinsic to the Wikipedia graph?
@@ -61,7 +53,7 @@ Here we were interested in understanding whether there is a cultural bias in the
 - Count the occurrences of each article in those paths 
 - Plot the distribution of the article occurrences 
 - Plot the distribution of the countries associated to those articles
-- Normalize the click count of countries with respect the the number of occurrences of those countries 
+- Normalize the click count of countries with respect the the number of occurrences of those countries
 
 
 #### Computing metrics
@@ -106,6 +98,9 @@ links to / from that article (that is, it cannot be explained by the structure o
 
 [TBD: The idea is that if most paths have an article linked to Western culture as the target, players will tend to follow
 paths that contain more Western culture articles.]
+
+#### Regression analysis of the click counts
+To investigate whether some inherent features of articles could influence le number of clicks that an article will receive in the Wikispeedia game, we performed a ordinary least squares regression using the number of clicks are the predicted/dependent variable and combinations of the number of links in and out of articles as predictors/independent variables. We also performed correlations to find relationships between these three variables. 
 
 
 ## Proposed timeline [current TODOs]

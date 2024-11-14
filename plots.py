@@ -55,7 +55,7 @@ def plot_country_to_country(df):
     plt.show()
     
 
-def paths_to_country(df, country_clicks, finished = True):
+def paths_to_country(df, country_clicks, fig_num= "", finished = True):
     country_clicks.dropna(subset=["Top_1_name"], inplace=True)
 
     start = []
@@ -103,13 +103,14 @@ def paths_to_country(df, country_clicks, finished = True):
         axs[1].tick_params(axis='x', rotation=90)
         axs[1].set_ylabel("Occurrences")
 
+    plt.suptitle(f"Figure {fig_num}")
     # Adjust layout and display
     plt.tight_layout()
     plt.show()
     
 
 
-def plot_regression_clicks_links(data, x, y, ax, position, x_label, y_label, title):
+def plot_regression_clicks_links(x, y, ax, position, x_label, y_label, title, intercept, slope, r):
     """ Plot scatter plot of the data and display regression line with equation and R-squared.
 
     Args:
@@ -123,14 +124,16 @@ def plot_regression_clicks_links(data, x, y, ax, position, x_label, y_label, tit
         title (str): the title of the plot
    
     """
-    plot = sns.regplot(data=data, x=x, y=y, ax=ax, order=1, line_kws={'color':'red'}, robust=True) # downweight the influence of outliers(1 outlier on the plot!)
-    
+    #sns.regplot(data=data, x=x, y=y, ax=ax, order=1, line_kws={'color':'red'}, robust=True) # downweight the influence of outliers(1 outlier on the plot!)
+    ax.scatter(x=x, y=y)
+    ax.plot(x, intercept + slope * x, color="r")
+
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
 
     # Compute the regression
-    slope, intercept, r, p, sterr = scipy.stats.linregress(x=plot.get_lines()[0].get_xdata(),
-                                                        y=plot.get_lines()[0].get_ydata())
+    #slope, intercept, r, p, sterr = scipy.stats.linregress(x=plot.get_lines()[0].get_xdata(),
+                                                        #y=plot.get_lines()[0].get_ydata())
     # Add regression equation to the plot
     ax.text(position[0], position[1], f"y = {round(intercept, 2)} + {round(slope, 2)} * x \n R-squared = {round(r, 2)}")
