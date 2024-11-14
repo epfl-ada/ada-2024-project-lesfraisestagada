@@ -91,7 +91,21 @@ to an article about B by following a link
 To make sure the visualization does not contain too many points / too many edges we might consider filtering the articles
 to only keep the most used ones in the games. We could also do other visualizations where we only keep a subset of
 categories of articles (for example, only the Historical Figures category)
+### 2.3 Dead Ends Analysis
+In this section, "dead ends" in the Wikispeedia game were analysed by examining points where players frequently abandoned paths before reaching their target. This analysis included tracking success and failure rates of articles, linking dead-end articles to specific countries, and scaling click counts by outgoing links to potentially highlight cultural patterns in player behavior.
 
+- Process all game paths to count occurrences, success, and failure ratios for each article.
+- Calculate and printed the success rate for the backtracking action ("<").
+- Analyze top articles by unique failure and success counts, segmented by category.
+- Identify articles with high failure ratios, indicating potential dead ends.
+- Merge articles with country data to connect dead-end articles to specific countries.
+- Aggregate data by country, calculating total clicks, outgoing/incoming links, and average failure ratios.
+- Plot the most significant dead-end countries based on click count and outgoing links.
+- Scale click counts by outgoing links and plotted scaled dead-end countries.
+- Extract last articles from unfinished paths and analyzed their frequency as dead ends by country.
+- Scale last article counts by outgoing links and visualized scaled dead-end countries.
+- Identify articles appearing before backtracking and counted their occurrences.
+- Plot unfinished paths' articles before backtracking, including a scaled version based on outgoing links.
 ### 3. How can we explain the players' biases?
 
 #### Comparing with random walk
