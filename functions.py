@@ -1,4 +1,5 @@
 import pandas as pd
+import networkx as nx
 
 from itertools import chain
 from collections import Counter
@@ -60,14 +61,14 @@ def links_out_of_articles(links):
 
     num_links_out["name_links_out"] = None
 
-    index_links_out = links.groupby('linkSource').groups # a dictionary whose keys are the computed unique groups and corresponding values are the axis labels belonging to each group. 
+    index_links_out = links.groupby('linkSource').groups # a dictionary whose keys are the computed unique groups and corresponding values are the axis labels belonging to each group.
     list_links_out = list(index_links_out.items())
 
     for article in range(len(list_links_out)):
         num_links_out["name_links_out"].iloc[article] = links.iloc[list_links_out[article][1]]['linkTarget'].tolist()
 
     num_links_out = num_links_out[:-1]
-    
+
     return num_links_out
 
 
@@ -92,13 +93,36 @@ def links_into_articles(links):
 
     num_links_in["name_links_in"] = None
 
-    index_links_in = links.groupby('linkTarget').groups # a dictionary whose keys are the computed unique groups and corresponding values are the axis labels belonging to each group. 
+    index_links_in = links.groupby('linkTarget').groups # a dictionary whose keys are the computed unique groups and corresponding values are the axis labels belonging to each group.
     list_links_in = list(index_links_in.items())
 
     for article in range(len(list_links_in)):
         num_links_in["name_links_in"].iloc[article] = links.iloc[list_links_in[article][1]]['linkSource'].tolist()
-    
+
     return num_links_in
+
+
+def pagerank(links):
+    """Run the pagerank algorithm on the Wikipedia graph.
+
+    Args:
+        links (pd.DataFrame): a DataFrame with 2 columns (linkSource and linkTarget), summarizing all links contained in each article
+
+    Returns:
+        pd.DataFrame: A DataFrame with the rank of each article in the graph
+        The format is as follows:
+        columns: article_name, rank
+        values: name of the article, rank computed by pagerank
+    """
+    edges = [(row['linkSource'], row['linkTarget']) for index, row in links.iterrows()]
+    G = nx.DiGraph(edges)
+    pagerank_result = nx.pagerank(G)
+    df_pagerank = pd.DataFrame({
+        'article_name': pagerank_result.keys(),
+        'rank': pagerank_result.values()  # Order will correspond to keys
+    })
+    df_pagerank.sort_values(by='rank', ascending=False, inplace=True, ignore_index=True)
+    return df_pagerank
 
 
 def find_pairs(paths):
