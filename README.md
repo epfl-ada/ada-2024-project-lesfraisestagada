@@ -91,59 +91,94 @@ paths that contain more Western culture articles.]
 To investigate whether some inherent features of articles could influence le number of clicks that an article will receive in the Wikispeedia game, we performed a ordinary least squares regression using the number of clicks are the predicted/dependent variable and combinations of the number of links in and out of articles as predictors/independent variables. We also performed correlations to find relationships between these three variables. 
 
 #### Comparing with random walk
-[TBD: The idea would be to run random walk and compare with the players' behavior. Do players spend a higher fraction
-of time on certain articles than random walk?]
 
-Random walk could be thought of as a baseline, where if a given article appear way more (or less) often on the Wikispeedia
-games than on random walk, it means player do prefer this article, and it cannot be entirely explained by the number of
-links to / from that article (that is, it cannot be explained by the structure of the Wikipedia graph)
+The basic PageRank algorithm of the `networkx` package was run on the full graph of the Wikispeedia game. The ranks were then compared with the players rank, defined as:
+$$r_a = \frac{c_a}{\sum_{a' \in A}{c_{a'}}}$$
+where
+* $c_a$ is the click count of the article $a$ (the number of times it appears in the recorded player paths)
+* $A$ is the set of all articles in the Wikipedia graph
 
+To remove as much bias from the graph as possible in the players rank (given that we want a fair comparison between the PageRanks which represents the graph's inherent bias and the players rank which represents the players' bias), we removed the start and target articles from the players paths before computing click counts. Those articles are not actually chosen by the players but are imposed by the game, so they do not represent the players' bias. Initial comparison of players vs PageRank was done.
 
-## Proposed timeline [current TODOs]
+The players and PageRank ranks were then aggregated by country for further analysis. The rank of a country was defined as:
+$$r_c = \sum_{a \in A_c} r_a$$
+where
+* $A_c$ is the set of all articles linked to the country $c$
+
+An analysis of the difference between the players and PageRank ranks was done to determine if players are significantly more biased than a random walk on the graph. Statistical significance was tested using a chi-square test with a number of trial $n$ set to the total number of clicks in all the recorded games.
+
+## Proposed timeline
 
 ### Week 28.10 - 01.11
-- [x]  Group articles by country first naïve approach (Jeremy)
-- [ ]  Readme (Bryan jusqu’à jeudi, Oriane après)
-- [ ]  Compute success/fail ratio → which articles have high success, high failure. Correlation with countries ? (Théo)
-- [ ]  Compute usage of articles, draw distribution, extract most used, correlation with countries (Claire)
+Jeremy
+- [x]  Group articles by country first naïve approach
+
+Bryan
+- [x]  Initial skeleton of `README.md`
+
+Oriane
+- [x]  First test of visualisation on a map
+
+Theo
+- [x]  Compute success/fail ratio → which articles have high success, high failure. Correlation with countries ?
+
+Claire
+- [x]  Compute usage of articles, draw distribution, extract most used, correlation with countries
 
 ### Week 01.11 - 08.11
-- [x] refine country calssification with help of an llm in order to have more articles (Jérémy)
-- [ ]  Visualisation on a map
-- [ ]  Links between countries (paths)
-   - [ ]  transform article paths with country paths to find links between countries → edges on the map
-- [ ]  Random walk thing ?
-- [ ]  Question 1 ?
+Jeremy
+- [x] Refine country calssification with help of an llm in order to have more articles
+
+Claire
+- [x] Click counts analysis
+
+Oriane
+- [x]  Highway paths analysis
+
+Bryan
+- [x]  Random walk analysis
+
+Theo
+- [x] Dead ends analysis
 
 ### Week 08.11 - 15.11
-- [x] Statistical analysis on the number of clicks an article get in function of different features (Jérémy)
-- [x] Can we explain the variance in player's click counts with the number of links leading in and out of articles (Jérémy)
+
+Jeremy
+- [x] Explain the variance in player's click counts with the number of links leading in and out of articles
+
+Claire
+- [x] Explain the variance in player's click counts with the number of links leading in and out of articles
+
+Bryan
+- [x] Refine the random walk analysis
+
+Oriane
+
+Theo
+
+Everyone
+- [x] Merge own notebook into `results.py`
+- [x] Write methods in `README.md`
+
+## Organization within the team
+[TODO: difference with proposed timeline?]
 
 ## Quickstart
 
 ```bash
 # clone project
-git clone <project link>
-cd <project repo>
+git clone https://github.com/epfl-ada/ada-2024-project-lesfraisestagada.git
+cd ada-2024-project-lesfraisestagada
 
 # [OPTIONAL] create conda environment
-conda create -n <env_name> python=3.11 or ...
-conda activate <env_name>
-
+conda create -n ada-2024-project-lesfraisestagada python=3.11
+conda activate ada-2024-project-lesfraisestagada
 
 # install requirements
 pip install -r pip_requirements.txt
 ```
 
-
-
-### How to use the library
-Tell us how the code is arranged, any explanations goes here.
-
-
-
-## Project Structure
-
+## Project Structure [TODO: fix this]
 The directory structure of new project looks like this:
 
 ```
@@ -164,3 +199,5 @@ The directory structure of new project looks like this:
 └── README.md
 ```
 
+### How to use the library
+Tell us how the code is arranged, any explanations goes here.
