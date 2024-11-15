@@ -52,11 +52,11 @@ Here we were interested in understanding whether there is a cultural bias in the
 The click count of an article is defined as the total number of times it appears across all Wikispeedia paths (i.e. ```data/paths_finished.csv``` and ```data/paths_unfinished.csv```)
 Mathematically, it can be expressed as:
 
-$$\text{Click Count}_{\text{article}} = \sum_{p=1}^{P} \text{Occurrences}_{\text{article}, p}$$
+$$Click Count_{article} = \sum_{p=1}^{P} Occurrences_{article, p}$$
 
 Where:
-- $ P \ \text{represents the total number of paths in the datasets.}$
-- $\text{Occurrences}_{\text{article}, p} \ \text{indicates the number of times the article appears in the p-th path.}$
+* P represents the total number of paths in the datasets.
+* $Occurrences_{article, p}$ indicates the number of times the article appears in the p-th path.
 
 
 #### Highway paths
@@ -72,11 +72,15 @@ In this section, we analyze "dead ends" in the Wikispeedia game by examining poi
 
 The success and failure ratios are defined as follows:
 
-$$\text{Success Ratio} = \frac{\text{Successful Clicks}}{\text{Total Clicks}}$$
-$$\text{Failure Ratio} = \frac{\text{Failure Clicks}}{\text{Total Clicks}}$$
+$$Success Ratio = \frac{Successful Clicks}{Total Clicks}$$
+
+$$Failure Ratio = \frac{Failure Clicks}{Total Clicks}$$
+
 --- 
+
 To incorporate scaling, the total clicks are adjusted by the number of outgoing links for each country, as expressed in the formula:
-$$\text{Scaled Total Clicks} = \frac{\text{Total Clicks}}{\text{Outgoing Links}}$$
+
+$$Scaled Total Clicks = \frac{Total Clicks}{Outgoing Links}$$
 
 This scaling highlights the influence of article connectivity on player behavior, providing deeper insights into cultural patterns and player strategies across different regions.
 
@@ -90,16 +94,20 @@ To investigate whether some inherent features of articles could influence le num
 
 #### Comparing with random walk
 
-The basic PageRank algorithm of the `networkx` package was run on the full graph of the Wikispeedia game. The ranks were then compared with the players rank, defined as:
+The basic PageRank algorithm of the `networkx` package was run on the full graph of the Wikispeedia game. The ranks were then compared with the players rank, defined as:<br/>
+
 $$r_a = \frac{c_a}{\sum_{a' \in A}{c_{a'}}}$$
+
 where
 * $c_a$ is the click count of the article $a$ (the number of times it appears in the recorded player paths)
 * $A$ is the set of all articles in the Wikipedia graph
 
 To remove as much bias from the graph as possible in the players rank (given that we want a fair comparison between the PageRanks which represents the graph's inherent bias and the players rank which represents the players' bias), we removed the start and target articles from the players paths before computing click counts. Those articles are not actually chosen by the players but are imposed by the game, so they do not represent the players' bias. Initial comparison of players vs PageRank was done.
 
-The players and PageRank ranks were then aggregated by country for further analysis. The rank of a country was defined as:
+The players and PageRank ranks were then aggregated by country for further analysis. The rank of a country was defined as: <br/>
+
 $$r_c = \sum_{a \in A_c} r_a$$
+
 where
 * $A_c$ is the set of all articles linked to the country $c$
 
