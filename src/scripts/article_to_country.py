@@ -1,5 +1,5 @@
 from country_list import countries_for_language
-from src.data.some_dataloader import *
+from data.dataloader import *
 from collections import defaultdict
 from tqdm import tqdm
 from src.models.llm_classifier import Generator

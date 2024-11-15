@@ -14,7 +14,7 @@
 
 # Imports
 import pandas as pd
-from src.data.some_dataloader import *
+from data.dataloader import *
 from src.utils.functions import *
 
 # main
