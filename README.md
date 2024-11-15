@@ -188,7 +188,14 @@ Adapt story text to fit in the website.
 git clone https://github.com/epfl-ada/ada-2024-project-lesfraisestagada.git
 cd ada-2024-project-lesfraisestagada
 
-#create conda environment
+# [OPTIONAL] create conda environment
+conda create -n ada-2024-project-lesfraisestagada python=3.11
+conda activate ada-2024-project-lesfraisestagada
+
+# install requirements
+pip install -r pip_requirements.txt
+
+# or create conda environment in case you want to run the llm locally on cuda GPUs
 conda env create -f environment.yml
 conda activate ada
 ```

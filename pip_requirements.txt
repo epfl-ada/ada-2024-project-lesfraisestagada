@@ -2,7 +2,7 @@ datasets
 transformers
 sentencepiece
 scipy
-matplotlib
+matplotlib==3.7.2
 wandb
 numpy==1.26.4
 country_list
