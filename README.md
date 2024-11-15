@@ -17,7 +17,7 @@ The articles that we will use have been borrowed from a 4,600-article version of
 ## Research questions
 1. Are there cultural biases intrinsic to the Wikipedia graph?
    * What countries are the most present in the Wikipedia graph?
-   * Are articles about some countries on average more connected than others? [TODO: revoir le 1.2]
+   * Are articles about some countries on average more connected than others?
 2. Are there cultural biases in the way players play Wikispeedia?
    * What articles are most often clicked on? How does this relate to the country of the article?
    * What paths do Wikispeedia players most follow? Are there "highway paths" that are very often used? Can this be
@@ -42,18 +42,14 @@ determine to which region of the world (and thus to which culture) a given artic
 - Two LLM's were tested (Qwen and Llama) and only Llama (a Meta LLM) was retained in order to assign the missing articles to countries. For this to be done the LLM was downloaded locally and used for inference on the plaintext articles. This approach allowed to classify 525 new articles having no country assigned to them. Articles classified with help of the LLM have a "Top_1_count" of 0 meaning 0 occurences of the exact country name in the article but stil able to be inferred by an llm.
 - Some articles remained without countries. This is due to the fact that they can't be classified (for example objects, stars, raw materials...) 
 
-#### Average in/out degree of articles by country
-[TODO: implement this?]
+#### Links between articles
+To find the number of links in and out of each article we simply counted the number of links in each article (this is the number of links out) and then counted the number on times an article occurs in other articles (this is the number of links in). 
 
 ### 2. Are there cultural biases in the way players play Wikispeedia?
 #### Click counts
 Here we were interested in understanding whether there is a cultural bias in the way players of the Wikispeedia game click on articles, meaning whether some articles are clicked more often and whether some countries are associated to articles that are more often clicked. 
 
-- Merge all paths in the Wikispedia game (i.e. ```data/paths_finished.csv``` and ```data/paths_unfinished.csv```)
-- Count the occurrences of each article in those paths 
-- Plot the distribution of the article occurrences 
-- Plot the distribution of the countries associated to those articles
-- Normalize the click count of countries with respect the the number of occurrences of those countries
+The click count of an article is defined by the number of times it occurs in all Wikispeedia paths (i.e. ```data/paths_finished.csv``` and ```data/paths_unfinished.csv```)
 
 #### Highway paths
 In this part, the focus is made on player's behaviour to investigate whether they use some paths more often than others. Those frequently used paths are called "highway paths".
@@ -84,7 +80,7 @@ In this section, "dead ends" in the Wikispeedia game were analysed by examining 
 ### 3. How can we explain the players' biases?
 
 #### Analyzing country distribution in start / target articles of proposed paths
-[TODO: write this]
+We isolate start and end articles from paths and analyze the distribution of countries among them.
 
 #### Regression analysis of the click counts
 To investigate whether some inherent features of articles could influence le number of clicks that an article will receive in the Wikispeedia game, we performed a ordinary least squares regression using the number of clicks are the predicted/dependent variable and combinations of the number of links in and out of articles as predictors/independent variables. We also performed correlations to find relationships between these three variables. 
@@ -106,61 +102,73 @@ where
 
 An analysis of the difference between the players and PageRank ranks was done to determine if players are significantly more biased than a random walk on the graph. Statistical significance was tested using a chi-square test with a number of trial $n$ set to the total number of clicks in all the recorded games.
 
-## Proposed timeline
+## Team organization
 
 ### Week 28.10 - 01.11
 Jeremy
-- [x]  Group articles by country first naïve approach
+- [x]  Group articles by country first naïve approach (1.1)
 
 Bryan
 - [x]  Initial skeleton of `README.md`
 
 Oriane
-- [x]  First test of visualisation on a map
+- [x]  First test of visualisation on a map (2)
 
 Theo
-- [x]  Compute success/fail ratio → which articles have high success, high failure. Correlation with countries ?
+- [x]  Compute success/fail ratio → which articles have high success, high failure. Correlation with countries (2.3)
 
 Claire
-- [x]  Compute usage of articles, draw distribution, extract most used, correlation with countries
+- [x]  Compute usage of articles, draw distribution, extract most used, correlation with countries (2.1)
 
 ### Week 01.11 - 08.11
 Jeremy
-- [x] Refine country calssification with help of an llm in order to have more articles
+- [x] Refine country calssification with help of an llm in order to have more articles (1.1)
 
 Claire
-- [x] Click counts analysis
+- [x] Click counts analysis (2.1)
 
 Oriane
-- [x]  Highway paths analysis
+- [x]  Highway paths analysis (2.2)
 
 Bryan
-- [x]  Random walk analysis
+- [x]  Random walk analysis (3.3)
 
 Theo
-- [x] Dead ends analysis
+- [x] Dead ends analysis (2.3)
 
 ### Week 08.11 - 15.11
 
-Jeremy
-- [x] Explain the variance in player's click counts with the number of links leading in and out of articles
+Jeremy and Claire
+- [x] Explain the variance in player's click counts with the number of links leading in and out of articles (3.2)
+- [x] Connection between countries (1.2)
 
-Claire
-- [x] Explain the variance in player's click counts with the number of links leading in and out of articles
+Jeremy
+- [x] Analyze country distribution in start / target articles of proposed paths (3.1)
 
 Bryan
-- [x] Refine the random walk analysis
+- [x] Refine the random walk analysis by countries (3.3)
 
 Oriane
+- [x] Refine the highway paths analysis. Normalization and link to countries (2.2)
 
 Theo
+- [x] Refine the dead ends analysis. Normalization by outgoing links and further analysis (2.3)
 
 Everyone
 - [x] Merge own notebook into `results.py`
 - [x] Write methods in `README.md`
+- [x] Write conclusion in 3.4 of `results.py`
 
-## Organization within the team
-[TODO: difference with proposed timeline?]
+## Proposed timeline
+### Step 1 (due 06.12)
+Implement feedback from TAs.
+
+Choose framework for the website. Decide which plots to keep and which to discard from the notebook. Add interactive plots like a map visualization.
+### Step 3 (due 13.12)
+Implement potential new interactive plots.
+### Step 4 (due 20.12)
+Adapt story text to fit in the website.
+
 
 ## Quickstart
 
@@ -189,14 +197,9 @@ The directory structure of new project looks like this:
 │   ├── utils                           <- Utility directory
 │   ├── scripts                         <- Shell scripts
 │
-├── tests                       <- Tests of any kind
-│
 ├── results.ipynb               <- a well-structured notebook showing the results
 │
 ├── .gitignore                  <- List of files ignored by git
 ├── pip_requirements.txt        <- File for installing python dependencies
 └── README.md
 ```
-
-### How to use the library
-Tell us how the code is arranged, any explanations goes here.
