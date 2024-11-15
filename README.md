@@ -196,7 +196,7 @@ conda activate ada-2024-project-lesfraisestagada
 pip install -r pip_requirements.txt
 ```
 
-## Project Structure [TODO: fix this]
+## Project Structure
 The directory structure of new project looks like this:
 
 ```
