@@ -51,7 +51,7 @@ def plot_country_to_country(df):
     df.groupby("links").size().sort_values(ascending=False).head(100).plot(kind="bar", figsize=(20, 5))
     plt.ylabel("Number of links between countries")
     plt.xlabel("Country links")
-    plt.title("Figure 4: Top 100 country links by occurences")
+    plt.title("Figure 1: Top 100 country links by occurences")
     plt.show()
     
 
@@ -148,7 +148,7 @@ def top_player_vs_pagerank_article_frequencies(df_player_frequencies, df_pageran
     first_k_article_names = df_pagerank.sort_values(by='rank', ascending=False).head(k).article_name
     truncated_r_v_f = rank_v_freq[rank_v_freq.article_name.isin(first_k_article_names.values)].reset_index(drop=True)
     plt.figure(figsize=(8, 14), dpi=80)
-    plt.title(f'Player vs PageRank for top {k} PageRank articles')
+    plt.title(f'Figure 1: Player vs PageRank for top {k} PageRank articles')
     sns.barplot(truncated_r_v_f, y='article_name', x='rank', hue='type', orient='y')
 
 
@@ -164,7 +164,7 @@ def top_player_vs_pagerank_country_frequencies(df_player_frequencies, df_pageran
     first_k_country_names = df_pagerank.sort_values(by='rank', ascending=False).head(k).country_name
     truncated_r_v_f = rank_v_freq[rank_v_freq.country_name.isin(first_k_country_names.values)].reset_index(drop=True)
     plt.figure(figsize=(8, 14), dpi=80)
-    plt.title(f'Player vs PageRank for top {k} PageRank countries')
+    plt.title(f'Figure 2: Player vs PageRank for top {k} PageRank countries')
     sns.barplot(truncated_r_v_f, y='country_name', x='rank', hue='type', orient='y')
 
 
@@ -193,7 +193,7 @@ def plot_top_k_unique_failure_success_counts(df_articles_count, k=10):
         y='article',
         palette=success_palette
     )
-    plt.title(f"Top {k} Articles by Unique Success Counts", fontsize=16, weight='bold')
+    plt.title(f"Figure 1: Top {k} Articles by Unique Success Counts", fontsize=16, weight='bold')
     plt.xlabel("Unique Success Count", fontsize=14)
     plt.ylabel("Article", fontsize=14)
     plt.xticks(fontsize=12)
@@ -210,7 +210,7 @@ def plot_top_k_unique_failure_success_counts(df_articles_count, k=10):
         y='article',
         palette=failure_palette
     )
-    plt.title(f"Top {k} Articles by Unique Failure Counts", fontsize=16, weight='bold')
+    plt.title(f"Figure 2: Top {k} Articles by Unique Failure Counts", fontsize=16, weight='bold')
     plt.xlabel("Unique Failure Count", fontsize=14)
     plt.ylabel("Article", fontsize=14)
     plt.xticks(fontsize=12)
@@ -255,14 +255,14 @@ def analyze_top_articles_by_category(df_articles_count, categories, top_n=15):
     plt.xticks(fontsize=8)
     plt.ylabel("Average Unique Failure Ratio", fontsize=10)
     plt.yticks(fontsize=8)
-    plt.title("Correlation between Article Categories and Success/Failure Ratios")
+    plt.title("Figure 3: Correlation between Article Categories and Success/Failure Ratios")
     plt.show()
     
     # heatmap of success ratio for top articles by category
     plt.figure(figsize=(10, 8))
     heatmap_df = df_art_and_cat.pivot(index='article', columns='category', values='success_ratio_unique')
     sns.heatmap(heatmap_df, cmap="RdYlGn", center=0.5, linewidths=0.1)
-    plt.title(f"Top {top_n} Articles Heatmap by Categories and Success Ratio")
+    plt.title(f"Figure 4: Top {top_n} Articles Heatmap by Categories and Success Ratio")
     plt.xlabel("Category", fontsize=10)
     plt.xticks(fontsize=8)
     plt.yticks(fontsize=8)
@@ -270,7 +270,7 @@ def analyze_top_articles_by_category(df_articles_count, categories, top_n=15):
     plt.show()
 
 
-def plot_top_dead_end_countries(unique_dead_end_countries, top_n=10, use_click_count=False, use_scaled=False):
+def plot_top_dead_end_countries(unique_dead_end_countries, top_n=10, use_click_count=False, use_scaled=False, i=""):
     """
     Plots the top country-related dead-end articles by click count or scaled click count, with a gradient for mean links out.
     
@@ -279,6 +279,7 @@ def plot_top_dead_end_countries(unique_dead_end_countries, top_n=10, use_click_c
         top_n (int): Number of top articles to display (default is 10).
         use_click_count (bool): Whether to plot based on click count or mean failure ratio (default is False).
         use_scaled (bool): Whether to use the scaled click count or the original click count if use_click_count is True.
+        i (int): number of the figure for the title
     """
     # choose the column to sort by based on the parameters
     if use_click_count:
@@ -315,7 +316,7 @@ def plot_top_dead_end_countries(unique_dead_end_countries, top_n=10, use_click_c
     cbar.set_label("Sum Links Out")
 
     # title and labels
-    plt.title(f"Top {top_n} Country-Related Dead-End Articles by {title_click_type}")
+    plt.title(f"Figure {i}: Top {top_n} Country-Related Dead-End Articles by {title_click_type}")
     plt.xlabel(title_click_type)
     plt.ylabel("Country")
     plt.tight_layout()
