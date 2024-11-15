@@ -34,7 +34,7 @@ linked to a cultural bias?
 
 ### 1. Are there cultural biases intrinsic to the Wikipedia graph?
 
-### Assign countries to articles
+#### Assign countries to articles
 First, we assign one or multiple countries to each articles of the Wikispeedia dataset. This will then be useful to
 determine to which region of the world (and thus to which culture) a given article belongs to. To assign each article to a country we did two things: 
 
