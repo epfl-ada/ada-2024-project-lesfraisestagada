@@ -188,12 +188,9 @@ Adapt story text to fit in the website.
 git clone https://github.com/epfl-ada/ada-2024-project-lesfraisestagada.git
 cd ada-2024-project-lesfraisestagada
 
-# [OPTIONAL] create conda environment
-conda create -n ada-2024-project-lesfraisestagada python=3.11
-conda activate ada-2024-project-lesfraisestagada
-
-# install requirements
-pip install -r pip_requirements.txt
+#create conda environment
+conda env create -f environment.yml
+conda activate ada
 ```
 
 ## Project Structure
