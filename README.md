@@ -84,8 +84,7 @@ In this section, "dead ends" in the Wikispeedia game were analysed by examining 
 ### 3. How can we explain the players' biases?
 
 #### Analyzing country distribution in start / target articles of proposed paths
-[TBD: The idea is that if most paths have an article linked to Western culture as the target, players will tend to follow
-paths that contain more Western culture articles.]
+[TODO: write this]
 
 #### Regression analysis of the click counts
 To investigate whether some inherent features of articles could influence le number of clicks that an article will receive in the Wikispeedia game, we performed a ordinary least squares regression using the number of clicks are the predicted/dependent variable and combinations of the number of links in and out of articles as predictors/independent variables. We also performed correlations to find relationships between these three variables. 
