@@ -40,42 +40,45 @@ determine to which region of the world (and thus to which culture) a given artic
 
 - First a naive approach is used by doing a text search and finding all the country string names inside the plaintext. This is done with help of a regex that matches all the countries in all the files. The results are then parsed in a table containing as index the article name and as columns all the possible countries on earth along with the number of occurences in the specific article. After this the top 2 countries per articles are kept. This approach resulted in 1412 articles having no country assigned to them. By going manually through them it can be seen that as a human some articles can be further classified to countries even if the country name is not explicetly mentionned in the text.
 - Two LLM's were tested (Qwen and Llama) and only Llama (a Meta LLM) was retained in order to assign the missing articles to countries. For this to be done the LLM was downloaded locally and used for inference on the plaintext articles. This approach allowed to classify 525 new articles having no country assigned to them. Articles classified with help of the LLM have a "Top_1_count" of 0 meaning 0 occurences of the exact country name in the article but stil able to be inferred by an llm.
-- Some articles remained without countries. This is due to the fact that they can't be classified (for example objects, stars, raw materials...) 
+- Some articles remained unclassified, as they represent entities that cannot be easily associated with a country (for example objects, celestial bodies, raw materials).
 
 #### Links between articles
-To find the number of links in and out of each article we simply counted the number of links in each article (this is the number of links out) and then counted the number on times an article occurs in other articles (this is the number of links in). 
+To find the number of links in and out of each article we simply counted the number of links in each article (this is the number of links out) and then counted the number of times an article occurs in other articles (this is the number of links in). 
 
 ### 2. Are there cultural biases in the way players play Wikispeedia?
 #### Click counts
 Here we were interested in understanding whether there is a cultural bias in the way players of the Wikispeedia game click on articles, meaning whether some articles are clicked more often and whether some countries are associated to articles that are more often clicked. 
 
-The click count of an article is defined by the number of times it occurs in all Wikispeedia paths (i.e. ```data/paths_finished.csv``` and ```data/paths_unfinished.csv```)
+The click count of an article is defined as the total number of times it appears across all Wikispeedia paths (i.e. ```data/paths_finished.csv``` and ```data/paths_unfinished.csv```)
+Mathematically, it can be expressed as:
+
+$$\text{Click Count}_{\text{article}} = \sum_{p=1}^{P} \text{Occurrences}_{\text{article}, p}$$
+
+Where:
+- $ P \ \text{represents the total number of paths in the datasets.}$
+- $\text{Occurrences}_{\text{article}, p} \ \text{indicates the number of times the article appears in the p-th path.}$
+
 
 #### Highway paths
 In this part, the focus is made on player's behaviour to investigate whether they use some paths more often than others. Those frequently used paths are called "highway paths".
 - Extract each game path from paths_finished.csv and paths_unfinished.csv as a list
 - Create a new list with every 1-unit long path between articles (returns to previous articles '<' are carefully taken care of by removing the last article accessed from the list)
-- Convert the list of pairs into a Pandas DataFrame and counts the number of time that each pair appear using .value_counts()
 - Normalize the number of occurences of each pair by the total number of pairs found
 - Associate each pair of article to the top 1 country of both articles
-- Plot the distribution of the pair occurences within all game paths
 - Repeat a similar procedure for 2-unit long path between articles by extracting trios of articles from game paths
 
 #### Dead ends analysis
-In this section, "dead ends" in the Wikispeedia game were analysed by examining points where players frequently abandoned paths before reaching their target. This analysis included tracking success and failure rates of articles, linking dead-end articles to specific countries, and scaling click counts by outgoing links to potentially highlight cultural patterns in player behavior.
+In this section, we analyze "dead ends" in the Wikispeedia game by examining points where players frequently abandoned their paths before reaching the target. This includes tracking the success and failure rates of articles, associating dead-end articles with specific countries, and scaling click counts by the number of outgoing links.
 
-- Process all game paths to count occurrences, success, and failure ratios for each article.
-- Calculate and printed the success rate for the backtracking action ("<").
-- Analyze top articles by unique failure and success counts, segmented by category.
-- Identify articles with high failure ratios, indicating potential dead ends.
-- Merge articles with country data to connect dead-end articles to specific countries.
-- Aggregate data by country, calculating total clicks, outgoing/incoming links, and average failure ratios.
-- Plot the most significant dead-end countries based on click count and outgoing links.
-- Scale click counts by outgoing links and plotted scaled dead-end countries.
-- Extract last articles from unfinished paths and analyzed their frequency as dead ends by country.
-- Scale last article counts by outgoing links and visualized scaled dead-end countries.
-- Identify articles appearing before backtracking and counted their occurrences.
-- Plot unfinished paths' articles before backtracking, including a scaled version based on outgoing links.
+The success and failure ratios are defined as follows:
+
+$$\text{Success Ratio} = \frac{\text{Successful Clicks}}{\text{Total Clicks}}$$
+$$\text{Failure Ratio} = \frac{\text{Failure Clicks}}{\text{Total Clicks}}$$
+--- 
+To incorporate scaling, the total clicks are adjusted by the number of outgoing links for each country, as expressed in the formula:
+$$\text{Scaled Total Clicks} = \frac{\text{Total Clicks}}{\text{Outgoing Links}}$$
+
+This scaling highlights the influence of article connectivity on player behavior, providing deeper insights into cultural patterns and player strategies across different regions.
 
 ### 3. How can we explain the players' biases?
 
