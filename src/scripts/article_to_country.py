@@ -1,9 +1,13 @@
+import sys
+sys.path.append('src')
+
 from country_list import countries_for_language
-from src.data.some_dataloader import *
+from models.llm_classifier import Generator
+from data.some_dataloader import *
 from collections import defaultdict
 from tqdm import tqdm
-from src.models.llm_classifier import Generator
 import re
+from datasets import Dataset
 
 
 def country_occurences_in_files():
@@ -66,37 +70,61 @@ def filter_top_k(df, k, N):
 
 
 
-if __name__ == "__main__":
-    df = country_occurences_in_files()
+def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data'):
+    
+    df = pd.read_csv('./data/country_data.csv', index_col=0)
     df_counts = filter_top_k(df, k=2, N=1)
     
-    nan_df = df_counts[df_counts.isna().all(axis=1)]
-    print(f"Number of articles with no countries: {len(nan_df)}")
+    if use_counts:
+        nan_df = df_counts[df_counts.isna().all(axis=1)]
+        print(f"Number of articles with no countries: {len(nan_df)}")
+    else:
+        nan_df = df_counts
+        print(f"Number of articles with no countries: {len(nan_df)}")
     
-    generator = Generator(local_compute=True, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama')
-    model, tokenizer = generator.load_model()
+        
+    generator = Generator(local_compute=True, model_key=model_key, model_family=model_family)
+    _, tokenizer = generator.load_model()
     
     system_prompt = "You will be given textual articles. For each article provide single and unique country to which the article is related and should be classified to. Provide the answer in the form : <country>. If there is no country related to the article, please write 'None'. If the location is not on earth, please write 'None'. You must be 100\% sure this is a question of life"
     user_prompt = ""
 
     inputs = []
+    chats = []
     outputs = []
+    
+    if os.path.exists("data/" + file_name + "dataset.json"):
+        print("Dataset already exists")
+        dataset = Dataset.from_json("data/" + file_name + "_dataset.json")
+        
+    else:
+        print("----------------- Applying Chat Template -----------------")
+        with tqdm(total=len(nan_df)) as pbar:
+            for i, _ in tqdm(nan_df.iterrows()):
+                inputs.append(i)
+                content = file_finder(article_name=i)
+                
+                chat = user_prompt + "\n" + content
+                chat = generator.chat_to_dict(chat)
+                chat = generator.add_system_prompt(system_prompt, chat)
+                chat = generator.apply_chat_template(chat, tokenizer)
+                
+                chats.append({"inputs" : chat})
+                pbar.update(1)
+            
+        dataset = Dataset.from_list(chats)
+        print(dataset)
+        dataset.to_json("data/" + file_name + "_dataset.json")
+    
+    dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
 
-    with tqdm(total=len(nan_df)) as pbar:
-        for i, _ in tqdm(nan_df.iterrows()):
-            inputs.append(i)
-            content = file_finder(article_name=i)
-            
-            chat = user_prompt + "\n" + content
-            chat = generator.chat_to_dict(chat)
-            chat = generator.add_system_prompt(system_prompt, chat)
-            chat = generator.apply_chat_template(chat, tokenizer)
-            
-            output = generator.generate(chat, max_new_tokens=10)
-            
-            outputs.append(output)
+    print("----------------- Starting Model Generation -----------------")
+    with tqdm(total=len(dataloader)) as pbar:
+        for _, batch in enumerate(dataloader):
+            output = generator.generate(batch, max_new_tokens=10)
+            outputs.extend(output)
             pbar.update(1)
-            
+                
     countries = list(dict(countries_for_language('en')).values())
       
     new_counts = df_counts.copy(deep=True)
@@ -116,4 +144,13 @@ if __name__ == "__main__":
     nan_df = new_counts[new_counts.isna().all(axis=1)]
     print(f"Number of articles with no countries after completion with llama: {len(nan_df)}")
 
-    new_counts.to_csv('data/country_occurences.csv')
+    new_counts.to_csv("data/" + file_name + ".csv")
+
+
+if __name__ == "__main__":
+    
+    # count_and_lama()
+    
+    count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama')
+    
+    

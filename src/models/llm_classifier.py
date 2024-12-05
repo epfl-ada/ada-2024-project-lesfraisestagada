@@ -1,7 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM, LlamaForCausalLM, BitsAndBytesConfig, TextIteratorStreamer
 import gc
 import os
-import threading
 
 
 class Generator:
@@ -40,7 +39,7 @@ class Generator:
     def load_tokenizer(self):
         
         tokenizer = AutoTokenizer.from_pretrained(self.model_key, token=self.hf_token)
-            
+        
         return tokenizer
 
     def load_model(self):
@@ -103,43 +102,40 @@ class Generator:
         return prompt
     
     
-    def generate(self, chat, max_new_tokens=512):
+    def generate(self, chat, max_new_tokens=512, temperature=1.0, sample=False, top_p=None):
         """This function is only used for the generate and should not be used for the pipeline implementation
         """
         
         model, tokenizer = self.get_model(self.model_key)
-
-        inputs = tokenizer.encode(chat, add_special_tokens=True, return_tensors="pt").to(model.device)
-        input_length = inputs.shape[-1]
+        
+        tokenizer.pad_token = tokenizer.eos_token
+        
+        inputs = tokenizer(chat['inputs'], add_special_tokens=True, return_tensors="pt", padding=True).to(model.device)
+        input_length = inputs["attention_mask"].sum(dim=1)
+        print(input_length)
+        
+        generation_config = {
+                'max_new_tokens': max_new_tokens,
+                'temperature': temperature,
+                'do_sample': sample,
+                'top_p': top_p
+                }
         
         with self.torch.no_grad():
-            outputs = model.generate(inputs, max_new_tokens=max_new_tokens)
-            
-        generated_ids = outputs[:, input_length:]
+            outputs = model.generate(**inputs, **generation_config)
+        
+        generated_ids = []
+
+        # Iterate over the batch to slice outputs correctly
+        for i, length in enumerate(input_length):
+            generated_ids.append(outputs[i, length:])
+
+        predictions = [tokenizer.decode(gen, skip_special_tokens=True, clean_up_tokenization_spaces=True) for gen in generated_ids]
         
         del inputs
         del outputs
         gc.collect()
         self.torch.cuda.empty_cache()
+        print(predictions)
         
-        return tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
-    
-    
-    def streamed_generate(self, chat, max_new_tokens=512):
-             
-        model, tokenizer = self.get_model(self.model_key)
-        
-        streamer = TextIteratorStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True)
-                        
-        inputs = tokenizer.encode(chat, add_special_tokens=True, return_tensors="pt").to(model.device)
-        
-        generation_thread = threading.Thread(
-            target= model.generate, 
-            args= (inputs,), 
-            kwargs={'streamer': streamer, 'max_new_tokens': max_new_tokens},
-        )
-        
-        with self.torch.no_grad():
-            generation_thread.start()
-            
-        return streamer
+        return predictions
