@@ -3,7 +3,7 @@ sys.path.append('src')
 
 from country_list import countries_for_language
 from models.llm_classifier import Generator
-from data.some_dataloader import *
+from data.dataloader import *
 from collections import defaultdict
 from tqdm import tqdm
 import re
