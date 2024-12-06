@@ -1,6 +1,7 @@
 import sys
 sys.path.append('src')
 
+from torch.utils.data import DataLoader
 from country_list import countries_for_language
 from models.llm_classifier import Generator
 from data.dataloader import *
@@ -70,7 +71,7 @@ def filter_top_k(df, k, N):
 
 
 
-def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data'):
+def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_occurences'):
     
     df = pd.read_csv('./data/country_data.csv', index_col=0)
     df_counts = filter_top_k(df, k=2, N=1)
@@ -82,21 +83,28 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
         nan_df = df_counts
         print(f"Number of articles with no countries: {len(nan_df)}")
     
+    countries = list(dict(countries_for_language('en')).values())
+
         
-    generator = Generator(local_compute=True, model_key=model_key, model_family=model_family)
+    generator = Generator(local_compute=False, model_key=model_key, model_family=model_family)
     _, tokenizer = generator.load_model()
     
-    system_prompt = "You will be given textual articles. For each article provide single and unique country to which the article is related and should be classified to. Provide the answer in the form : <country>. If there is no country related to the article, please write 'None'. If the location is not on earth, please write 'None'. You must be 100\% sure this is a question of life"
+    system_prompt = f"""You will be given textual articles. For each article provide single and unique country to which the article is related and should be classified to. Provide the answer in the form : <country>.
+    If there is no country related to the article, please write 'None'. If the location is not on earth, please write 'None'. You must be 100\% sure this is a question of life.
+    This is the list of coutnries that you are allowed to output DON'T output anything that is not in this list: {countries}"""
+    
     user_prompt = ""
 
     inputs = []
     chats = []
     outputs = []
     
-    if os.path.exists("data/" + file_name + "dataset.json"):
+    if os.path.exists("data/" + file_name + "_dataset.json"):
         print("Dataset already exists")
         dataset = Dataset.from_json("data/" + file_name + "_dataset.json")
-        
+                
+        inputs = list(nan_df.index)
+
     else:
         print("----------------- Applying Chat Template -----------------")
         with tqdm(total=len(nan_df)) as pbar:
@@ -114,9 +122,10 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
             
         dataset = Dataset.from_list(chats)
         print(dataset)
+        
         dataset.to_json("data/" + file_name + "_dataset.json")
     
-    dataloader = DataLoader(dataset, batch_size=2, shuffle=False)
+    dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
 
     print("----------------- Starting Model Generation -----------------")
     with tqdm(total=len(dataloader)) as pbar:
@@ -125,19 +134,34 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
             outputs.extend(output)
             pbar.update(1)
                 
-    countries = list(dict(countries_for_language('en')).values())
-      
-    new_counts = df_counts.copy(deep=True)
-    for article, country in zip(inputs, outputs):
-        if country != "None":
-            
+    
+    if use_counts:
+        new_counts = df_counts.copy(deep=True)
+        for article, country in zip(inputs, outputs):
+            if country != "None":
+                
+                for country_ in countries:
+                    if country_.lower() in country.lower():
+                        new_counts.loc[article, "Top_1_name"] = country_.lower()
+                        new_counts.loc[article, "Top_1_count"] = 0
+                        break
+    
+    else:
+        cleaned_outputs = []
+        
+        for country in outputs:
             for country_ in countries:
+                found = False
                 if country_.lower() in country.lower():
-                    new_counts.loc[article, "Top_1_name"] = country_.lower()
-                    new_counts.loc[article, "Top_1_count"] = 0
+                    cleaned_outputs.append(country_.lower())
+                    found = True
                     break
-                    
-            
+            if not found:
+                cleaned_outputs.append("")
+        
+        
+        new_counts = pd.DataFrame({"Top_1_name" : cleaned_outputs, "Predictions" : outputs})
+        new_counts.index = inputs
 
 
     print(f"Number of articles with no countries before completion with llama: {len(nan_df)}")
@@ -149,8 +173,12 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
 
 if __name__ == "__main__":
     
-    # count_and_lama()
+    count_and_lama()
     
     count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama')
+    
+    count_and_lama(use_counts=False, model_key="Qwen/Qwen2.5-7B-Instruct", model_family='qwen', file_name='country_data_full_qwen')
+    
+    count_and_lama(use_counts=False, model_key="google/gemma-2-9b-it", model_family='gemma', file_name='country_data_full_gemma')
     
     
