@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import plotly.express as px
 import scipy
 from ast import literal_eval
 from collections import Counter
@@ -391,3 +392,53 @@ def plot_articles_before_go_back(before_last_article_analysis, use_scaled=False,
     plt.title(title)
     plt.tight_layout()
     plt.show()
+
+def plot_publications_map(publications_per_country_df):
+    """
+    Plot a choropleth map of the number of publications per country.
+    Args:
+        publications_per_country_df (pd.DataFrame): DataFrame containing the number of publications per country.
+    """
+    fig = px.choropleth(
+    publications_per_country_df,
+    locations="Country",  # match on country names
+    locationmode="country names",  
+    color="Citable documents",  
+    color_continuous_scale="Plasma",
+    title="Number of Publications per Country",
+    labels={'Citable documents': 'Publications'},
+    hover_name="Country", 
+    hover_data={
+        "Citable documents": ":,.0f", 
+        "Country": False
+    }
+)
+
+    fig.update_layout(
+        geo=dict(
+            showframe=False,
+            showcoastlines=True,
+            projection_type='equirectangular'
+        ),
+        title=dict(
+            text="Number of Publications per Country",
+            font=dict(
+                family="Helvetica Neue, sans-serif", 
+                size=18 
+            ),
+            x=0.5,  # center title
+            y=0.95  # lower title on canvas
+        ),
+        margin=dict(l=0, r=0, t=50, b=0),
+    )
+
+    fig.update_traces(
+        hoverlabel=dict(
+            bgcolor="white", 
+            font_size=12, 
+            font_family="Helvetica Neue"
+        )
+    )
+
+
+    fig.show()
