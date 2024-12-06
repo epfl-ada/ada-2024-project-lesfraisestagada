@@ -77,6 +77,19 @@ def load_path_unfinished_distance_dataframe(path = "./data/wikispeedia_paths-and
     """
     return pd.read_csv(path + "paths_unfinished.tsv", names=["hashedIpAddress",   "timestamp ",  "durationInSec",  "path",   "target",   "type"], skiprows=17, sep="\t")
 
+def load_publications_dataframe(path = "./data/"):
+    """Load the publications.csv file into a pandas dataframe and keep only the relevant columns
+
+    Args:
+        path (str, optional): Path to the file. Defaults to "./data/".
+
+    Returns:
+        pandas.dataframe: The loaded dataframe
+    """
+    pub_data = pd.read_csv(path + "publications_2007.csv")
+    cols_to_keep = ["Rank", "Country", "Citable documents"]
+    return pub_data[cols_to_keep]
+
 
 def plaintext_files_iterator(path = "./data/plaintext_articles/"):
     """Iterate over the plaintext files in the directory
