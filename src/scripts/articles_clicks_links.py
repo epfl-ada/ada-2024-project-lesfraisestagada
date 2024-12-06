@@ -43,13 +43,6 @@ if __name__ == "__main__":
 
     # merge the 4 DataFrames to get final DataFrame containing click count, countries and links
     df_tot = pd.concat([df_country_occurences, df_clicks, df_links_in, df_links_out], axis=1)
-
-    # load publications data 
-    df_publications = load_publications_dataframe()
-    df_publications["Country"] = df_publications["Country"].str.lower()
-
-    # merge the publications data with the rest of the data
-    df_tot = df_tot.merge(df_publications, left_index=True, right_index=True)
     
     df_tot.to_csv('data/country_clicks_links.csv', index=True)
 
