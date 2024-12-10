@@ -17,7 +17,7 @@ class Generator:
         
         self.model_accepts_system_prompts = {
             "gemma" : False,
-            "llama3" : True,
+            "llama" : True,
             "qwen" : True,
         }
         
