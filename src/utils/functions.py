@@ -15,7 +15,7 @@ Authors :
     - Theo Schifferli
     - Jeremy Barghorn
     - Bryan Gotti 
-    - Oriane Petitphar
+    - Oriane Petit-Phar
 """
 
 
