@@ -1,0 +1,250 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 600px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "afghanistan", "label": "afghanistan", "shape": "dot", "size": 120.73258484307222, "title": "afghanistan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "albania", "label": "albania", "shape": "dot", "size": 41.97575912222506, "title": "albania"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "algeria", "label": "algeria", "shape": "dot", "size": 50.512630773156424, "title": "algeria"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "andorra", "label": "andorra", "shape": "dot", "size": 26.575912222505742, "title": "andorra"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "angola", "label": "angola", "shape": "dot", "size": 45.658331206940545, "title": "angola"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "anguilla", "label": "anguilla", "shape": "dot", "size": 13.519520285787191, "title": "anguilla"}, {"color": "#ffefe8", "font": {"color": "#10000000"}, "id": "antarctica", "label": "antarctica", "shape": "dot", "size": 337.0, "title": "antarctica"}, {"color": "#fff1ea", "font": {"color": "#10000000"}, "id": "argentina", "label": "argentina", "shape": "dot", "size": 40.81387809014905, "title": "argentina"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "armenia", "label": "armenia", "shape": "dot", "size": 20.047716254146465, "title": "armenia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "aruba", "label": "aruba", "shape": "dot", "size": 12.515182444501148, "title": "aruba"}, {"color": "#fcbda4", "font": {"color": "#10000000"}, "id": "australia", "label": "australia", "shape": "dot", "size": 79.35450143894883, "title": "australia"}, {"color": "#fff0e8", "font": {"color": "#10000000"}, "id": "austria", "label": "austria", "shape": "dot", "size": 60.985400002218846, "title": "austria"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "azerbaijan", "label": "azerbaijan", "shape": "dot", "size": 23.060729778004593, "title": "azerbaijan"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "bahamas", "label": "bahamas", "shape": "dot", "size": 40.748235093986565, "title": "bahamas"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "bahrain", "label": "bahrain", "shape": "dot", "size": 30.593263587649915, "title": "bahrain"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "bangladesh", "label": "bangladesh", "shape": "dot", "size": 43.64965552436846, "title": "bangladesh"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "barbados", "label": "barbados", "shape": "dot", "size": 43.31487624393978, "title": "barbados"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "belarus", "label": "belarus", "shape": "dot", "size": 39.63230415922429, "title": "belarus"}, {"color": "#fff0e9", "font": {"color": "#10000000"}, "id": "belgium", "label": "belgium", "shape": "dot", "size": 94.28942667973838, "title": "belgium"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "belize", "label": "belize", "shape": "dot", "size": 21.05205409543251, "title": "belize"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "benin", "label": "benin", "shape": "dot", "size": 14.189078846644552, "title": "benin"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "bermuda", "label": "bermuda", "shape": "dot", "size": 21.386833375861187, "title": "bermuda"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "bhutan", "label": "bhutan", "shape": "dot", "size": 35.614952794080125, "title": "bhutan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "bolivia", "label": "bolivia", "shape": "dot", "size": 76.1232457259505, "title": "bolivia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "botswana", "label": "botswana", "shape": "dot", "size": 33.94105639193672, "title": "botswana"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "bouvet island", "label": "bouvet island", "shape": "dot", "size": 13.519520285787191, "title": "bouvet island"}, {"color": "#ffeee7", "font": {"color": "#10000000"}, "id": "brazil", "label": "brazil", "shape": "dot", "size": 133.86071519702548, "title": "brazil"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "british indian ocean territory", "label": "british indian ocean territory", "shape": "dot", "size": 11.510844603215107, "title": "british indian ocean territory"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "british virgin islands", "label": "british virgin islands", "shape": "dot", "size": 42.64531768308242, "title": "british virgin islands"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "brunei", "label": "brunei", "shape": "dot", "size": 29.58892574636387, "title": "brunei"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "bulgaria", "label": "bulgaria", "shape": "dot", "size": 82.81883133452412, "title": "bulgaria"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "burkina faso", "label": "burkina faso", "shape": "dot", "size": 26.91069150293442, "title": "burkina faso"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "burundi", "label": "burundi", "shape": "dot", "size": 29.58892574636387, "title": "burundi"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "cambodia", "label": "cambodia", "shape": "dot", "size": 65.99617249298291, "title": "cambodia"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "cameroon", "label": "cameroon", "shape": "dot", "size": 53.090431232457256, "title": "cameroon"}, {"color": "#fdccb8", "font": {"color": "#10000000"}, "id": "canada", "label": "canada", "shape": "dot", "size": 61.50905020207591, "title": "canada"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "cape verde", "label": "cape verde", "shape": "dot", "size": 21.554223016075532, "title": "cape verde"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "cayman islands", "label": "cayman islands", "shape": "dot", "size": 21.554223016075532, "title": "cayman islands"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "central african republic", "label": "central african republic", "shape": "dot", "size": 48.67134473079867, "title": "central african republic"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "chad", "label": "chad", "shape": "dot", "size": 69.76243939780557, "title": "chad"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "chile", "label": "chile", "shape": "dot", "size": 66.56681899371361, "title": "chile"}, {"color": "#fcbfa7", "font": {"color": "#10000000"}, "id": "china", "label": "china", "shape": "dot", "size": 123.8314956823035, "title": "china"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "christmas island", "label": "christmas island", "shape": "dot", "size": 30.593263587649915, "title": "christmas island"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "cocos (keeling) islands", "label": "cocos (keeling) islands", "shape": "dot", "size": 15.528195968359276, "title": "cocos (keeling) islands"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "colombia", "label": "colombia", "shape": "dot", "size": 46.66266904822659, "title": "colombia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "comoros", "label": "comoros", "shape": "dot", "size": 16.532533809645315, "title": "comoros"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "cook islands", "label": "cook islands", "shape": "dot", "size": 44.65399336565451, "title": "cook islands"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "costa rica", "label": "costa rica", "shape": "dot", "size": 91.35570298545548, "title": "costa rica"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "croatia", "label": "croatia", "shape": "dot", "size": 45.90941566726206, "title": "croatia"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "cuba", "label": "cuba", "shape": "dot", "size": 79.30364889002297, "title": "cuba"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "cyprus", "label": "cyprus", "shape": "dot", "size": 45.658331206940545, "title": "cyprus"}, {"color": "#fff0e8", "font": {"color": "#10000000"}, "id": "denmark", "label": "denmark", "shape": "dot", "size": 83.86683603847477, "title": "denmark"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "djibouti", "label": "djibouti", "shape": "dot", "size": 25.571574381219698, "title": "djibouti"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "dominica", "label": "dominica", "shape": "dot", "size": 19.545547333503443, "title": "dominica"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "dominican republic", "label": "dominican republic", "shape": "dot", "size": 56.70604746108701, "title": "dominican republic"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "ecuador", "label": "ecuador", "shape": "dot", "size": 57.30865016585864, "title": "ecuador"}, {"color": "#fee7db", "font": {"color": "#10000000"}, "id": "egypt", "label": "egypt", "shape": "dot", "size": 134.19590676720838, "title": "egypt"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "el salvador", "label": "el salvador", "shape": "dot", "size": 43.64965552436846, "title": "el salvador"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "eritrea", "label": "eritrea", "shape": "dot", "size": 27.580250063791787, "title": "eritrea"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "estonia", "label": "estonia", "shape": "dot", "size": 49.173513651441695, "title": "estonia"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "ethiopia", "label": "ethiopia", "shape": "dot", "size": 135.84786935442716, "title": "ethiopia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "falkland islands", "label": "falkland islands", "shape": "dot", "size": 21.554223016075532, "title": "falkland islands"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "faroe islands", "label": "faroe islands", "shape": "dot", "size": 16.78361826996683, "title": "faroe islands"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "fiji", "label": "fiji", "shape": "dot", "size": 34.61061495279408, "title": "fiji"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "finland", "label": "finland", "shape": "dot", "size": 59.353847224477484, "title": "finland"}, {"color": "#fca78b", "font": {"color": "#10000000"}, "id": "france", "label": "france", "shape": "dot", "size": 83.01869956164572, "title": "france"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "french guiana", "label": "french guiana", "shape": "dot", "size": 36.61929063536616, "title": "french guiana"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "french polynesia", "label": "french polynesia", "shape": "dot", "size": 24.56723653993366, "title": "french polynesia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "gabon", "label": "gabon", "shape": "dot", "size": 40.30186272008165, "title": "gabon"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "gambia", "label": "gambia", "shape": "dot", "size": 22.056391936718555, "title": "gambia"}, {"color": "#fff0e9", "font": {"color": "#10000000"}, "id": "georgia", "label": "georgia", "shape": "dot", "size": 90.37527794991433, "title": "georgia"}, {"color": "#fcb99f", "font": {"color": "#10000000"}, "id": "germany", "label": "germany", "shape": "dot", "size": 135.98178106659864, "title": "germany"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "ghana", "label": "ghana", "shape": "dot", "size": 29.923705026792547, "title": "ghana"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "gibraltar", "label": "gibraltar", "shape": "dot", "size": 292.89282980352135, "title": "gibraltar"}, {"color": "#fee8de", "font": {"color": "#10000000"}, "id": "greece", "label": "greece", "shape": "dot", "size": 124.9005868844093, "title": "greece"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "greenland", "label": "greenland", "shape": "dot", "size": 155.84854007946635, "title": "greenland"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "grenada", "label": "grenada", "shape": "dot", "size": 37.121459556009185, "title": "grenada"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "guadeloupe", "label": "guadeloupe", "shape": "dot", "size": 20.549885174789488, "title": "guadeloupe"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "guam", "label": "guam", "shape": "dot", "size": 42.64531768308242, "title": "guam"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "guatemala", "label": "guatemala", "shape": "dot", "size": 52.93978055626435, "title": "guatemala"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "guernsey", "label": "guernsey", "shape": "dot", "size": 21.554223016075532, "title": "guernsey"}, {"color": "#fff0e9", "font": {"color": "#10000000"}, "id": "guinea", "label": "guinea", "shape": "dot", "size": 62.11034155943572, "title": "guinea"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "guyana", "label": "guyana", "shape": "dot", "size": 15.193416687930593, "title": "guyana"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "haiti", "label": "haiti", "shape": "dot", "size": 61.225567746874205, "title": "haiti"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "honduras", "label": "honduras", "shape": "dot", "size": 30.593263587649915, "title": "honduras"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "hungary", "label": "hungary", "shape": "dot", "size": 44.089053329931104, "title": "hungary"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "iceland", "label": "iceland", "shape": "dot", "size": 79.94929464513542, "title": "iceland"}, {"color": "#fcae92", "font": {"color": "#10000000"}, "id": "india", "label": "india", "shape": "dot", "size": 105.11088024560848, "title": "india"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "indonesia", "label": "indonesia", "shape": "dot", "size": 163.1658586374075, "title": "indonesia"}, {"color": "#fff0e9", "font": {"color": "#10000000"}, "id": "iran", "label": "iran", "shape": "dot", "size": 62.09775587220156, "title": "iran"}, {"color": "#fff0e8", "font": {"color": "#10000000"}, "id": "iraq", "label": "iraq", "shape": "dot", "size": 117.55979029900949, "title": "iraq"}, {"color": "#fdcebb", "font": {"color": "#10000000"}, "id": "ireland", "label": "ireland", "shape": "dot", "size": 76.00607297780046, "title": "ireland"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "isle of man", "label": "isle of man", "shape": "dot", "size": 25.973309517734116, "title": "isle of man"}, {"color": "#ffece4", "font": {"color": "#10000000"}, "id": "israel", "label": "israel", "shape": "dot", "size": 105.43078044690702, "title": "israel"}, {"color": "#fdd3c1", "font": {"color": "#10000000"}, "id": "italy", "label": "italy", "shape": "dot", "size": 107.41597810202046, "title": "italy"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "jamaica", "label": "jamaica", "shape": "dot", "size": 65.94595560091861, "title": "jamaica"}, {"color": "#fedecf", "font": {"color": "#10000000"}, "id": "japan", "label": "japan", "shape": "dot", "size": 91.40135470551394, "title": "japan"}, {"color": "#ffeee6", "font": {"color": "#10000000"}, "id": "jersey", "label": "jersey", "shape": "dot", "size": 24.243256591131704, "title": "jersey"}, {"color": "#fff0e9", "font": {"color": "#10000000"}, "id": "jordan", "label": "jordan", "shape": "dot", "size": 121.45940828084501, "title": "jordan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "kazakhstan", "label": "kazakhstan", "shape": "dot", "size": 76.1232457259505, "title": "kazakhstan"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "kenya", "label": "kenya", "shape": "dot", "size": 164.07889303857664, "title": "kenya"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "kiribati", "label": "kiribati", "shape": "dot", "size": 16.0303648890023, "title": "kiribati"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "kuwait", "label": "kuwait", "shape": "dot", "size": 259.91707068129625, "title": "kuwait"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "kyrgyzstan", "label": "kyrgyzstan", "shape": "dot", "size": 17.53687165093136, "title": "kyrgyzstan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "laos", "label": "laos", "shape": "dot", "size": 92.36004082674152, "title": "laos"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "latvia", "label": "latvia", "shape": "dot", "size": 34.10844603215106, "title": "latvia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "lebanon", "label": "lebanon", "shape": "dot", "size": 62.22990558816025, "title": "lebanon"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "lesotho", "label": "lesotho", "shape": "dot", "size": 14.858637407501915, "title": "lesotho"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "liberia", "label": "liberia", "shape": "dot", "size": 27.245470783363103, "title": "liberia"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "libya", "label": "libya", "shape": "dot", "size": 49.4245981117632, "title": "libya"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "liechtenstein", "label": "liechtenstein", "shape": "dot", "size": 36.61929063536616, "title": "liechtenstein"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "lithuania", "label": "lithuania", "shape": "dot", "size": 35.28017351365144, "title": "lithuania"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "luxembourg", "label": "luxembourg", "shape": "dot", "size": 35.327999125141254, "title": "luxembourg"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "madagascar", "label": "madagascar", "shape": "dot", "size": 32.601939270222, "title": "madagascar"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "malawi", "label": "malawi", "shape": "dot", "size": 28.584587905077825, "title": "malawi"}, {"color": "#fff2ec", "font": {"color": "#10000000"}, "id": "malaysia", "label": "malaysia", "shape": "dot", "size": 45.574636386833376, "title": "malaysia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "maldives", "label": "maldives", "shape": "dot", "size": 49.67568257208472, "title": "maldives"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "mali", "label": "mali", "shape": "dot", "size": 45.658331206940545, "title": "mali"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "malta", "label": "malta", "shape": "dot", "size": 25.069405460576675, "title": "malta"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "marshall islands", "label": "marshall islands", "shape": "dot", "size": 49.67568257208472, "title": "marshall islands"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "martinique", "label": "martinique", "shape": "dot", "size": 12.515182444501148, "title": "martinique"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "mauritania", "label": "mauritania", "shape": "dot", "size": 30.091094667006892, "title": "mauritania"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "mauritius", "label": "mauritius", "shape": "dot", "size": 42.89640214340393, "title": "mauritius"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "mayotte", "label": "mayotte", "shape": "dot", "size": 15.528195968359276, "title": "mayotte"}, {"color": "#fee1d3", "font": {"color": "#10000000"}, "id": "mexico", "label": "mexico", "shape": "dot", "size": 98.16009186016842, "title": "mexico"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "micronesia", "label": "micronesia", "shape": "dot", "size": 17.53687165093136, "title": "micronesia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "moldova", "label": "moldova", "shape": "dot", "size": 27.078081143148765, "title": "moldova"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "monaco", "label": "monaco", "shape": "dot", "size": 35.36386833375861, "title": "monaco"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "mongolia", "label": "mongolia", "shape": "dot", "size": 56.404746108701204, "title": "mongolia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "montenegro", "label": "montenegro", "shape": "dot", "size": 40.636642000510335, "title": "montenegro"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "montserrat", "label": "montserrat", "shape": "dot", "size": 24.065067619290637, "title": "montserrat"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "morocco", "label": "morocco", "shape": "dot", "size": 92.86220974738454, "title": "morocco"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "mozambique", "label": "mozambique", "shape": "dot", "size": 37.95840775708089, "title": "mozambique"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "namibia", "label": "namibia", "shape": "dot", "size": 42.9800969635111, "title": "namibia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "nauru", "label": "nauru", "shape": "dot", "size": 23.562898698647615, "title": "nauru"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "nepal", "label": "nepal", "shape": "dot", "size": 66.24725695330442, "title": "nepal"}, {"color": "#ffede5", "font": {"color": "#10000000"}, "id": "netherlands", "label": "netherlands", "shape": "dot", "size": 71.6455728502169, "title": "netherlands"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "new caledonia", "label": "new caledonia", "shape": "dot", "size": 17.53687165093136, "title": "new caledonia"}, {"color": "#ffece4", "font": {"color": "#10000000"}, "id": "new zealand", "label": "new zealand", "shape": "dot", "size": 55.90257718805818, "title": "new zealand"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "nicaragua", "label": "nicaragua", "shape": "dot", "size": 55.45062515947946, "title": "nicaragua"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "niger", "label": "niger", "shape": "dot", "size": 32.31498560128313, "title": "niger"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "nigeria", "label": "nigeria", "shape": "dot", "size": 73.37805562643531, "title": "nigeria"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "niue", "label": "niue", "shape": "dot", "size": 16.532533809645315, "title": "niue"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "norfolk island", "label": "norfolk island", "shape": "dot", "size": 16.532533809645315, "title": "norfolk island"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "north korea", "label": "north korea", "shape": "dot", "size": 44.40290890533299, "title": "north korea"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "northern mariana islands", "label": "northern mariana islands", "shape": "dot", "size": 31.597601428935953, "title": "northern mariana islands"}, {"color": "#ffefe8", "font": {"color": "#10000000"}, "id": "norway", "label": "norway", "shape": "dot", "size": 55.78540443990814, "title": "norway"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "oman", "label": "oman", "shape": "dot", "size": 39.63230415922429, "title": "oman"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "pakistan", "label": "pakistan", "shape": "dot", "size": 40.97142128093902, "title": "pakistan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "palau", "label": "palau", "shape": "dot", "size": 21.554223016075532, "title": "palau"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "panama", "label": "panama", "shape": "dot", "size": 65.7450880326614, "title": "panama"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "paraguay", "label": "paraguay", "shape": "dot", "size": 46.66266904822659, "title": "paraguay"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "peru", "label": "peru", "shape": "dot", "size": 60.938614077935334, "title": "peru"}, {"color": "#fff2ec", "font": {"color": "#10000000"}, "id": "philippines", "label": "philippines", "shape": "dot", "size": 49.2121420299527, "title": "philippines"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "pitcairn islands", "label": "pitcairn islands", "shape": "dot", "size": 17.53687165093136, "title": "pitcairn islands"}, {"color": "#ffebe2", "font": {"color": "#10000000"}, "id": "poland", "label": "poland", "shape": "dot", "size": 34.30158792470607, "title": "poland"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "portugal", "label": "portugal", "shape": "dot", "size": 44.65399336565451, "title": "portugal"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "puerto rico", "label": "puerto rico", "shape": "dot", "size": 26.07374330186272, "title": "puerto rico"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "qatar", "label": "qatar", "shape": "dot", "size": 119.72824700178617, "title": "qatar"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "romania", "label": "romania", "shape": "dot", "size": 42.01760653227864, "title": "romania"}, {"color": "#fee0d2", "font": {"color": "#10000000"}, "id": "russia", "label": "russia", "shape": "dot", "size": 165.08983112854582, "title": "russia"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "rwanda", "label": "rwanda", "shape": "dot", "size": 31.74107826340539, "title": "rwanda"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "r\u00e9union", "label": "r\u00e9union", "shape": "dot", "size": 40.30186272008165, "title": "r\u00e9union"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "samoa", "label": "samoa", "shape": "dot", "size": 23.562898698647615, "title": "samoa"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "san marino", "label": "san marino", "shape": "dot", "size": 31.597601428935953, "title": "san marino"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "saudi arabia", "label": "saudi arabia", "shape": "dot", "size": 103.74253636131667, "title": "saudi arabia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "senegal", "label": "senegal", "shape": "dot", "size": 30.92804286807859, "title": "senegal"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "serbia", "label": "serbia", "shape": "dot", "size": 50.680020413370755, "title": "serbia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "seychelles", "label": "seychelles", "shape": "dot", "size": 23.060729778004593, "title": "seychelles"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "sierra leone", "label": "sierra leone", "shape": "dot", "size": 24.56723653993366, "title": "sierra leone"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "singapore", "label": "singapore", "shape": "dot", "size": 37.82449604490942, "title": "singapore"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "slovakia", "label": "slovakia", "shape": "dot", "size": 39.13013523858127, "title": "slovakia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "slovenia", "label": "slovenia", "shape": "dot", "size": 150.10946670068896, "title": "slovenia"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "solomon islands", "label": "solomon islands", "shape": "dot", "size": 29.78979331462108, "title": "solomon islands"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "somalia", "label": "somalia", "shape": "dot", "size": 44.905077825976015, "title": "somalia"}, {"color": "#fee5d8", "font": {"color": "#10000000"}, "id": "south africa", "label": "south africa", "shape": "dot", "size": 115.30763877612563, "title": "south africa"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "south korea", "label": "south korea", "shape": "dot", "size": 64.48966573105385, "title": "south korea"}, {"color": "#fee8de", "font": {"color": "#10000000"}, "id": "spain", "label": "spain", "shape": "dot", "size": 104.73702775317834, "title": "spain"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "sri lanka", "label": "sri lanka", "shape": "dot", "size": 37.95840775708089, "title": "sri lanka"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "st. lucia", "label": "st. lucia", "shape": "dot", "size": 26.575912222505742, "title": "st. lucia"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "st. martin", "label": "st. martin", "shape": "dot", "size": 19.545547333503443, "title": "st. martin"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "sudan", "label": "sudan", "shape": "dot", "size": 58.463638683337585, "title": "sudan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "suriname", "label": "suriname", "shape": "dot", "size": 27.580250063791787, "title": "suriname"}, {"color": "#ffefe8", "font": {"color": "#10000000"}, "id": "sweden", "label": "sweden", "shape": "dot", "size": 144.74012208765973, "title": "sweden"}, {"color": "#ffeee7", "font": {"color": "#10000000"}, "id": "switzerland", "label": "switzerland", "shape": "dot", "size": 82.49600845696789, "title": "switzerland"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "syria", "label": "syria", "shape": "dot", "size": 104.91426384281705, "title": "syria"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "taiwan", "label": "taiwan", "shape": "dot", "size": 95.2056647103853, "title": "taiwan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "tajikistan", "label": "tajikistan", "shape": "dot", "size": 26.07374330186272, "title": "tajikistan"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "tanzania", "label": "tanzania", "shape": "dot", "size": 68.004848175555, "title": "tanzania"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "thailand", "label": "thailand", "shape": "dot", "size": 39.004593008420514, "title": "thailand"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "togo", "label": "togo", "shape": "dot", "size": 9.836948201071703, "title": "togo"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "tokelau", "label": "tokelau", "shape": "dot", "size": 9.0, "title": "tokelau"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "tonga", "label": "tonga", "shape": "dot", "size": 33.606277111508035, "title": "tonga"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "tunisia", "label": "tunisia", "shape": "dot", "size": 75.11890788466445, "title": "tunisia"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "turkey", "label": "turkey", "shape": "dot", "size": 72.90936463383517, "title": "turkey"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "turkmenistan", "label": "turkmenistan", "shape": "dot", "size": 52.688696095942845, "title": "turkmenistan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "tuvalu", "label": "tuvalu", "shape": "dot", "size": 61.72773666751723, "title": "tuvalu"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "u.s. virgin islands", "label": "u.s. virgin islands", "shape": "dot", "size": 44.65399336565451, "title": "u.s. virgin islands"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "uganda", "label": "uganda", "shape": "dot", "size": 101.35342967825744, "title": "uganda"}, {"color": "#fff3ed", "font": {"color": "#10000000"}, "id": "ukraine", "label": "ukraine", "shape": "dot", "size": 23.562898698647615, "title": "ukraine"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "united arab emirates", "label": "united arab emirates", "shape": "dot", "size": 115.4598111763205, "title": "united arab emirates"}, {"color": "#fcc3ab", "font": {"color": "#10000000"}, "id": "united kingdom", "label": "united kingdom", "shape": "dot", "size": 155.9772761432711, "title": "united kingdom"}, {"color": "#67000d", "font": {"color": "#10000000"}, "id": "united states", "label": "united states", "shape": "dot", "size": 107.4633763731107, "title": "united states"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "uruguay", "label": "uruguay", "shape": "dot", "size": 60.72339882623118, "title": "uruguay"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "uzbekistan", "label": "uzbekistan", "shape": "dot", "size": 29.58892574636387, "title": "uzbekistan"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "vanuatu", "label": "vanuatu", "shape": "dot", "size": 26.575912222505742, "title": "vanuatu"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "vatican city", "label": "vatican city", "shape": "dot", "size": 151.11380454197501, "title": "vatican city"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "venezuela", "label": "venezuela", "shape": "dot", "size": 106.92293952538914, "title": "venezuela"}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "vietnam", "label": "vietnam", "shape": "dot", "size": 53.8939015054861, "title": "vietnam"}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "yemen", "label": "yemen", "shape": "dot", "size": 30.091094667006892, "title": "yemen"}, {"color": "#fff4ee", "font": {"color": "#10000000"}, "id": "zambia", "label": "zambia", "shape": "dot", "size": 33.0323697736303, "title": "zambia"}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "zimbabwe", "label": "zimbabwe", "shape": "dot", "size": 107.09032916560348, "title": "zimbabwe"}]);
+                  edges = new vis.DataSet([]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
