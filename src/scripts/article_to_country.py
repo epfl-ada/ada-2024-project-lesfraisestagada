@@ -71,7 +71,7 @@ def filter_top_k(df, k, N):
 
 
 
-def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_occurences'):
+def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_occurences', testing = False):
     
     df = pd.read_csv('./data/country_data.csv', index_col=0)
     df_counts = filter_top_k(df, k=2, N=1)
@@ -89,9 +89,32 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
     generator = Generator(local_compute=True, model_key=model_key, model_family=model_family)
     _, tokenizer = generator.load_model()
     
-    system_prompt = f"""You will be given textual articles. For each article provide single and unique country to which the article is related and should be classified to. Provide the answer in the form : <country>.
-    If there is no country related to the article, please write 'None'. If the location is not on earth, please write 'None'. You must be 100\% sure this is a question of life.
-    This is the list of coutnries that you are allowed to output DON'T output anything that is not in this list: {countries}"""
+#     system_prompt = f"""You will be given textual articles. For each article provide a single and unique country to which the article is related and should be classified to. Provide the answer in the form : country.
+# If there is no country related to the article, please write 'None'. 
+# If the location is not on earth, please write 'None'. 
+# If the article is a general article where the content is not specifically related to a country, please write 'None'.
+# You must be 100\% sure this is a question of life.
+# This is the list of coutnries that you are allowed to output don't output anything that is not in this list: {countries}"""
+
+#     system_prompt = f"""You will be given textual articles. For each article provide a single and unique country to which the article is related and should be classified to. Provide the answer in the form : country. 
+# If the article is related to an object, a place, a monument related to a country, please write the country.
+# If the article is about a person, please write the country where the person is from.
+# If there is no country related to the article, please write 'None'. 
+# If the location is not on earth, please write 'None'. 
+# If the article is a general article where the content is not specifically related to a country, please write 'None'.
+# You are allowed to use the article name to help you find the country.
+# This is the list of coutnries that you are allowed to output don't output anything that is not in this list: {countries}
+# """
+
+    system_prompt = f"""You will be given textual articles. For each article provide a single and unique country to which the article is related and should be classified to. Provide the answer in the form : country. 
+If the article is related to an object, a place, a monument related to a country, please write the country.
+if the article is about a spieces, that lives in multiple countries, please write 'None'.
+If there is no country related to the article, please write 'None'. 
+If the location is not on earth, please write 'None'. 
+If the article is a general article where the content is not specifically related to a country, please write 'None'.
+You are allowed to use the article name to help you find the country.
+This is the list of coutnries that you are allowed to output don't output anything that is not in this list: {countries}
+"""
     
     user_prompt = ""
 
@@ -100,28 +123,29 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
     outputs = []
     
     if os.path.exists("data/" + file_name + "_dataset.json"):
-        print("Dataset already exists")
+        print("----------------- Dataset already exists -----------------")
         dataset = Dataset.from_json("data/" + file_name + "_dataset.json")
                 
         inputs = list(nan_df.index)
 
     else:
         print("----------------- Applying Chat Template -----------------")
-        #! remove this once tests are done 
-        annoatation = pd.read_csv("data/annotated/consensus.csv", index_col=0)
-        
+        if testing:
+            annoatation = pd.read_csv("data/annotated/consensus.csv", index_col=0)
+            nan_df = nan_df.filter(items=annoatation.index, axis=0)
+            print(nan_df)
+            
         with tqdm(total=len(nan_df)) as pbar:
             for i, _ in tqdm(nan_df.iterrows()):
-                if i in annoatation.index:
-                    inputs.append(i)
-                    content = file_finder(article_name=i)
-                    
-                    chat = user_prompt + "\n" + content
-                    chat = generator.chat_to_dict(chat)
-                    chat = generator.add_system_prompt(system_prompt, chat)
-                    chat = generator.apply_chat_template(chat, tokenizer)
-                    
-                    chats.append({"inputs" : chat})
+                inputs.append(i)
+                content = file_finder(article_name=i)
+                
+                chat = user_prompt + "\n" + "Article name : " + i + "\n\n" + content
+                chat = generator.chat_to_dict(chat)
+                chat = generator.add_system_prompt(system_prompt, chat)
+                chat = generator.apply_chat_template(chat, tokenizer)
+                
+                chats.append({"inputs" : chat})
                 pbar.update(1)
             
         dataset = Dataset.from_list(chats)
@@ -163,9 +187,14 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
             if not found:
                 cleaned_outputs.append("")
         
-        
+        if testing:
+            annoatation = pd.read_csv("data/annotated/consensus.csv", index_col=0)
         new_counts = pd.DataFrame({"Top_1_name" : cleaned_outputs, "Predictions" : outputs})
-        new_counts.index = inputs
+        
+        if testing:
+            new_counts.index = annoatation.index
+        else:
+            new_counts.index = inputs
 
 
     print(f"Number of articles with no countries before completion with llama: {len(nan_df)}")
@@ -174,18 +203,24 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
 
     new_counts.to_csv("data/" + file_name + ".csv")
     
-    agreement_value = (new_counts["Top_1_name"] == annoatation["country"].str.lower().fillna("nan")).sum() / len(df)
-    print(f"Agreement value: {agreement_value}")
+    if testing:
+        print(new_counts["Top_1_name"].str.lower().replace("", "nan").fillna("nan"))
+        print(annoatation["country"].str.lower().fillna("nan"))
+        print((new_counts["Top_1_name"].str.lower().replace("", "nan").fillna("nan") == annoatation["country"].str.lower().fillna("nan")))
+        agreement_value = (new_counts["Top_1_name"].str.lower().replace("", "nan").fillna("nan") == annoatation["country"].str.lower().fillna("nan")).sum() / len(annoatation)
+        print(f"Agreement value: {agreement_value}")
 
 
 if __name__ == "__main__":
     
     # count_and_lama()
     
-    count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama')
+    # count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama', testing=False)
     
     # count_and_lama(use_counts=False, model_key="Qwen/Qwen2.5-7B-Instruct", model_family='qwen', file_name='country_data_full_qwen')
     
     # count_and_lama(use_counts=False, model_key="google/gemma-2-9b-it", model_family='gemma', file_name='country_data_full_gemma')
     
+    count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved', testing=False)
+
     
