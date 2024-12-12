@@ -86,7 +86,7 @@ def count_and_lama(use_counts=True, model_key="meta-llama/Meta-Llama-3.1-8B-Inst
     countries = list(dict(countries_for_language('en')).values())
 
         
-    generator = Generator(local_compute=True, model_key=model_key, model_family=model_family)
+    generator = Generator(local_compute=False, model_key=model_key, model_family=model_family)
     _, tokenizer = generator.load_model()
     
 #     system_prompt = f"""You will be given textual articles. For each article provide a single and unique country to which the article is related and should be classified to. Provide the answer in the form : country.
@@ -213,14 +213,17 @@ This is the list of coutnries that you are allowed to output don't output anythi
 
 if __name__ == "__main__":
     
-    # count_and_lama()
+    count_and_lama()
     
-    # count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama', testing=False)
+    count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama', testing=False)
     
-    # count_and_lama(use_counts=False, model_key="Qwen/Qwen2.5-7B-Instruct", model_family='qwen', file_name='country_data_full_qwen')
+    count_and_lama(use_counts=False, model_key="Qwen/Qwen2.5-7B-Instruct", model_family='qwen', file_name='country_data_full_qwen')
     
-    # count_and_lama(use_counts=False, model_key="google/gemma-2-9b-it", model_family='gemma', file_name='country_data_full_gemma')
+    count_and_lama(use_counts=False, model_key="google/gemma-2-9b-it", model_family='gemma', file_name='country_data_full_gemma')
     
     count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved', testing=False)
+    
+    # count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved_test', testing=True)
+
 
     
