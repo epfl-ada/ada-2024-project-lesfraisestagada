@@ -11,8 +11,8 @@
 
 # Imports
 import pandas as pd
-from data.dataloader import *
-from utils.functions import *
+from src.data.dataloader import *
+from src.utils.functions import *
 
 def main():
     # load DataFrames containing the data
@@ -35,7 +35,7 @@ def main():
     df_links_in = links_into_articles(links)
 
     # load DatFrame contaning the ocuntry info for each article
-    df_country_occurences = pd.read_csv("data/country_data_full_llama_improved.csv", index_col=0).drop(columns=["Predictions"])
+    df_country_occurences = pd.read_csv("data/country_data_full_llama_improved.csv", index_col=0)
 
     # merge the 4 DataFrames to get final DataFrame containing click count, countries and links
     df_tot = pd.concat([df_country_occurences, df_clicks, df_links_in, df_links_out], axis=1)
