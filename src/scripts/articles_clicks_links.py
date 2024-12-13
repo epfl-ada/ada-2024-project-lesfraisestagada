@@ -1,8 +1,5 @@
 # This script creates a DataFrame containing the following 9 columns: 
-# - Top_1_name = name of the country that occurs the most in the article
-# - Top_2_name = name of the country that occurs the second most in the article
-# - Top_1_count = number of times that the Top1 country occurs
-# - Top_2_count = number of times that the Top2 country occurs
+# - Top_1_name = name of the country the article was classified in
 # - click_count = number of times the article occurs in the clicking paths of the Wikispeedia game
 # - num_links_in = number of articles that lead to article of interest 
 # - name_links_in = name of the artciles that lead to article of interest
@@ -15,10 +12,9 @@
 # Imports
 import pandas as pd
 from data.dataloader import *
-from src.utils.functions import *
+from utils.functions import *
 
-# main
-if __name__ == "__main__":
+def main():
     # load DataFrames containing the data
     articles = load_articles_dataframe()
     categories = load_categories_dataframe()
@@ -39,10 +35,13 @@ if __name__ == "__main__":
     df_links_in = links_into_articles(links)
 
     # load DatFrame contaning the ocuntry info for each article
-    df_country_occurences = pd.read_csv("data/country_occurences.csv", names = ["Top_1_name", "Top_2_name", "Top_1_count", "Top_2_count"], skiprows=1)
+    df_country_occurences = pd.read_csv("data/country_data_full_llama_improved.csv", index_col=0).drop(columns=["Predictions"])
 
     # merge the 4 DataFrames to get final DataFrame containing click count, countries and links
     df_tot = pd.concat([df_country_occurences, df_clicks, df_links_in, df_links_out], axis=1)
     
     df_tot.to_csv('data/country_clicks_links.csv', index=True)
 
+# main
+if __name__ == "__main__":
+    main()
