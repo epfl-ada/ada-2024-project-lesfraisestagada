@@ -39,8 +39,11 @@ def main():
 
     # merge the 4 DataFrames to get final DataFrame containing click count, countries and links
     df_tot = pd.concat([df_country_occurences, df_clicks, df_links_in, df_links_out], axis=1)
+
+    bad_articles = ['%C3%85land', '%C3%89douard_Manet', '%C3%89ire', 'Wikipedia_Text_of_the_GNU_Free_Documentation_License']
+    df_filtered = df_tot[~df_tot.index.isin(bad_articles)]
     
-    df_tot.to_csv('data/country_clicks_links.csv', index=True)
+    df_filtered.to_csv('data/country_clicks_links.csv', index=True)
 
 # main
 if __name__ == "__main__":
