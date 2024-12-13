@@ -114,6 +114,7 @@ If the location is not on earth, please write 'None'.
 If the article is a general article where the content is not specifically related to a country, please write 'None'.
 You are allowed to use the article name to help you find the country.
 This is the list of coutnries that you are allowed to output don't output anything that is not in this list: {countries}
+Don't put any country by default
 """
     
     user_prompt = ""
@@ -222,6 +223,8 @@ if __name__ == "__main__":
     count_and_lama(use_counts=False, model_key="google/gemma-2-9b-it", model_family='gemma', file_name='country_data_full_gemma')
     
     count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved', testing=False)
+    
+    # count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved_reversed', testing=False)
     
     # count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved_test', testing=True)
 
