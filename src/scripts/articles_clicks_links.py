@@ -22,8 +22,8 @@ def main():
     unfinished_paths = load_path_unfinished_distance_dataframe()
     links = load_links_dataframe()
 
-    paths = pd.concat([finished_paths["path"], unfinished_paths["path"]])
-    paths_merged = paths.apply(lambda row: row.split(';'))
+    # Remove start / target articles (they do not truly represent player behavior)
+    paths_merged = pd.concat([finished_paths["path"].apply(lambda row: row.split(';')[1:-1]), unfinished_paths["path"].apply(lambda row: row.split(';')[1:])])
 
     # count number of clicks per article in the Wikispeedia game 
     df_clicks = click_count_in_paths(articles, paths_merged)
