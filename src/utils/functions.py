@@ -4,7 +4,7 @@ import networkx as nx
 from itertools import chain
 from collections import Counter
 
-from data.dataloader import *
+from src.data.dataloader import *
 
 
 """
