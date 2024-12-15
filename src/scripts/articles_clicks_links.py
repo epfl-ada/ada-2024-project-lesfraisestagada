@@ -10,6 +10,12 @@
 # This DataFrame is used for the rest of our analysis. 
 
 # Imports
+import sys
+import os
+
+# Add the project root to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 import pandas as pd
 from src.data.dataloader import *
 from src.utils.functions import *
