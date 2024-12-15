@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#67000d", "font": {"color": "#10000000"}, "id": "United_States", "label": "United_States", "shape": "dot", "title": "article: United_States \n click count: 12370 \n in degree: 1551.0 \n out degree: 294.0", "x": 500.0, "y": 0.0}, {"color": "#fc9576", "font": {"color": "#10000000"}, "id": "Europe", "label": "Europe", "shape": "dot", "title": "article: Europe \n click count: 5553 \n in degree: 933.0 \n out degree: 159.0", "x": 475.52825814757676, "y": 154.5084971874737}, {"color": "#fc9e80", "font": {"color": "#10000000"}, "id": "United_Kingdom", "label": "United_Kingdom", "shape": "dot", "title": "article: United_Kingdom \n click count: 5278 \n in degree: 972.0 \n out degree: 168.0", "x": 404.5084971874737, "y": 293.8926261462366}, {"color": "#fcbca2", "font": {"color": "#10000000"}, "id": "England", "label": "England", "shape": "dot", "title": "article: England \n click count: 4304 \n in degree: 751.0 \n out degree: 172.0", "x": 293.8926261462366, "y": 404.5084971874737}, {"color": "#fcc1a8", "font": {"color": "#10000000"}, "id": "Earth", "label": "Earth", "shape": "dot", "title": "article: Earth \n click count: 4134 \n in degree: 269.0 \n out degree: 118.0", "x": 154.50849718747372, "y": 475.52825814757676}, {"color": "#fdd3c1", "font": {"color": "#10000000"}, "id": "Africa", "label": "Africa", "shape": "dot", "title": "article: Africa \n click count: 3464 \n in degree: 477.0 \n out degree: 212.0", "x": 3.061616997868383e-14, "y": 500.0}, {"color": "#fee3d6", "font": {"color": "#10000000"}, "id": "World_War_II", "label": "World_War_II", "shape": "dot", "title": "article: World_War_II \n click count: 2846 \n in degree: 751.0 \n out degree: 119.0", "x": -154.50849718747367, "y": 475.5282581475768}, {"color": "#fee8dd", "font": {"color": "#10000000"}, "id": "North_America", "label": "North_America", "shape": "dot", "title": "article: North_America \n click count: 2503 \n in degree: 410.0 \n out degree: 77.0", "x": -293.8926261462365, "y": 404.5084971874737}, {"color": "#fee9df", "font": {"color": "#10000000"}, "id": "Animal", "label": "Animal", "shape": "dot", "title": "article: Animal \n click count: 2396 \n in degree: 492.0 \n out degree: 29.0", "x": -404.50849718747367, "y": 293.89262614623664}, {"color": "#feeae1", "font": {"color": "#10000000"}, "id": "Human", "label": "Human", "shape": "dot", "title": "article: Human \n click count: 2334 \n in degree: 165.0 \n out degree: 137.0", "x": -475.52825814757676, "y": 154.50849718747375}, {"color": "#ffebe2", "font": {"color": "#10000000"}, "id": "Mammal", "label": "Mammal", "shape": "dot", "title": "article: Mammal \n click count: 2292 \n in degree: 199.0 \n out degree: 42.0", "x": -500.0, "y": 6.123233995736766e-14}, {"color": "#ffece4", "font": {"color": "#10000000"}, "id": "France", "label": "France", "shape": "dot", "title": "article: France \n click count: 2201 \n in degree: 959.0 \n out degree: 85.0", "x": -475.5282581475768, "y": -154.50849718747364}, {"color": "#ffeee6", "font": {"color": "#10000000"}, "id": "Germany", "label": "Germany", "shape": "dot", "title": "article: Germany \n click count: 2121 \n in degree: 743.0 \n out degree: 169.0", "x": -404.5084971874737, "y": -293.8926261462365}, {"color": "#fff0e9", "font": {"color": "#10000000"}, "id": "English_language", "label": "English_language", "shape": "dot", "title": "article: English_language \n click count: 1956 \n in degree: 598.0 \n out degree: 118.0", "x": -293.89262614623664, "y": -404.50849718747367}, {"color": "#fff2eb", "font": {"color": "#10000000"}, "id": "Science", "label": "Science", "shape": "dot", "title": "article: Science \n click count: 1855 \n in degree: 135.0 \n out degree: 40.0", "x": -154.50849718747378, "y": -475.52825814757676}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "India", "label": "India", "shape": "dot", "title": "article: India \n click count: 1722 \n in degree: 611.0 \n out degree: 81.0", "x": -9.184850993605149e-14, "y": -500.0}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "Atlantic_Ocean", "label": "Atlantic_Ocean", "shape": "dot", "title": "article: Atlantic_Ocean \n click count: 1706 \n in degree: 250.0 \n out degree: 125.0", "x": 154.5084971874736, "y": -475.5282581475768}, {"color": "#fff4ef", "font": {"color": "#10000000"}, "id": "Agriculture", "label": "Agriculture", "shape": "dot", "title": "article: Agriculture \n click count: 1698 \n in degree: 241.0 \n out degree: 57.0", "x": 293.89262614623647, "y": -404.5084971874738}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "Plant", "label": "Plant", "shape": "dot", "title": "article: Plant \n click count: 1648 \n in degree: 185.0 \n out degree: 70.0", "x": 404.50849718747367, "y": -293.8926261462367}, {"color": "#fff5f0", "font": {"color": "#10000000"}, "id": "Computer", "label": "Computer", "shape": "dot", "title": "article: Computer \n click count: 1640 \n in degree: 87.0 \n out degree: 36.0", "x": 475.52825814757676, "y": -154.50849718747384}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "United_States", "to": "United_States"}, {"arrows": "to", "from": "United_States", "to": "Europe"}, {"arrows": "to", "from": "United_States", "to": "United_Kingdom"}, {"arrows": "to", "from": "United_States", "to": "Africa"}, {"arrows": "to", "from": "United_States", "to": "World_War_II"}, {"arrows": "to", "from": "United_States", "to": "North_America"}, {"arrows": "to", "from": "United_States", "to": "France"}, {"arrows": "to", "from": "United_States", "to": "Germany"}, {"arrows": "to", "from": "United_States", "to": "India"}, {"arrows": "to", "from": "United_States", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "United_States", "to": "Agriculture"}, {"arrows": "to", "from": "United_States", "to": "Computer"}, {"arrows": "to", "from": "Europe", "to": "Europe"}, {"arrows": "to", "from": "Europe", "to": "United_Kingdom"}, {"arrows": "to", "from": "Europe", "to": "England"}, {"arrows": "to", "from": "Europe", "to": "Earth"}, {"arrows": "to", "from": "Europe", "to": "Africa"}, {"arrows": "to", "from": "Europe", "to": "World_War_II"}, {"arrows": "to", "from": "Europe", "to": "North_America"}, {"arrows": "to", "from": "Europe", "to": "Mammal"}, {"arrows": "to", "from": "Europe", "to": "France"}, {"arrows": "to", "from": "Europe", "to": "Germany"}, {"arrows": "to", "from": "Europe", "to": "India"}, {"arrows": "to", "from": "Europe", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "United_Kingdom", "to": "United_States"}, {"arrows": "to", "from": "United_Kingdom", "to": "Europe"}, {"arrows": "to", "from": "United_Kingdom", "to": "United_Kingdom"}, {"arrows": "to", "from": "United_Kingdom", "to": "England"}, {"arrows": "to", "from": "United_Kingdom", "to": "Earth"}, {"arrows": "to", "from": "United_Kingdom", "to": "World_War_II"}, {"arrows": "to", "from": "United_Kingdom", "to": "France"}, {"arrows": "to", "from": "United_Kingdom", "to": "Germany"}, {"arrows": "to", "from": "United_Kingdom", "to": "English_language"}, {"arrows": "to", "from": "United_Kingdom", "to": "India"}, {"arrows": "to", "from": "United_Kingdom", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "United_Kingdom", "to": "Computer"}, {"arrows": "to", "from": "England", "to": "Europe"}, {"arrows": "to", "from": "England", "to": "United_Kingdom"}, {"arrows": "to", "from": "England", "to": "England"}, {"arrows": "to", "from": "England", "to": "France"}, {"arrows": "to", "from": "England", "to": "Germany"}, {"arrows": "to", "from": "England", "to": "English_language"}, {"arrows": "to", "from": "England", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "Earth", "to": "United_States"}, {"arrows": "to", "from": "Earth", "to": "Europe"}, {"arrows": "to", "from": "Earth", "to": "Earth"}, {"arrows": "to", "from": "Earth", "to": "Africa"}, {"arrows": "to", "from": "Earth", "to": "North_America"}, {"arrows": "to", "from": "Earth", "to": "Animal"}, {"arrows": "to", "from": "Earth", "to": "Human"}, {"arrows": "to", "from": "Earth", "to": "Mammal"}, {"arrows": "to", "from": "Earth", "to": "India"}, {"arrows": "to", "from": "Earth", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "Earth", "to": "Plant"}, {"arrows": "to", "from": "Africa", "to": "United_States"}, {"arrows": "to", "from": "Africa", "to": "Europe"}, {"arrows": "to", "from": "Africa", "to": "United_Kingdom"}, {"arrows": "to", "from": "Africa", "to": "Earth"}, {"arrows": "to", "from": "Africa", "to": "Africa"}, {"arrows": "to", "from": "Africa", "to": "World_War_II"}, {"arrows": "to", "from": "Africa", "to": "Human"}, {"arrows": "to", "from": "Africa", "to": "France"}, {"arrows": "to", "from": "Africa", "to": "English_language"}, {"arrows": "to", "from": "Africa", "to": "India"}, {"arrows": "to", "from": "Africa", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "Africa", "to": "Agriculture"}, {"arrows": "to", "from": "World_War_II", "to": "United_States"}, {"arrows": "to", "from": "World_War_II", "to": "Europe"}, {"arrows": "to", "from": "World_War_II", "to": "United_Kingdom"}, {"arrows": "to", "from": "World_War_II", "to": "Africa"}, {"arrows": "to", "from": "World_War_II", "to": "France"}, {"arrows": "to", "from": "World_War_II", "to": "Germany"}, {"arrows": "to", "from": "World_War_II", "to": "India"}, {"arrows": "to", "from": "North_America", "to": "United_States"}, {"arrows": "to", "from": "North_America", "to": "Europe"}, {"arrows": "to", "from": "North_America", "to": "United_Kingdom"}, {"arrows": "to", "from": "North_America", "to": "Earth"}, {"arrows": "to", "from": "North_America", "to": "Africa"}, {"arrows": "to", "from": "North_America", "to": "France"}, {"arrows": "to", "from": "North_America", "to": "English_language"}, {"arrows": "to", "from": "North_America", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "Animal", "to": "Human"}, {"arrows": "to", "from": "Animal", "to": "Mammal"}, {"arrows": "to", "from": "Animal", "to": "Plant"}, {"arrows": "to", "from": "Human", "to": "United_States"}, {"arrows": "to", "from": "Human", "to": "Europe"}, {"arrows": "to", "from": "Human", "to": "Earth"}, {"arrows": "to", "from": "Human", "to": "Africa"}, {"arrows": "to", "from": "Human", "to": "World_War_II"}, {"arrows": "to", "from": "Human", "to": "Animal"}, {"arrows": "to", "from": "Human", "to": "Human"}, {"arrows": "to", "from": "Human", "to": "Mammal"}, {"arrows": "to", "from": "Human", "to": "English_language"}, {"arrows": "to", "from": "Human", "to": "Science"}, {"arrows": "to", "from": "Human", "to": "India"}, {"arrows": "to", "from": "Human", "to": "Agriculture"}, {"arrows": "to", "from": "Mammal", "to": "North_America"}, {"arrows": "to", "from": "Mammal", "to": "Animal"}, {"arrows": "to", "from": "Mammal", "to": "Human"}, {"arrows": "to", "from": "France", "to": "United_States"}, {"arrows": "to", "from": "France", "to": "Europe"}, {"arrows": "to", "from": "France", "to": "United_Kingdom"}, {"arrows": "to", "from": "France", "to": "Africa"}, {"arrows": "to", "from": "France", "to": "World_War_II"}, {"arrows": "to", "from": "France", "to": "North_America"}, {"arrows": "to", "from": "France", "to": "France"}, {"arrows": "to", "from": "France", "to": "Germany"}, {"arrows": "to", "from": "France", "to": "India"}, {"arrows": "to", "from": "France", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "Germany", "to": "United_States"}, {"arrows": "to", "from": "Germany", "to": "Europe"}, {"arrows": "to", "from": "Germany", "to": "United_Kingdom"}, {"arrows": "to", "from": "Germany", "to": "England"}, {"arrows": "to", "from": "Germany", "to": "World_War_II"}, {"arrows": "to", "from": "Germany", "to": "France"}, {"arrows": "to", "from": "Germany", "to": "English_language"}, {"arrows": "to", "from": "Germany", "to": "India"}, {"arrows": "to", "from": "Germany", "to": "Atlantic_Ocean"}, {"arrows": "to", "from": "English_language", "to": "United_States"}, {"arrows": "to", "from": "English_language", "to": "Europe"}, {"arrows": "to", "from": "English_language", "to": "United_Kingdom"}, {"arrows": "to", "from": "English_language", "to": "England"}, {"arrows": "to", "from": "English_language", "to": "Africa"}, {"arrows": "to", "from": "English_language", "to": "World_War_II"}, {"arrows": "to", "from": "English_language", "to": "Germany"}, {"arrows": "to", "from": "English_language", "to": "English_language"}, {"arrows": "to", "from": "English_language", "to": "India"}, {"arrows": "to", "from": "Science", "to": "United_States"}, {"arrows": "to", "from": "Science", "to": "Computer"}, {"arrows": "to", "from": "India", "to": "United_States"}, {"arrows": "to", "from": "India", "to": "Europe"}, {"arrows": "to", "from": "India", "to": "United_Kingdom"}, {"arrows": "to", "from": "India", "to": "Africa"}, {"arrows": "to", "from": "India", "to": "Mammal"}, {"arrows": "to", "from": "India", "to": "France"}, {"arrows": "to", "from": "India", "to": "English_language"}, {"arrows": "to", "from": "India", "to": "India"}, {"arrows": "to", "from": "Atlantic_Ocean", "to": "United_States"}, {"arrows": "to", "from": "Atlantic_Ocean", "to": "Europe"}, {"arrows": "to", "from": "Atlantic_Ocean", "to": "United_Kingdom"}, {"arrows": "to", "from": "Atlantic_Ocean", "to": "Earth"}, {"arrows": "to", "from": "Atlantic_Ocean", "to": "Africa"}, {"arrows": "to", "from": "Atlantic_Ocean", "to": "France"}, {"arrows": "to", "from": "Atlantic_Ocean", "to": "Germany"}, {"arrows": "to", "from": "Atlantic_Ocean", "to": "India"}, {"arrows": "to", "from": "Agriculture", "to": "Africa"}, {"arrows": "to", "from": "Agriculture", "to": "France"}, {"arrows": "to", "from": "Agriculture", "to": "Germany"}, {"arrows": "to", "from": "Plant", "to": "Animal"}, {"arrows": "to", "from": "Plant", "to": "Agriculture"}, {"arrows": "to", "from": "Computer", "to": "Computer"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.09,
+            "gravitationalConstant": -10000,
+            "springConstant": 0.05,
+            "springLength": 300000
+        },
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
