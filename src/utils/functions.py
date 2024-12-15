@@ -4,7 +4,9 @@ import networkx as nx
 from itertools import chain
 from collections import Counter
 
-from data.dataloader import *
+from src.data.dataloader import *
+
+from src.scripts.articles_clicks_links import bad_articles
 
 
 """
@@ -125,7 +127,11 @@ def pagerank(links):
         columns: article_name, rank
         values: name of the article, rank computed by pagerank
     """
-    edges = [(row['linkSource'], row['linkTarget']) for index, row in links.iterrows()]
+    # Remove bad articles
+    edges = [(row['linkSource'], row['linkTarget']) for index, row in links.iterrows()
+             if (row['linkSource'] not in bad_articles) and (row['linkTarget'] not in bad_articles)
+            ]
+
     G = nx.DiGraph(edges)
     pagerank_result = nx.pagerank(G)
     df_pagerank = pd.DataFrame({

@@ -10,9 +10,17 @@
 # This DataFrame is used for the rest of our analysis. 
 
 # Imports
+import sys
+import os
+
+# Add the project root to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 import pandas as pd
-from data.dataloader import *
-from utils.functions import *
+from src.data.dataloader import *
+from src.utils.functions import *
+
+bad_articles = ['%C3%85land', '%C3%89douard_Manet', '%C3%89ire', 'Wikipedia_Text_of_the_GNU_Free_Documentation_License']
 
 def main():
     # load DataFrames containing the data
@@ -35,12 +43,11 @@ def main():
     df_links_in = links_into_articles(links)
 
     # load DatFrame contaning the ocuntry info for each article
-    df_country_occurences = pd.read_csv("data/country_data_full_llama_improved.csv", index_col=0).drop(columns=["Predictions"])
+    df_country_occurences = pd.read_csv("data/country_data_full_llama_improved.csv", index_col=0)
 
     # merge the 4 DataFrames to get final DataFrame containing click count, countries and links
     df_tot = pd.concat([df_country_occurences, df_clicks, df_links_in, df_links_out], axis=1)
 
-    bad_articles = ['%C3%85land', '%C3%89douard_Manet', '%C3%89ire', 'Wikipedia_Text_of_the_GNU_Free_Documentation_License']
     df_filtered = df_tot[~df_tot.index.isin(bad_articles)]
     
     df_filtered.to_csv('data/country_clicks_links.csv', index=True)
