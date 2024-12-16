@@ -2,12 +2,10 @@
 # Analyzing cultural biases in Wikispeedia
 
 ## Abstract
-In the last few centuries, Western societies like Europe and the USA have become wealthier and wealthier compared to
-African or Asian countries. This has also come with a faster technological development, meaning that the early internet
-was dominated by Western culture. Today, content on the internet is still still mostly produced by Western societies [[1]](https://upload.wikimedia.org/wikipedia/commons/4/4a/Decolonizing_Wikipedia.pdf) [[2]](https://www.theguardian.com/commentisfree/2017/oct/05/internet-white-western-google-wikipedia-skewed#:~:text=of%20the%20world.-,For%20the%20first%20time%20in%20history%2C%20we%20are%20creating%20a,skewed%20towards%20rich%2C%20western%20countries.). In this project, we will analyze the impact this had on
-[Wikispeedia](https://dlab.epfl.ch/wikispeedia/play/), an online game built on 4604 Wikipedia articles from 2007 during which players are navigating from a given start and end article only through the links contained in the articles. We intend to answer several questions: Are people players more likely to click on articles linked to Western countries? What are
-the most used articles in Wikispeedia paths? Are there unconscious biases in the way players choose their paths? Do they tend to follow paths that connect articles from Western countries? Is that because
-Wikipedia contains a larger proportion of articles about Western culture, or are the players themselves biased? 
+Today, content on the internet is still still mostly produced by Western societies [[1]](https://upload.wikimedia.org/wikipedia/commons/4/4a/Decolonizing_Wikipedia.pdf) [[2]](https://www.theguardian.com/commentisfree/2017/oct/05/internet-white-western-google-wikipedia-skewed#:~:text=of%20the%20world.-,For%20the%20first%20time%20in%20history%2C%20we%20are%20creating%20a,skewed%20towards%20rich%2C%20western%20countries.). Interestingly, those same societies also produce most of the human knowledge, which we proxy as the number of citable publications [[3]](https://www.scimagojr.com/countryrank.php?year=2007&order=it&ord=desc#google_vignette). [Wikispeedia](https://dlab.epfl.ch/wikispeedia/play/) is an online game built on Wikipedia articles from 2007 during which players are navigating from a given start to a target end article through the links contained in the articles. In this project we intend to investigate players’ behaviors and their biases. More precisely, we ask if the way players play Wikispeedia is dependent on how knowledge is produced in the world? Or are they influenced by the Wikipedia graph, which is itself biased towards countries that produce the most knowledge?
+ 
+The first step will be to understand the relationship between the way players play Wikispeedia and the production of knowledge in the world.
+For this, we will compare two hypotheses, namely the “passive” and the “active” hypothesis. In the “passive” hypothesis, we assume that players “passively” play on a graph that is biased towards countries producing a lot of scientific knowledge. Thus, by removing the graph bias (i.e. by controlling for the number of articles per country, the number of links in and out of articles, balancing, propensity score matching, PageRank), there should be no bias anymore in the way players play. We consider that the Wikipedia graph is biased if it over or under represents some countries. On the other hand, the “active” hypothesis states that players “actively” add their own intrinsic biases when playing on that graph. A player bias can be defined as the inclination for or against one or several countries. By removing the graph bias, the player’s preference for some countries should still be visible.
 
 
 ## Data
@@ -15,20 +13,17 @@ The articles that we will use have been borrowed from a 4,600-article version of
 
 
 ## Research questions
-1. Are there cultural biases intrinsic to the Wikipedia graph?
-   * What countries are the most present in the Wikipedia graph?
-   * Are articles about some countries on average more connected than others?
-2. Are there cultural biases in the way players play Wikispeedia?
-   * What articles are most often clicked on? How does this relate to the country of the article?
-   * What paths do Wikispeedia players most follow? Are there "highway paths" that are very often used? Can this be
-linked to a cultural bias?
-   * What articles are most likely to cause a player to stop the game? What makes those articles "dead ends"? What does
-   this have to do with the country of these articles?
-3. How can we explain the players' biases?
-   * What is the distribution of countries among start / target articles for the Wikispeedia games? If it is not balanced, could this be an explanation?
-   * Can we explain the variance in player's click counts with the number of links leading in and out of article?
-   * How does the players' clicking behavior compare itself to PageRank? Are players significantly more biased than a random walk on the graph?
-   * Is there something inherent to the way players play the game?
+Is the way players play Wikispeedia dependent on how knowledge is produced in the world? Or are they influenced by the Wikipedia graph, which is itself biased towards countries that produce the most knowledge?
+This main question can be subdivided into different smaller questions: 
+
+1. Which countries are most represented in the Wikispeedia? Are there cultural biases intrinsic to the Wikipedia graph?
+2. Are there countries that are clicked more often by players in Wikispeedia? Are there "highway paths" that are very often used by players? 
+3. What articles are most likely to cause a player to stop the game? What makes those articles "dead ends"? 
+4. Can controlling for different cofactors be enough to remove the observed bias? Can we explain the variance in player's click counts with the number of links leading in and out of articles? Are players significantly more biased than a random walk on the graph?
+5. Do players click more often on articles that are associated with countries generating a high number of publications? Is this phenomenon also observed after balancing and controlling for any confounding factors?
+
+## Data story
+Our data story is available on the following [website](https://brygotti.github.io/lesfraisestagada/analysis.html). Happy reading!
 
 ## Methods
 
@@ -115,70 +110,52 @@ An analysis of the difference between the players and PageRank ranks was done to
 
 ## Team organization
 
-### Week 28.10 - 01.11
-Jeremy
-- [x]  Group articles by country first naïve approach (1.1)
-
-Bryan
-- [x]  Initial skeleton of `README.md`
-
-Oriane
-- [x]  First test of visualisation on a map (2)
-
-Theo
-- [x]  Compute success/fail ratio → which articles have high success, high failure. Correlation with countries (2.3)
-
-Claire
-- [x]  Compute usage of articles, draw distribution, extract most used, correlation with countries (2.1)
-
-### Week 01.11 - 08.11
-Jeremy
-- [x] Refine country calssification with help of an llm in order to have more articles (1.1)
-
-Claire
-- [x] Click counts analysis (2.1)
-
-Oriane
-- [x]  Highway paths analysis (2.2)
-
-Bryan
-- [x]  Random walk analysis (3.3)
-
-Theo
-- [x] Dead ends analysis (2.3)
-
-### Week 08.11 - 15.11
-
-Jeremy and Claire
-- [x] Explain the variance in player's click counts with the number of links leading in and out of articles (3.2)
-- [x] Connection between countries (1.2)
+### Week 28.10 - 15.11 (P2)
 
 Jeremy
+- [x]  Group articles by country first naïve approach, refine country calssification with help of an llm in order to have more articles (1.1)
+- [x]  Explain the variance in player's click counts with the number of links leading in and out of articles (3.2)
+- [x]  Connection between countries (1.2)
 - [x] Analyze country distribution in start / target articles of proposed paths (3.1)
 
 Bryan
-- [x] Refine the random walk analysis by countries (3.3)
+- [x]  Initial skeleton of `README.md`
+- [x]  Random walk analysis (3.3)
 
 Oriane
-- [x] Refine the highway paths analysis. Normalization and link to countries (2.2)
+- [x]  First test of visualisation on a map (2)
+- [x]  Highway paths analysis, normalization and map to countries (2.2)
 
 Theo
-- [x] Refine the dead ends analysis. Normalization by outgoing links and further analysis (2.3)
+- [x]  Compute success/fail ratio → which articles have high success, high failure. Correlation with countries (2.3)
+- [x]  Dead ends analysis, normalization by outgoing links and further analysis (2.3)
 
+Claire
+- [x]  Click counts analysis, compute usage of articles, draw distribution, extract most used, correlation with countries (2.1)
+- [x]  Explain the variance in player's click counts with the number of links leading in and out of articles (3.2)
+- [x]  Connection between countries (1.2)
+
+### Week 29.11 - 20.12 (P3)
+
+Jeremy
+- [x] 
+
+Claire
+- [x] 
+
+Oriane
+- [x] 
+
+Bryan
+- [x]
+
+Theo
+- [x]
+  
 Everyone
 - [x] Merge own notebook into `results.py`
 - [x] Write methods in `README.md`
 - [x] Write conclusion in 3.4 of `results.py`
-
-## Proposed timeline
-### Step 1 (due 06.12)
-Implement feedback from TAs.
-
-Choose framework for the website. Decide which plots to keep and which to discard from the notebook. Add interactive plots like a map visualization.
-### Step 3 (due 13.12)
-Implement potential new interactive plots.
-### Step 4 (due 20.12)
-Adapt story text to fit in the website.
 
 
 ## Quickstart
