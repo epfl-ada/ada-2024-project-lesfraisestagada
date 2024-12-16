@@ -111,20 +111,25 @@ An analysis of the difference between the players and PageRank ranks was done to
 ## Team organization
 
 ### Week 28.10 - 15.11 (P2)
+
 Jeremy
 - [x]  Group articles by country first naïve approach, refine country calssification with help of an llm in order to have more articles (1.1)
 - [x]  Explain the variance in player's click counts with the number of links leading in and out of articles (3.2)
 - [x]  Connection between countries (1.2)
 - [x] Analyze country distribution in start / target articles of proposed paths (3.1)
+
 Bryan
 - [x]  Initial skeleton of `README.md`
 - [x]  Random walk analysis (3.3)
+
 Oriane
 - [x]  First test of visualisation on a map (2)
 - [x]  Highway paths analysis, normalization and map to countries (2.2)
+
 Theo
 - [x]  Compute success/fail ratio → which articles have high success, high failure. Correlation with countries (2.3)
 - [x]  Dead ends analysis, normalization by outgoing links and further analysis (2.3)
+
 Claire
 - [x]  Click counts analysis, compute usage of articles, draw distribution, extract most used, correlation with countries (2.1)
 - [x]  Explain the variance in player's click counts with the number of links leading in and out of articles (3.2)
@@ -134,12 +139,16 @@ Claire
 
 Jeremy
 - [x] 
+
 Claire
 - [x] 
+
 Oriane
 - [x] 
+
 Bryan
 - [x]
+
 Theo
 - [x]
   
