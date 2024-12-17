@@ -46,14 +46,13 @@ def color_gradient(variable, color):
 
 
 
-def draw_circle_graph(df, title, out_path, project_path):
+def draw_circle_graph(df, out_path, project_path):
     """Draw a circular directed graph where nodes are articles
     Edges represent connections between articles. 
     Article A is said to be connected to article B if article A contains a link that is pointing to article B. 
 
     Args:
         df (dataframe): containing the following variables = click_count, num_links_in, num_links_out and having as an index the name of articles
-        title(str): the title of the graph
         out_path (str): path where the graph is saved
         project_path (str): path of the current project
     """
@@ -102,16 +101,6 @@ def draw_circle_graph(df, title, out_path, project_path):
 
     # save to html for visualization on our website
     net.show(out_path)
-
-    # Add a title into the saved HTML
-    with open(out_path, 'r+', encoding="utf-8") as f:
-        html = f.read()
-        title_html = f"<h1 style='text-align:center; color:#333;font-size:18px;'>{title}</h1>"
-        # Insert the title just after the <body> tag
-        html = html.replace("<body>", f"<body>{title_html}")
-        f.seek(0)
-        f.write(html)
-        f.truncate()
 
     print(f"Map is saved in {out_path}!")
 
