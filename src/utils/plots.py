@@ -393,24 +393,27 @@ def plot_articles_before_go_back(before_last_article_analysis, use_scaled=False,
     plt.tight_layout()
     plt.show()
 
-def plot_publications_map(publications_per_country_df):
+def plot_color_map(
+        df: pd.DataFrame,
+        value_column: str,
+        title: str
+    ):
     """
     Plot a choropleth map of the number of publications per country.
     Args:
-        publications_per_country_df (pd.DataFrame): DataFrame containing the number of publications per country.
+        publications_per_country_df (pd.DataFrame): DataFrame containing at least two columns: {value_column} and country
     """
     fig = px.choropleth(
-    publications_per_country_df,
-    locations="Country",  # match on country names
+    df,
+    locations="country",  # match on country names
     locationmode="country names",  
-    color="Citable documents",  
+    color=value_column,  
     color_continuous_scale="Plasma",
-    title="Number of Publications per Country",
-    labels={'Citable documents': 'Publications'},
-    hover_name="Country", 
+    title=title,
+    hover_name="country", 
     hover_data={
-        "Citable documents": ":,.0f", 
-        "Country": False
+        value_column: ":,.0f", 
+        "country": False
     }
 )
 
@@ -421,7 +424,7 @@ def plot_publications_map(publications_per_country_df):
             projection_type='equirectangular'
         ),
         title=dict(
-            text="Number of Publications per Country",
+            text=title,
             font=dict(
                 family="Helvetica Neue, sans-serif", 
                 size=18 
@@ -440,5 +443,4 @@ def plot_publications_map(publications_per_country_df):
         )
     )
 
-
-    fig.show()
+    return fig

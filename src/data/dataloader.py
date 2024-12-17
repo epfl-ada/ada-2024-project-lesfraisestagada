@@ -88,7 +88,7 @@ def load_publications_dataframe(path = "./data/"):
     """
     pub_data = pd.read_csv(path + "publications_2007.csv")
     cols_to_keep = ["Rank", "Country", "Citable documents"]
-    return pub_data[cols_to_keep]
+    return pub_data[cols_to_keep].rename(columns={'Country': 'country', 'Citable documents': 'Publications'})
 
 
 def plaintext_files_iterator(path = "./data/plaintext_articles/"):
