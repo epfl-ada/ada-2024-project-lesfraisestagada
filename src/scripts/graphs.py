@@ -167,6 +167,10 @@ def geolocalization(df):
             result = get_country_coordinates("Greenland, Kingdom of Denmark")
         elif country == "jordan": 
             result = get_country_coordinates("Jordan, Middle East")
+        elif country == "armenia": 
+            result = get_country_coordinates("Armenia, Caucasus")
+        elif country == "montenegro": 
+            result = get_country_coordinates("Montenegro, Europe")
         else:
             result = get_country_coordinates(country)
 
