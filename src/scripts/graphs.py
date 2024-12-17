@@ -106,7 +106,7 @@ def draw_circle_graph(df, title, out_path, project_path):
     # Add a title into the saved HTML
     with open(out_path, 'r+', encoding="utf-8") as f:
         html = f.read()
-        title_html = f"<h1 style='text-align:center; color:#333;font-size:28px;'>{title}</h1>"
+        title_html = f"<h1 style='text-align:center; color:#333;font-size:18px;'>{title}</h1>"
         # Insert the title just after the <body> tag
         html = html.replace("<body>", f"<body>{title_html}")
         f.seek(0)
@@ -171,6 +171,9 @@ def geolocalization(df):
             result = get_country_coordinates("Armenia, Caucasus")
         elif country == "montenegro": 
             result = get_country_coordinates("Montenegro, Europe")
+        elif country == "albania": 
+            result = get_country_coordinates("Albania, Europe")
+
         else:
             result = get_country_coordinates(country)
 
@@ -197,28 +200,13 @@ def overlap_world_map(df, country_connections, latitudes, longitudes, out_path, 
     """
     # Create a base map centered on an average coordinate (e.g., latitude 0, longitude 0)
     map_center = [0, 0]
-    world_map = folium.Map(location=map_center, zoom_start=2, tiles='cartodbpositron')
+    world_map = folium.Map(location=map_center, zoom_start=0.5, tiles='cartodbpositron')
 
      # define a global color map
     color_map = plt.get_cmap('Reds')
     colors_hex = [matplotlib.colors.to_hex(color_map(element + 100)) for element in df.occurrence.tolist()]
 
     countries = df.Top_1_name.tolist()
-
-    # Add each country node as a CircleMarker with scaled sizes
-    for country, lat, lon, color, size in zip(countries, latitudes, longitudes, colors_hex, df.occurrence.tolist()):
-        folium.CircleMarker(
-            location=[lat, lon],  # Use latitude and longitude
-            radius=size/10,         # Scaled size based on occurrence
-            color=color,
-            fill=True,
-            fill_opacity=0.7,
-            popup=folium.Popup(
-                f"<b>{country}</b><br>{size} articles",
-                max_width=100, 
-                min_width=50
-            )
-        ).add_to(world_map)
 
     # Add a slider for threshold
     slider_html = '''
@@ -255,6 +243,7 @@ def overlap_world_map(df, country_connections, latitudes, longitudes, out_path, 
     # Add the JavaScript to the map
     world_map.get_root().html.add_child(folium.Element(slider_js))
 
+    # add edges
     if edge:
         for i in range(len(country_connections)):
             start_country = country_connections["start_country"].iloc[i]
@@ -278,6 +267,22 @@ def overlap_world_map(df, country_connections, latitudes, longitudes, out_path, 
             except ValueError:
                 print(f"Connection skipped: {start_country} -> {end_country} (one of them not found in countries list)")
 
+
+    # Add each country node as a CircleMarker with scaled sizes
+    for country, lat, lon, color, size in zip(countries, latitudes, longitudes, colors_hex, df.occurrence.tolist()):
+        folium.CircleMarker(
+            location=[lat, lon],  # Use latitude and longitude
+            radius=size/10,         # Scaled size based on occurrence
+            color=color,
+            fill=True,
+            fill_opacity=0.7,
+            popup=folium.Popup(
+                f"<b>{country}</b><br>{size} articles",
+                max_width=100, 
+                min_width=50
+            )
+        ).add_to(world_map)
+
     # Save the combined map to an HTML file
     world_map.save(out_path)
 
@@ -285,7 +290,7 @@ def overlap_world_map(df, country_connections, latitudes, longitudes, out_path, 
 
 
 
-def plot_node_dregrees(df):
+def plot_node_degrees(df):
     """Plot Figure 2 of the website, 2 stakced bar plots representing the in and out degrees of countries
 
     Args:
@@ -345,14 +350,6 @@ def plot_node_dregrees(df):
     # Create buttons to toggle between the two bar charts
     fig.update_layout(
         barmode='stack',
-        title={
-            'text': "Figure 2: Node degree of countries",  # The title text
-            'x': 0.5,  # Center the title horizontally
-            'xanchor': 'center',  # Anchor it to the center
-            'y': 0.97,
-            'yanchor': 'top'  # Anchor it to the top
-        },
-        height=600,
         updatemenus=[
             dict(
                 type="buttons",
