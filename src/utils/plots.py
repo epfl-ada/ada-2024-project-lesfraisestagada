@@ -396,7 +396,6 @@ def plot_articles_before_go_back(before_last_article_analysis, use_scaled=False,
 def plot_color_map(
         df: pd.DataFrame,
         value_column: str,
-        title: str
     ):
     """
     Plot a choropleth map of the number of publications per country.
@@ -409,7 +408,6 @@ def plot_color_map(
     locationmode="country names",  
     color=value_column,  
     color_continuous_scale="Plasma",
-    title=title,
     hover_name="country", 
     hover_data={
         value_column: ":,.0f", 
@@ -422,15 +420,6 @@ def plot_color_map(
             showframe=False,
             showcoastlines=True,
             projection_type='equirectangular'
-        ),
-        title=dict(
-            text=title,
-            font=dict(
-                family="Helvetica Neue, sans-serif", 
-                size=18 
-            ),
-            x=0.5,  # center title
-            y=0.95  # lower title on canvas
         ),
         margin=dict(l=0, r=0, t=50, b=0),
     )
