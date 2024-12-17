@@ -8,6 +8,7 @@ import matplotlib
 import pandas as pd
 import numpy as np
 
+from sklearn.preprocessing import MinMaxScaler
 
 from pyvis.network import Network
 import plotly.graph_objects as go
@@ -370,3 +371,136 @@ def plot_node_degrees(df):
 
     # Export the figure to an HTML file
     pio.write_html(fig, file='graphs/topic_1/bar_plot_distribution_of_degrees.html', auto_open=False)
+
+
+
+def overlap_world_map_clicks_before(out_path, clicks, all_pairs_countries_normalized, countries, latitudes,longitudes):
+    """
+    World map of the click count per country and game path between countries before scaling
+    Args:
+        out_path (path): define the name and path of the output map 
+        clicks (list): list of the click count per country
+        all_pairs_countries_normalized (df): Pandas DataFrame of the number of time that a path between two articles is taken by players
+        countries (list): list of the name of all the countries
+        latitudes (list): first geographical coordinate of each country
+        longitudes (list): second geographical coordinate of each country
+    """
+    # Create a base map centered on (0,0)
+    map_center = [0, 0]
+    world_map = folium.Map(location=map_center, zoom_start=0.5, tiles='cartodbpositron')
+
+    # define size gradient proportional to the click count 
+    size_scaler = MinMaxScaler(feature_range=(min(clicks), max(clicks)))
+    node_sizes = size_scaler.fit_transform([[count] for count in clicks]).flatten()
+
+    # define color gradient for node color
+    color_scaler = MinMaxScaler(feature_range=(0.25, 1.5))
+    normalized_counts = color_scaler.fit_transform([[count] for count in clicks]).flatten()
+    color_map = plt.cm.get_cmap('Purples')
+    colors_hex_before = [matplotlib.colors.to_hex(color_map(norm)) for norm in normalized_counts]
+
+    for one_edge, weight in all_pairs_countries_normalized.items():
+        country_from, country_to = one_edge.split('-> ')
+        
+        # Get coordinates for both countries
+        lon_from = longitudes[countries.index(country_from)]
+        lat_from = latitudes[countries.index(country_from)]
+        lon_to = longitudes[countries.index(country_to)]
+        lat_to = latitudes[countries.index(country_to)]
+        
+        # Create a curved edge trace between the two different countries 
+        if country_from != country_to: 
+            folium.PolyLine(
+                locations=[[lat_from, lon_from], [lat_to, lon_to]], 
+                color='green',
+                weight=2, 
+                opacity=weight*100,
+                interactive = True
+            ).add_to(world_map)
+    
+
+    # Add each country node as a CircleMarker with scaled sizes
+    for country, lat, lon, color, size in zip(countries, latitudes, longitudes, colors_hex_before, node_sizes):
+        folium.CircleMarker(
+            location=[lat, lon],  
+            radius=size/500,
+            color=color,
+            fill=True,
+            fill_opacity=0.7,
+            popup=folium.Popup(
+                f"<b>{country}</b><br>click count: {round(size,2)}",
+                max_width=100, 
+                min_width=50
+            )
+        ).add_to(world_map)
+    
+    # Save the combined map to an HTML file
+    world_map.save(out_path)
+
+    print(f"Map is saved in {out_path}!")
+
+
+def overlap_world_map_clicks_after(out_path, clicks_scaled, all_pairs_countries_normalized, countries, latitudes,longitudes):
+    """
+    World map of the click count per country and game path between countries after scaling by the number of articles
+    Args:
+        out_path (path): define the name and path of the output map 
+        clicks_scaled (list): list of the click count per country divided by the number of article associated with this country
+        all_pairs_countries_normalized (df): Pandas DataFrame of the number of time that a path between two articles is taken by players
+        countries (list): list of the name of all the countries
+        latitudes (list): first geographical coordinate of each country
+        longitudes (list): second geographical coordinate of each country
+    """
+    # Create a base map centered on (0,0))
+    map_center = [0, 0]
+    world_map = folium.Map(location=map_center, zoom_start=0.5, tiles='cartodbpositron')
+
+    # define size gradient proportional to the scaled click count 
+    size_scaler = MinMaxScaler(feature_range=(min(clicks_scaled), max(clicks_scaled)))
+    node_sizes_scaled = size_scaler.fit_transform([[count] for count in clicks_scaled]).flatten()
+
+    # define color gradient for node color
+    color_scaler = MinMaxScaler(feature_range=(0.25, 1.5))
+    normalized_counts = color_scaler.fit_transform([[count] for count in clicks_scaled]).flatten()
+    color_map = plt.cm.get_cmap('Purples')
+    colors_hex_after = [matplotlib.colors.to_hex(color_map(norm)) for norm in normalized_counts]
+
+    for one_edge, weight in all_pairs_countries_normalized.items():
+        country_from, country_to = one_edge.split('-> ')
+        
+        # Get coordinates for both countries
+        lon_from = longitudes[countries.index(country_from)]
+        lat_from = latitudes[countries.index(country_from)]
+        lon_to = longitudes[countries.index(country_to)]
+        lat_to = latitudes[countries.index(country_to)]
+        
+        # Create edge trace between the two countries
+        folium.PolyLine(
+            locations=[[lat_from, lon_from], [lat_to, lon_to]], 
+            color='green',
+            weight=2, 
+            opacity=weight*100,
+            interactive = True
+        ).add_to(world_map)
+    
+
+    # Add each country node as a CircleMarker with scaled sizes
+    for country, lat, lon, color, size in zip(countries, latitudes, longitudes, colors_hex_after, node_sizes_scaled):
+        folium.CircleMarker(
+            location=[lat, lon],  # Use latitude and longitude
+            radius=size/50,         # Scaled size based on occurrence
+            color=color,
+            fill=True,
+            fill_opacity=0.7,
+            popup=folium.Popup(
+                f"<b>{country}</b><br>scaled click count: {round(size,2)}",
+                max_width=100, 
+                min_width=50
+            )
+        ).add_to(world_map)
+
+    
+    # Save the combined map to an HTML file
+    world_map.save(out_path)
+
+    print(f"Map is saved in {out_path}!")
