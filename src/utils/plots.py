@@ -6,6 +6,9 @@ import plotly.express as px
 from ast import literal_eval
 from collections import Counter
 
+import plotly.io as pio
+import plotly.graph_objects as go
+
 
 def plot_res_stats_model(res):
     variables = res.params.index
@@ -432,3 +435,112 @@ def plot_color_map(
     )
 
     return fig
+
+
+def start_end_countries(finished_paths, country_clicks):
+    """Plot the distribution of source and target articles
+
+    Args:
+        finished_paths (dataframe)
+        country_clicks (dataframe)
+    """
+
+    country_clicks.dropna(subset=["Top_1_name"], inplace=True)
+
+    start = []
+    end = []
+    for idx, row in finished_paths.iterrows():
+        start_article = row["path"][0]
+        end_article = row["path"][-1]
+        
+        if start_article != '<' and end_article != '<':
+            try:
+                start_country = country_clicks.loc[start_article]["Top_1_name"]
+                end_country = country_clicks.loc[end_article]["Top_1_name"]
+                
+                start.append(start_country)
+                end.append(end_country)
+            except:
+                pass
+            
+            
+    start_counts = Counter(start)
+    end_counts = Counter(end)
+    
+    start_sorted = sorted(start_counts.items(), key=lambda item: item[1], reverse=True)[:20]
+    start_sorted = pd.DataFrame(start_sorted, 
+                                columns=["country", "count"])
+    
+    end_sorted = sorted(end_counts.items(), key=lambda item: item[1], reverse=True)[:20]
+    end_sorted = pd.DataFrame(end_sorted, 
+                              columns=["country", "count"])
+
+    # Generate a custom color map for each country
+    all_countries = list(set(start_sorted["country"]).union(set(end_sorted["country"])))
+
+    # Use a colormap (e.g., from Matplotlib) to assign unique colors
+    cmap = plt.cm.get_cmap("tab20", len(all_countries)) 
+    country_colors = {country: f"rgba({cmap(i)[0]*255:.0f}, {cmap(i)[1]*255:.0f}, {cmap(i)[2]*255:.0f}, {cmap(i)[3]:.2f})" 
+                    for i, country in enumerate(all_countries)}
+
+    # create bar plot for source countries
+    trace_start = go.Bar(x=start_sorted["country"], 
+                        y=start_sorted["count"],
+                            name="Occurrence in source",
+                            marker_color=[country_colors[country] for country in start_sorted["country"]],
+                            hovertemplate=( "<b>Country:</b> %{x}<br>" 
+                                            "<b>Count:</b> %{y}<br>" 
+                                            "<extra></extra>")    
+                            )
+
+    trace_end = go.Bar(x=end_sorted["country"], 
+                        y=end_sorted["count"],
+                            name="Occurrence in target",
+                            marker_color=[country_colors[country] for country in end_sorted["country"]], 
+                            hovertemplate=( "<b>Country:</b> %{x}<br>" 
+                                            "<b>Count:</b> %{y}<br>" 
+                                            "<extra></extra>")    
+                            )
+
+    # create figures
+    fig = go.Figure()
+
+    # add traces
+    fig.add_trace(trace_start)
+    fig.add_trace(trace_end.update(visible=False))
+
+    y_max = max(start_sorted["count"].max(), end_sorted["count"].max())
+    # Create buttons to toggle between the two bar charts
+    fig.update_layout(
+        yaxis=dict(range=[0, y_max+200]),
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="left",
+                buttons=[
+                    dict(
+                        label="Source countries",
+                        method="update",
+                        args=[{"visible": [True, False]}],  # Show first chart, hide second
+                    ),
+                    dict(
+                        label="Target countries",
+                        method="update",
+                        args=[{"visible": [False, True]}],  # Hide first chart, show second
+                    ),
+                ],
+                pad={"r": 0, "l":0, "t": 20, "b":0},
+                showactive=True,
+                x=0.,
+                xanchor="left",
+                y=1.1,
+                yanchor="middle"
+            ),
+        ]
+    )
+
+    # Show the figure
+    fig.show()
+
+    # Export the figure to an HTML file
+    pio.write_html(fig, file='graphs/topic_1/start_end_countries.html', auto_open=False)
