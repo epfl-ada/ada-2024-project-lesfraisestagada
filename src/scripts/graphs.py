@@ -504,3 +504,65 @@ def overlap_world_map_clicks_after(out_path, clicks_scaled, all_pairs_countries_
     world_map.save(out_path)
 
     print(f"Map is saved in {out_path}!")
+
+
+def plot_start_stop_count(df_top_start, df_top_stop):
+    """
+    Plot the start and stop articles counts for the top 10 countries
+
+    Args:
+        df_top_start (dataframe): data containing the start and stop articles count (sorted by start articles count) for the top 10 countries
+        df_top_stop (dataframe): data containing the start and stop articles count (sorted by stop articles count) for the top 10 countries
+    """
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Bar(
+        x=df_top_start['country'],
+        y=df_top_start['start'],
+        name='Start Articles',
+        marker_color='#1f77b4'
+    ))
+
+    fig.add_trace(go.Bar(
+        x=df_top_start['country'],
+        y=df_top_start['stop'],
+        name='Stop Articles',
+        marker_color='#ff7f0e'
+    ))
+
+    fig.update_layout(
+        xaxis_title="Country",
+        yaxis_title="Count",
+        barmode='group',
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="left",
+                buttons=[
+                    dict(
+                        label="Sort by Start",
+                        method="update",
+                        args=[
+                            {"x": [df_top_start['country'], df_top_start['country']],
+                            "y": [df_top_start['start'], df_top_start['stop']]},
+                        ]
+                    ),
+                    dict(
+                        label="Sort by Stop",
+                        method="update",
+                        args=[
+                            {"x": [df_top_stop['country'], df_top_stop['country']],
+                            "y": [df_top_stop['start'], df_top_stop['stop']]}
+                        ]
+                    )
+                ],
+                showactive=True,
+                x=0.9,
+                y=1.1
+            )
+        ],
+        height=600,
+        width=800
+    )
+    fig.show()
