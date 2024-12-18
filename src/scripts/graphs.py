@@ -390,7 +390,7 @@ def overlap_world_map_clicks_before(out_path, clicks, all_pairs_countries_normal
     world_map = folium.Map(location=map_center, zoom_start=0.5, tiles='cartodbpositron')
 
     # define size gradient proportional to the click count 
-    size_scaler = MinMaxScaler(feature_range=(min(clicks), max(clicks)))
+    size_scaler = MinMaxScaler(feature_range=(0.0001, max(clicks)))
     node_sizes = size_scaler.fit_transform([[count] for count in clicks]).flatten()
 
     # define color gradient for node color
@@ -456,7 +456,7 @@ def overlap_world_map_clicks_after(out_path, clicks_scaled, all_pairs_countries_
     world_map = folium.Map(location=map_center, zoom_start=0.5, tiles='cartodbpositron')
 
     # define size gradient proportional to the scaled click count 
-    size_scaler = MinMaxScaler(feature_range=(min(clicks_scaled), max(clicks_scaled)))
+    size_scaler = MinMaxScaler(feature_range=(0.0001, max(clicks_scaled)))
     node_sizes_scaled = size_scaler.fit_transform([[count] for count in clicks_scaled]).flatten()
 
     # define color gradient for node color
@@ -494,6 +494,54 @@ def overlap_world_map_clicks_after(out_path, clicks_scaled, all_pairs_countries_
             fill_opacity=0.7,
             popup=folium.Popup(
                 f"<b>{country}</b><br>scaled click count: {round(size,2)}",
+                max_width=100, 
+                min_width=50
+            )
+        ).add_to(world_map)
+
+    
+    # Save the combined map to an HTML file
+    world_map.save(out_path)
+
+    print(f"Map is saved in {out_path}!")
+
+
+def overlap_world_map_normalized_clicks(out_path, clicks_normalized, countries, latitudes,longitudes):
+    """
+    World map of the click count per country and game path between countries after scaling by the number of articles
+    Args:
+        out_path (path): define the name and path of the output map 
+        clicks_normalized (list): list of the click count per country divided by the number of links in for every article associated with this country
+        countries (list): list of the name of all the countries
+        latitudes (list): first geographical coordinate of each country
+        longitudes (list): second geographical coordinate of each country
+    """
+    # Create a base map centered on (0,0))
+    map_center = [0, 0]
+    world_map = folium.Map(location=map_center, zoom_start=0.5, tiles='cartodbpositron')
+
+    # define size gradient proportional to the scaled click count 
+    size_scaler = MinMaxScaler(feature_range=(0.0001, max(clicks_normalized)))
+    node_sizes_norm = size_scaler.fit_transform([[count] for count in clicks_normalized]).flatten()
+
+    # define color gradient for node color
+    color_scaler = MinMaxScaler(feature_range=(0,1))
+    normalized_counts = color_scaler.fit_transform([[count] for count in clicks_normalized]).flatten()
+    color_map = plt.cm.get_cmap('Oranges')
+    colors_hex_norm = [matplotlib.colors.to_hex(color_map(norm)) for norm in normalized_counts]
+
+    # Add each country node as a CircleMarker with scaled sizes
+    for country, lat, lon, color, size in zip(countries, latitudes, longitudes, colors_hex_norm, node_sizes_norm):
+        folium.CircleMarker(
+            location=[lat, lon],  
+            radius=size*3,      
+            color=color,
+            fill=True,
+            fill_opacity=0.7,
+            opacity=0.8,
+            weight=1,
+            popup=folium.Popup(
+                f"<b>{country}</b><br>normalized click count: {round(size,2)}",
                 max_width=100, 
                 min_width=50
             )
