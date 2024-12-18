@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import plotly.express as px
-import scipy
 from ast import literal_eval
 from collections import Counter
 
