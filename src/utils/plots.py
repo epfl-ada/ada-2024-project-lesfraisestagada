@@ -5,6 +5,8 @@ import seaborn as sns
 import plotly.express as px
 from ast import literal_eval
 from collections import Counter
+from src.scripts.article_to_country import *
+from itertools import combinations
 
 import plotly.io as pio
 import plotly.graph_objects as go
@@ -700,3 +702,182 @@ def start_end_countries(finished_paths, country_clicks):
 
     # Export the figure to an HTML file
     pio.write_html(fig, file='graphs/topic_1/start_end_countries.html', auto_open=False)
+
+
+
+def show_country_assignments(write = False):
+    """Show the proportion of articles assigned to a country by different classification methods.
+
+    Args:
+        write (bool, optional): If the new plot should be written to disk. Defaults to False.
+
+    Returns:
+        results, data: dictionnary containing the results of the classification methods and the dataframes of the different classification methods
+    """
+    results = {}
+    data = {}
+    country_data = pd.read_csv('data/country_data.csv', index_col=0)
+    counts = filter_top_k(country_data, k=2, N=1)
+    total_number_of_articles = len(counts)
+
+    nan_df = counts[counts.isna().all(axis=1)]
+    print(f"Number of articles with no countries before completion with llama: {len(nan_df)}")
+    results["Text search"] = (total_number_of_articles - len(nan_df)) / total_number_of_articles * 100
+
+    refined_data = pd.read_csv("data/country_occurences.csv", index_col=0)
+    nan_df = refined_data[refined_data.isna().all(axis=1)]
+    print(f"Number of articles with no countries after completion with naive + llama: {len(nan_df)}")
+    results["Text search + missing articles classified with LlaMa"] = (total_number_of_articles - len(nan_df)) / total_number_of_articles * 100
+
+    qwen_country_data = pd.read_csv('data/country_data_full_qwen.csv', index_col=0)
+    qwen_missing = len(qwen_country_data[qwen_country_data["Top_1_name"].isna()])
+    print(f"Number of articles with no countries after completion with Qwen: {qwen_missing}")
+    results["Full classification with Qwen"] = (total_number_of_articles - qwen_missing) / total_number_of_articles * 100
+
+
+    llama_country_data = pd.read_csv('data/country_data_full_llama.csv', index_col=0)
+    llama_missing = len(llama_country_data[llama_country_data["Top_1_name"].isna()])
+    print(f"Number of articles with no countries after completion with LLAMA: {llama_missing}")
+    results["Full classification with LLaMa"] = (total_number_of_articles - llama_missing) / total_number_of_articles * 100
+
+    llama_country_data_imporved_normal = pd.read_csv('data/country_data_full_llama_improved_normal.csv', index_col=0)
+    llama_country_data_imporved_reversed = pd.read_csv('data/country_data_full_llama_improved_reversed.csv', index_col=0)
+
+    llama_country_data_imporved = pd.read_csv('data/country_data_full_llama_improved_reversed.csv', index_col=0)
+
+    llama_country_data_imporved_normal["Top_1_name"] = llama_country_data_imporved_normal["Top_1_name"].where(llama_country_data_imporved_normal['Top_1_name'] == llama_country_data_imporved_reversed['Top_1_name'], np.nan)
+    llama_country_data_imporved = llama_country_data_imporved_normal
+    llama_missing_improved = len(llama_country_data_imporved[llama_country_data_imporved["Top_1_name"].isna()])
+    print(f"Number of articles with no countries after completion with LLAMA: {llama_missing_improved}")
+    results["Improved classification with LLaMa"] = (total_number_of_articles - llama_missing_improved) / total_number_of_articles * 100
+    llama_country_data_imporved.drop(columns=["Predictions"], inplace=True)
+    llama_country_data_imporved.to_csv('data/country_data_full_llama_improved.csv')
+
+    fig = px.bar(x=results.keys(), y=results.values(), color=results.keys(), labels={"x": "Classification Method", "y": "% of articles assigned to a country"})
+    fig.update_layout(title="Proportion of articles assigned to a country") #legend is not shown since we want to write it directly on the website in HTML for better readability
+    fig.update_xaxes(showticklabels=False)  # Remove x-axis tick labels
+    fig.update_yaxes(range=[0, 100])
+    fig.show()
+    
+    if write:
+        fig.write_html("./graphs/preprocessing/proportion_country_assignment.html")
+    
+    data["Text search"] = counts
+    data["Text search + missing articles classified with LlaMa"] = refined_data
+    data["Full classification with Qwen"] = qwen_country_data
+    data["Full classification with LLaMa"] = llama_country_data
+    data["Improved classification with LLaMa"] = llama_country_data_imporved
+    
+    return results, data
+
+
+def show_overlap_heatmap(data, write=False):
+    """Show the overlap between classification methods as a heatmap.
+
+    Args:
+        data (dictionnary): dictionnary containing the dataframes of the different classification methods
+        write (bool, optional): If the new plot should be written to disk. Defaults to False.
+    """
+    
+    models = {
+        "Text search": data["Text search"],
+        "Text search + missing articles classified with LlaMa": data["Text search + missing articles classified with LlaMa"],
+        "Full classification with Qwen": data["Full classification with Qwen"],
+        "Full classification with LLaMa": data["Full classification with LLaMa"],
+        "Improved classification with LLaMa": data["Improved classification with LLaMa"],
+    }
+
+    heatmap_data = pd.DataFrame(index=models.keys(), columns=models.keys())
+
+    for model in models.keys():
+        heatmap_data.loc[model, model] = 1.0
+
+    for model1, model2 in combinations(models.keys(), 2):
+        df_1 = models[model1]
+        df_2 = models[model2]
+        overlap = (df_1["Top_1_name"] == df_2["Top_1_name"]).sum() / len(data["Text search"])
+        heatmap_data.loc[model2, model1] = overlap.round(2)
+
+    heatmap_data = heatmap_data.astype(float)
+
+    # Replace row and column names with indices
+    model_names = list(models.keys())
+    index_to_name = {i: name for i, name in enumerate(model_names)}  # Create legend mapping
+
+    # Create heatmap with indices
+    heatmap_data.index = range(len(model_names))
+    heatmap_data.columns = range(len(model_names))
+
+    # Generate the heatmap
+    fig = px.imshow(
+        heatmap_data.values,
+        labels={"x": "Index", "y": "Index", "color": "Overlap"},
+        x=heatmap_data.columns,
+        y=heatmap_data.index,
+        color_continuous_scale="Blues",
+        text_auto=True,
+    )
+
+    fig.update_layout(
+        title="Overlap percentage between classification methods",
+        xaxis_title="Classification Method Index",
+        yaxis_title="Classification Method Index",
+        coloraxis_colorbar=dict(title="Overlap"),
+    )
+
+    fig.update_xaxes(dtick=1)  # Force x-axis to show every tick
+    fig.update_yaxes(dtick=1)  # Force y-axis to show every tick
+    fig.update_layout(coloraxis_showscale=False)  # Hide the color scale
+
+    # Display legend associating indices to model names
+    legend_text = "<br>".join([f"{i}: {name}" for i, name in index_to_name.items()])
+    fig.add_annotation(
+        text=f"<b>Legend:</b><br>{legend_text}",
+        xref="paper", yref="paper",
+        x=0.0, y=0.5,
+        showarrow=False,
+        align="left",
+        font=dict(size=12)
+    )
+
+    fig.show()
+    if write:
+        fig.write_html("./graphs/preprocessing/overlap_heatmap.html")
+
+
+
+def show_agreement_plot(data, agreement_df, write = False):
+    """Show the agreement between annotators and classification methods as a bar plot.
+
+    Args:
+        data (dictionnary): dictionnary containing the dataframes of the different classification methods
+        agreement_df (dataframe): dataframe containing the agreement between annotators so that it can be compared to the classification methods
+        write (bool, optional): If the new plot should be written to disk. Defaults to False.
+    """
+    models = {
+        "Text search": data["Text search"],
+        "Text search + missing articles classified with LlaMa": data["Text search + missing articles classified with LlaMa"],
+        "Full classification with Qwen": data["Full classification with Qwen"],
+        "Full classification with LLaMa": data["Full classification with LLaMa"],
+        "Improved classification with LLaMa": data["Improved classification with LLaMa"],
+    }
+
+    values = []
+    for model in models.keys():
+        agreement_value = (models[model].loc[agreement_df.index]["Top_1_name"].str.lower().fillna("nan") == agreement_df["country"].str.lower().fillna("nan")).sum() / len(agreement_df) * 100
+        values.append(agreement_value)
+        
+    fig = px.bar(
+        x=models.keys(), 
+        y=values, 
+        color=models.keys(),
+        title="Agreement between annotators and classification method in %", 
+        labels={"x": "Classification Method", "y": "Agreement value in %"}
+        )
+    fig.update_xaxes(showticklabels=False)  # Remove x-axis tick labels
+
+    fig.update_yaxes(range=[0, 100])
+    fig.show()
+
+    if write:
+        fig.write_html("./graphs/preprocessing/agreement_bar_plot.html")

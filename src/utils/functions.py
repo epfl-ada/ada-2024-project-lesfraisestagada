@@ -3,6 +3,7 @@ import networkx as nx
 
 from itertools import chain
 from collections import Counter
+from country_list import countries_for_language
 
 from src.data.dataloader import *
 
@@ -336,6 +337,228 @@ def analyze_last_articles_in_unfinished_paths(unfinished_paths, unique_dead_end_
 
     return last_dead_end_countries
 
+
+def generate_annotations_and_show_agreement(data, write = False, write_agreement = False):
+    articles = pd.DataFrame(data["Text search"].index)
+
+    subset_1 = articles.sample(10, random_state=0).values.flatten().tolist()
+    subset_2 = articles.sample(10, random_state=1).values.flatten().tolist()
+    subset_3 = articles.sample(10, random_state=2).values.flatten().tolist()
+    subset_4 = articles.sample(10, random_state=3).values.flatten().tolist()
+    subset_5 = articles.sample(10, random_state=4).values.flatten().tolist()
+    subset_6 = articles.sample(10, random_state=5).values.flatten().tolist()
+
+    claire = subset_1 + subset_3
+    theo = subset_2 + subset_4
+    oriane = subset_1 + subset_4
+    bryan = subset_2 + subset_5
+    jeremy = subset_3 + subset_5
+
+    claire = pd.DataFrame(index=claire, columns=["country"])
+    theo = pd.DataFrame(index=theo, columns=["country"])
+    oriane = pd.DataFrame(index=oriane, columns=["country"])
+    bryan= pd.DataFrame(index=bryan, columns=["country"])
+    jeremy = pd.DataFrame(index=jeremy, columns=["country"])
+
+    if write :
+        pd.DataFrame(claire).to_csv("claire.csv")
+        pd.DataFrame(theo).to_csv("theo.csv")
+        pd.DataFrame(oriane).to_csv("oriane.csv")
+        pd.DataFrame(bryan).to_csv("bryan.csv")
+        pd.DataFrame(jeremy).to_csv("jeremy.csv")
+
+        countries = list(dict(countries_for_language('en')).values())
+        pd.DataFrame(countries).to_csv("countries.csv")
+
+    annotation_path = "./data/annotated/"
+
+    claire = pd.read_csv(annotation_path + "subset_claire.csv", index_col=0, na_values="None")
+    theo = pd.read_csv(annotation_path + "subset_theo.csv", index_col=0, na_values="None")
+    oriane = pd.read_csv(annotation_path + "subset_oriane.csv", index_col=0, na_values="None")
+    bryan = pd.read_csv(annotation_path + "subset_bryan.csv", index_col=0, na_values="None")
+    jeremy = pd.read_csv(annotation_path + "subset_jeremy.csv", index_col=0, na_values="None")
+
+    subset_1_c = claire[:10]
+    subset_3_c = claire[10:]
+
+    subset_2_t = theo[:10]
+    subset_4_t = theo[10:]
+
+    subset_1_o = oriane[:10]
+    subset_4_o = oriane[10:]
+
+    subset_2_b = bryan[:10]
+    subset_5_b = bryan[10:]
+
+    subset_3_j = jeremy[:10]
+    subset_5_j = jeremy[10:]
+
+    comparison1 = subset_1_c["country"].str.lower().fillna("nan") == subset_1_o["country"].str.lower().fillna("nan")
+    print(f"Agreement between Claire and Oriane: {comparison1.sum() * 10}%")
+    comparison2 = subset_2_t["country"].str.lower().fillna("nan") == subset_2_b["country"].str.lower().fillna("nan")
+    print(f"Agreement between Theo and Bryan: {comparison2.sum() * 10}%")
+    comparison3 = subset_3_c["country"].str.lower().fillna("nan") == subset_3_j["country"].str.lower().fillna("nan")
+    print(f"Agreement between Claire and Jeremy: {comparison3.sum() * 10}%")
+    comparison4 = subset_4_t["country"].str.lower().fillna("nan") == subset_4_o["country"].str.lower().fillna("nan")
+    print(f"Agreement between Theo and Oriane: {comparison4.sum() * 10}%")
+    comparison5 = subset_5_b["country"].str.lower().fillna("nan") == subset_5_j["country"].str.lower().fillna("nan")
+    print(f"Agreement between Bryan and Jeremy: {comparison5.sum() * 10}%")
+
+    agreement_df = pd.concat([
+        subset_1_c.loc[comparison1],
+        subset_2_b.loc[comparison2],
+        subset_3_c.loc[comparison3],
+        subset_4_t.loc[comparison4],
+        subset_5_b.loc[comparison5]
+    ], ignore_index=False)
+
+    if write:
+        agreement_df.to_csv("data/annotated/consensus.csv")
+
+    if write_agreement:
+        print(data["Improved classification with LLaMa"].loc[agreement_df.index]["Top_1_name"].str.lower().fillna("nan"))
+        
+    return agreement_df
+
+
+def normalize_clicks():
+    """Computes the normalization of click counts of each country as described in part 5 of the notebook"""
+    articles = pd.read_csv("data/country_clicks_links.csv", index_col=0).reset_index().rename(columns={'index': 'article'})
+    countries_links_in = articles[['Top_1_name', 'num_links_in']].groupby('Top_1_name').agg('sum')
+    countries_clicks = articles[['Top_1_name', 'click_count']].groupby('Top_1_name').agg('sum')
+    countries = pd.concat([countries_links_in, countries_clicks], axis=1)
+    countries['click_count_normalized'] = countries['click_count'] / countries['num_links_in']
+    countries = countries.reset_index()
+
+    return countries
+
+def compute_player_frequencies():
+    """Compute the players rank as described in PageRank analysis (part 5 of notebook)"""
+    df_player_frequencies = pd.read_csv("data/country_clicks_links.csv", index_col=0)
+    df_player_frequencies['rank'] = df_player_frequencies.click_count / df_player_frequencies.click_count.sum()
+    df_player_frequencies.index.name = 'article_name'
+    df_player_frequencies.reset_index(inplace=True)
+    df_player_frequencies.sort_values(by='rank', ascending=False, inplace=True, ignore_index=True)
+    df_player_frequencies = df_player_frequencies[['article_name', 'rank']]
+
+    return df_player_frequencies
+
+def aggregate_ranks_by_country(
+    df_ranks
+):
+    """Aggregate player ranks and PageRanks by country as described PageRank analysis (part 5 of notebook)"""
+
+    df_ranks = df_ranks[['country_name', 'rank']].groupby(['country_name'], as_index=False).sum()
+
+    return df_ranks
+
+def rank_diff(
+    df_pagerank,
+    df_player_frequencies
+):
+    """Computing rank difference between players rank and PageRank (part 5 of notebook)"""
+
+    rank_v_freq_2_columns = pd.merge(df_pagerank[['article_name', 'rank']], df_player_frequencies[['country_name', 'article_name', 'rank']], on='article_name', suffixes=('_pagerank', '_players'), how='right')
+    rank_v_freq_2_columns = rank_v_freq_2_columns.fillna({'rank_pagerank': 0}) # fill missing pagerank values (those where isolated articles that were not added to the graph, they all have click_count 0 anyway and the pagerank should be 0 too)
+    rank_v_freq_2_columns['rank_diff'] = rank_v_freq_2_columns['rank_players'] - rank_v_freq_2_columns['rank_pagerank']
+    rank_v_freq_2_columns.sort_values(by='rank_pagerank', inplace=True, ignore_index=True, ascending=False)
+    rank_v_freq_countries = rank_v_freq_2_columns.drop(columns=['article_name']).groupby('country_name', as_index=False, dropna=False).sum()
+    rank_v_freq_countries.sort_values(by='rank_pagerank', inplace=True, ignore_index=True, ascending=False)
+    
+    return rank_v_freq_countries
+
+
+def generate_annotations_and_show_agreement(data, write = False, write_agreement = False):
+    """Generate annotations and show agreement between annotators
+
+    Args:
+        data (dictionnary): dictionary containing the data of the different country annotation methods
+        write (bool, optional): If the agreement csv should be saved. Defaults to False.
+        write_agreement (bool, optional): If the agreement dataframe should be printed. Defaults to False.
+
+    Returns:
+        _type_: _description_
+    """
+    articles = pd.DataFrame(data["Text search"].index)
+
+    subset_1 = articles.sample(10, random_state=0).values.flatten().tolist()
+    subset_2 = articles.sample(10, random_state=1).values.flatten().tolist()
+    subset_3 = articles.sample(10, random_state=2).values.flatten().tolist()
+    subset_4 = articles.sample(10, random_state=3).values.flatten().tolist()
+    subset_5 = articles.sample(10, random_state=4).values.flatten().tolist()
+    subset_6 = articles.sample(10, random_state=5).values.flatten().tolist()
+
+    claire = subset_1 + subset_3
+    theo = subset_2 + subset_4
+    oriane = subset_1 + subset_4
+    bryan = subset_2 + subset_5
+    jeremy = subset_3 + subset_5
+
+    claire = pd.DataFrame(index=claire, columns=["country"])
+    theo = pd.DataFrame(index=theo, columns=["country"])
+    oriane = pd.DataFrame(index=oriane, columns=["country"])
+    bryan= pd.DataFrame(index=bryan, columns=["country"])
+    jeremy = pd.DataFrame(index=jeremy, columns=["country"])
+
+    if write :
+        pd.DataFrame(claire).to_csv("claire.csv")
+        pd.DataFrame(theo).to_csv("theo.csv")
+        pd.DataFrame(oriane).to_csv("oriane.csv")
+        pd.DataFrame(bryan).to_csv("bryan.csv")
+        pd.DataFrame(jeremy).to_csv("jeremy.csv")
+
+        countries = list(dict(countries_for_language('en')).values())
+        pd.DataFrame(countries).to_csv("countries.csv")
+
+    annotation_path = "./data/annotated/"
+
+    claire = pd.read_csv(annotation_path + "subset_claire.csv", index_col=0, na_values="None")
+    theo = pd.read_csv(annotation_path + "subset_theo.csv", index_col=0, na_values="None")
+    oriane = pd.read_csv(annotation_path + "subset_oriane.csv", index_col=0, na_values="None")
+    bryan = pd.read_csv(annotation_path + "subset_bryan.csv", index_col=0, na_values="None")
+    jeremy = pd.read_csv(annotation_path + "subset_jeremy.csv", index_col=0, na_values="None")
+
+    subset_1_c = claire[:10]
+    subset_3_c = claire[10:]
+
+    subset_2_t = theo[:10]
+    subset_4_t = theo[10:]
+
+    subset_1_o = oriane[:10]
+    subset_4_o = oriane[10:]
+
+    subset_2_b = bryan[:10]
+    subset_5_b = bryan[10:]
+
+    subset_3_j = jeremy[:10]
+    subset_5_j = jeremy[10:]
+
+    comparison1 = subset_1_c["country"].str.lower().fillna("nan") == subset_1_o["country"].str.lower().fillna("nan")
+    print(f"Agreement between Claire and Oriane: {comparison1.sum() * 10}%")
+    comparison2 = subset_2_t["country"].str.lower().fillna("nan") == subset_2_b["country"].str.lower().fillna("nan")
+    print(f"Agreement between Theo and Bryan: {comparison2.sum() * 10}%")
+    comparison3 = subset_3_c["country"].str.lower().fillna("nan") == subset_3_j["country"].str.lower().fillna("nan")
+    print(f"Agreement between Claire and Jeremy: {comparison3.sum() * 10}%")
+    comparison4 = subset_4_t["country"].str.lower().fillna("nan") == subset_4_o["country"].str.lower().fillna("nan")
+    print(f"Agreement between Theo and Oriane: {comparison4.sum() * 10}%")
+    comparison5 = subset_5_b["country"].str.lower().fillna("nan") == subset_5_j["country"].str.lower().fillna("nan")
+    print(f"Agreement between Bryan and Jeremy: {comparison5.sum() * 10}%")
+
+    agreement_df = pd.concat([
+        subset_1_c.loc[comparison1],
+        subset_2_b.loc[comparison2],
+        subset_3_c.loc[comparison3],
+        subset_4_t.loc[comparison4],
+        subset_5_b.loc[comparison5]
+    ], ignore_index=False)
+
+    if write:
+        agreement_df.to_csv("data/annotated/consensus.csv")
+
+    if write_agreement:
+        print(data["Improved classification with LLaMa"].loc[agreement_df.index]["Top_1_name"].str.lower().fillna("nan"))
+        
+    return agreement_df
 def normalize_clicks():
     """Computes the normalization of click counts of each country as described in part 5 of the notebook"""
     articles = pd.read_csv("data/country_clicks_links.csv", index_col=0).reset_index().rename(columns={'index': 'article'})
