@@ -566,6 +566,7 @@ def plot_start_stop_count(df_top_start, df_top_stop):
 
     fig = go.Figure()
 
+    # Add traces for start and stop articles
     fig.add_trace(go.Bar(
         x=df_top_start['country'],
         y=df_top_start['start'],
@@ -580,6 +581,7 @@ def plot_start_stop_count(df_top_start, df_top_stop):
         marker_color='#ff7f0e'
     ))
 
+    # Update layout
     fig.update_layout(
         xaxis_title="Country",
         yaxis_title="Count",
@@ -588,13 +590,17 @@ def plot_start_stop_count(df_top_start, df_top_stop):
             dict(
                 type="buttons",
                 direction="left",
+                x=0.5,  # Center the buttons horizontally
+                y=1.15,  # Position the buttons above the graph
+                xanchor="center",
+                yanchor="bottom",
                 buttons=[
                     dict(
                         label="Sort by Start",
                         method="update",
                         args=[
                             {"x": [df_top_start['country'], df_top_start['country']],
-                            "y": [df_top_start['start'], df_top_start['stop']]},
+                             "y": [df_top_start['start'], df_top_start['stop']]},
                         ]
                     ),
                     dict(
@@ -602,16 +608,116 @@ def plot_start_stop_count(df_top_start, df_top_stop):
                         method="update",
                         args=[
                             {"x": [df_top_stop['country'], df_top_stop['country']],
-                            "y": [df_top_stop['start'], df_top_stop['stop']]}
+                             "y": [df_top_stop['start'], df_top_stop['stop']]},
                         ]
                     )
                 ],
                 showactive=True,
-                x=0.9,
-                y=1.1
             )
         ],
         height=600,
-        width=800
+        width=800,
+        title_x=0.5,  # Center the plot title
+        margin=dict(l=50, r=50, t=100, b=50)  # Add padding around the plot
     )
+
+    # Save to HTML and display
+    fig.write_html("graphs/topic_1/start_stop_count.html")
+    fig.show()
+
+
+    # don't add title to the plot, will be added as html
+# TITLE = "Top Country-Related Dead-End Articles (Before/After Scaling)"
+def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
+    """
+    Plots the top country-related dead-end articles with an interactive button
+    to switch between before scaling and after scaling (scaled click counts).
+    
+    Args:
+        unique_dead_end_countries (pd.DataFrame): DataFrame containing dead-end 
+                                                  country-related articles with click counts and link information.
+        top_n (int): Number of top articles to display (default is 10).
+    """
+    # get the top N data for both "before scaling" and "after scaling"
+    top_before_scaling = unique_dead_end_countries.sort_values(
+        by="click_count", ascending=False
+    ).head(top_n)
+    top_after_scaling = unique_dead_end_countries.sort_values(
+        by="scaled_click_count", ascending=False
+    ).head(top_n)
+    
+    # get global min and max for "Sum Links Out" across both datasets
+    global_min = unique_dead_end_countries["sum_num_links_out"].min()
+    global_max = unique_dead_end_countries["sum_num_links_out"].max()
+    
+    # create traces for before scaling
+    trace_before = go.Bar(
+        x=top_before_scaling["click_count"],
+        y=top_before_scaling["Top_1_name"],
+        orientation="h",
+        marker=dict(
+            color=top_before_scaling["sum_num_links_out"], 
+            colorscale="Viridis", 
+            cmin=global_min,
+            cmax=global_max,
+            colorbar=dict(title="Sum Links Out", x=1.02),  
+        ),
+        name="Before Scaling",
+    )
+
+    trace_after = go.Bar(
+        x=top_after_scaling["scaled_click_count"],
+        y=top_after_scaling["Top_1_name"],
+        orientation="h",
+        marker=dict(
+            color=top_after_scaling["sum_num_links_out"], 
+            colorscale="Viridis",
+            cmin=global_min,
+            cmax=global_max,
+            colorbar=dict(title="Sum Links Out", x=1.02),
+        ),
+        name="After Scaling",
+    )
+
+    layout = go.Layout(
+        xaxis=dict(title="Click Count"),
+        yaxis=dict(title="Country"),
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="left",
+                x=0.7,
+                y=1.2,
+                showactive=True,
+                buttons=[
+                    dict(
+                        label="Before Scaling",
+                        method="update",
+                        args=[
+                            {"visible": [True, False]},
+                            {"xaxis.title.text": "Click Count"}  # Show first trace
+                        ],
+                    ),
+                    dict(
+                        label="After Scaling",
+                        method="update",
+                        args=[
+                            {"visible": [False, True]},
+                            {"xaxis.title.text": "Scaled Click Count by Sum Links Out"}  # Show second trace
+                        ],
+                    ),
+                ],
+            )
+        ],
+    )
+
+    # combine traces
+    fig = go.Figure(data=[trace_before, trace_after], layout=layout)
+
+    # initially set visibility
+    fig.data[0].visible = True  # Before scaling
+    fig.data[1].visible = False  # After scaling
+
+    fig.write_html('graphs/top_country_dead_end_articles.html')
+   
     fig.show()
