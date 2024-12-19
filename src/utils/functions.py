@@ -3,6 +3,7 @@ import networkx as nx
 
 from itertools import chain
 from collections import Counter
+from country_list import countries_for_language
 
 from src.data.dataloader import *
 
@@ -335,3 +336,86 @@ def analyze_last_articles_in_unfinished_paths(unfinished_paths, unique_dead_end_
     )
 
     return last_dead_end_countries
+
+
+def generate_annotations_and_show_agreement(data, write = False, write_agreement = False):
+    articles = pd.DataFrame(data["Text search"].index)
+
+    subset_1 = articles.sample(10, random_state=0).values.flatten().tolist()
+    subset_2 = articles.sample(10, random_state=1).values.flatten().tolist()
+    subset_3 = articles.sample(10, random_state=2).values.flatten().tolist()
+    subset_4 = articles.sample(10, random_state=3).values.flatten().tolist()
+    subset_5 = articles.sample(10, random_state=4).values.flatten().tolist()
+    subset_6 = articles.sample(10, random_state=5).values.flatten().tolist()
+
+    claire = subset_1 + subset_3
+    theo = subset_2 + subset_4
+    oriane = subset_1 + subset_4
+    bryan = subset_2 + subset_5
+    jeremy = subset_3 + subset_5
+
+    claire = pd.DataFrame(index=claire, columns=["country"])
+    theo = pd.DataFrame(index=theo, columns=["country"])
+    oriane = pd.DataFrame(index=oriane, columns=["country"])
+    bryan= pd.DataFrame(index=bryan, columns=["country"])
+    jeremy = pd.DataFrame(index=jeremy, columns=["country"])
+
+    if write :
+        pd.DataFrame(claire).to_csv("claire.csv")
+        pd.DataFrame(theo).to_csv("theo.csv")
+        pd.DataFrame(oriane).to_csv("oriane.csv")
+        pd.DataFrame(bryan).to_csv("bryan.csv")
+        pd.DataFrame(jeremy).to_csv("jeremy.csv")
+
+        countries = list(dict(countries_for_language('en')).values())
+        pd.DataFrame(countries).to_csv("countries.csv")
+
+    annotation_path = "./data/annotated/"
+
+    claire = pd.read_csv(annotation_path + "subset_claire.csv", index_col=0, na_values="None")
+    theo = pd.read_csv(annotation_path + "subset_theo.csv", index_col=0, na_values="None")
+    oriane = pd.read_csv(annotation_path + "subset_oriane.csv", index_col=0, na_values="None")
+    bryan = pd.read_csv(annotation_path + "subset_bryan.csv", index_col=0, na_values="None")
+    jeremy = pd.read_csv(annotation_path + "subset_jeremy.csv", index_col=0, na_values="None")
+
+    subset_1_c = claire[:10]
+    subset_3_c = claire[10:]
+
+    subset_2_t = theo[:10]
+    subset_4_t = theo[10:]
+
+    subset_1_o = oriane[:10]
+    subset_4_o = oriane[10:]
+
+    subset_2_b = bryan[:10]
+    subset_5_b = bryan[10:]
+
+    subset_3_j = jeremy[:10]
+    subset_5_j = jeremy[10:]
+
+    comparison1 = subset_1_c["country"].str.lower().fillna("nan") == subset_1_o["country"].str.lower().fillna("nan")
+    print(f"Agreement between Claire and Oriane: {comparison1.sum() * 10}%")
+    comparison2 = subset_2_t["country"].str.lower().fillna("nan") == subset_2_b["country"].str.lower().fillna("nan")
+    print(f"Agreement between Theo and Bryan: {comparison2.sum() * 10}%")
+    comparison3 = subset_3_c["country"].str.lower().fillna("nan") == subset_3_j["country"].str.lower().fillna("nan")
+    print(f"Agreement between Claire and Jeremy: {comparison3.sum() * 10}%")
+    comparison4 = subset_4_t["country"].str.lower().fillna("nan") == subset_4_o["country"].str.lower().fillna("nan")
+    print(f"Agreement between Theo and Oriane: {comparison4.sum() * 10}%")
+    comparison5 = subset_5_b["country"].str.lower().fillna("nan") == subset_5_j["country"].str.lower().fillna("nan")
+    print(f"Agreement between Bryan and Jeremy: {comparison5.sum() * 10}%")
+
+    agreement_df = pd.concat([
+        subset_1_c.loc[comparison1],
+        subset_2_b.loc[comparison2],
+        subset_3_c.loc[comparison3],
+        subset_4_t.loc[comparison4],
+        subset_5_b.loc[comparison5]
+    ], ignore_index=False)
+
+    if write:
+        agreement_df.to_csv("data/annotated/consensus.csv")
+
+    if write_agreement:
+        print(data["Improved classification with LLaMa"].loc[agreement_df.index]["Top_1_name"].str.lower().fillna("nan"))
+        
+    return agreement_df
