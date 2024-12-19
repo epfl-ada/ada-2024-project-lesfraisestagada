@@ -11,6 +11,8 @@ For this, we will compare two hypotheses, namely the “passive” and the “ac
 ## Data
 The articles that we will use have been borrowed from a 4,600-article version of Wikipedia that was once available at the 2007 Wikipedia Selection for schools. We have the content of the articles (*data/plaintext_articles*) as well as data of the Wikispeedia games (*data/wikispeedia-paths-and-graph*). 
 
+Additionnaly to this in order to quantify the knowledge produced by each country, we will use the number of citable publications per country in 2007. This data is available on the [Science and Engineering indicators](https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field#utm_source=chatgpt.com) website.
+
 
 ## Research questions
 Is the way players play Wikispeedia dependent on how knowledge is produced in the world? Or are they influenced by the Wikipedia graph, which is itself biased towards countries that produce the most knowledge?
@@ -21,10 +23,12 @@ This main question can be subdivided into different smaller questions:
 3. What articles are most likely to cause a player to stop the game? What makes those articles "dead ends"? 
 4. Can controlling for different cofactors be enough to remove the observed bias? Can we explain the variance in player's click counts with the number of links leading in and out of articles? Are players significantly more biased than a random walk on the graph?
 5. Do players click more often on articles that are associated with countries generating a high number of publications? Is this phenomenon also observed after balancing and controlling for any confounding factors?
+6. is the Wikpedia graph acutely representing the knowledge produced by each country?
 
 ## Data story
 Our data story is available on the following [website](https://brygotti.github.io/lesfraisestagada/analysis.html). Happy reading!
 
+In case you want to look at the code of the website it is available [here](https://github.com/brygotti/lesfraisestagada)
 ## Methods
 
 ### 1. Are there cultural biases intrinsic to the Wikipedia graph?
@@ -33,8 +37,9 @@ Our data story is available on the following [website](https://brygotti.github.i
 First, we assign one or multiple countries to each articles of the Wikispeedia dataset. This will then be useful to
 determine to which region of the world (and thus to which culture) a given article belongs to. To assign each article to a country we did two things: 
 
-- First a naive approach is used by doing a text search and finding all the country string names inside the plaintext. This is done with help of a regex that matches all the countries in all the files. The results are then parsed in a table containing as index the article name and as columns all the possible countries on earth along with the number of occurences in the specific article. After this the top 2 countries per articles are kept. This approach resulted in 1412 articles having no country assigned to them. By going manually through them it can be seen that as a human some articles can be further classified to countries even if the country name is not explicetly mentionned in the text.
-- Two LLM's were tested (Qwen and Llama) and only Llama (a Meta LLM) was retained in order to assign the missing articles to countries. For this to be done the LLM was downloaded locally and used for inference on the plaintext articles. This approach allowed to classify 525 new articles having no country assigned to them. Articles classified with help of the LLM have a "Top_1_count" of 0 meaning 0 occurences of the exact country name in the article but stil able to be inferred by an llm.
+- Two approaches were used in order to classify the countries. A naïve text search approach and a more context aware aproach using LLMs. 
+- In order to assess the quality of the classification, we used a consensus approach. We annotated 50 articles (where each article was annotated by two different team memebers) and we only kept the articles that were classified as the same by both annotators. This allowed to create an agreement metric used to compare the automated country classification methods.
+- We then improved the models classifications in order in order to have a higher agreement with the human annotators while avoiding to classify too many articles.
 - Some articles remained unclassified, as they represent entities that cannot be easily associated with a country (for example objects, celestial bodies, raw materials).
 
 #### Links between articles
@@ -108,6 +113,12 @@ where
 
 An analysis of the difference between the players and PageRank ranks was done to determine if players are significantly more biased than a random walk on the graph. Statistical significance was tested using a chi-square test with a number of trial $n$ set to the total number of clicks in all the recorded games.
 
+### Conclusion : Is the wikipedia graph acutely representing the knowledge produced by each country and how are players impacted by this ?
+
+By comparing the world knowledge production in terms of citable publications with the number of articles in the Wikipedia graph, we can determine if the Wikipedia graph is acutely representing the knowledge produced by each country. We can also analyze the impact of this representation on the players of the Wikispeedia game.
+
+This will be analyzed on graphical representations showing world knowledge production, the number of articles in the Wikipedia graph, the number of clicks on articles by players along with the main paths used by players in the game.
+
 ## Team organization
 
 ### Week 28.10 - 15.11 (P2)
@@ -138,25 +149,36 @@ Claire
 ### Week 29.11 - 20.12 (P3)
 
 Jeremy
-- [x] 
+- [x] Refined the country classification for all the methods and improve the LLM generations. 
+- [x] Organise human annotation and preprocess the data for the analysis part of the project.
+- [x] Improved robustness of the country classification.
 
 Claire
-- [x] 
+- [x] Analysis of the connectivity of the articles
+- [x] Analysis of the countries represented by the articles and connections between countries
+- [x] Analysis of the in degrees and out degrees of the articles
+- [x] Introduction of the website
 
 Oriane
-- [x] 
+- [x] Analysis of the click counts per country
+- [x] Analysis of the highway/game paths between countries before and after scaling
+- [x] Introduction of the website
 
 Bryan
-- [x]
+- [x] Rebalancing of the graph and further improvements on confounders.
+- [x] Page rank implmentation and analysis.
+- [x] Website creation and UI design.
 
 Theo
-- [x]
+- [x] Dead end analysis and scaling per country.
+- [x] Analysis of the success and failure ratios of the articles.
+- [x] Knowledge distribution per country with the number of citable publications.
   
 Everyone
 - [x] Merge own notebook into `results.py`
 - [x] Write methods in `README.md`
 - [x] Write conclusion in 3.4 of `results.py`
-
+- [x] Contribute to the website and convert the graphs to plotty so that they can be shown on the website
 
 ## Quickstart
 
@@ -177,21 +199,59 @@ conda env create -f environment.yml
 conda activate ada
 ```
 
+To run the scripts in the `src/scripts` folder, you can use the following command:
+
+This will launch the country classification for the articles with LLM and Qwen. This will take nearly 40min per model and it assumes you have a GPU with at least 30GB of VRAM. The EPFL clusters were used to run this script.
+```bash
+python src/scripts/article_to_country.py
+```
+
+This will generate the country_clicks_links.csv file that is used in the analysis part of the project.
+```bash
+python src/scripts/article_clicks_links.py
+```
+
 ## Project Structure
-The directory structure of new project looks like this:
+The directory structure of the project looks like this:
 
 ```
-├── data                        <- Project data files
+├── data                                                    <- Project data files
+│   ├── country_clicks_links.csv                                <- Data directory
+│   │   ├── consensus.csv                                           <- Consensus file for the country classification (only the articles that were classified as the same from both annotators)
+│   │   ├── subset_bryan.csv                                        <- Annotations of the articles by Bryan
+│   │   ├── subset_claire.csv                                       <- Annotations of the articles by Claire
+│   │   ├── subset_jeremy.csv                                       <- Annotations of the articles by Jeremy
+│   │   ├── subset_oriane.csv                                       <- Annotations of the articles by Oriane
+│   │   └── subset_theo.csv                                         <- Annotations of the articles by Theo
+│   │
+│   ├── country_clicks_links.csv                                <- Data directory
+│   ├── country_data_full_llama_improved_normal.csv             <- Model directory
+│   ├── country_data_full_llama_improved_reversed.csv           <- Utility directory
+│   ├── country_data_full_llama_improved.csv                    <- Shell scripts
+│   ├── country_data_full_llama.csv                             <- Data directory
+│   ├── country_data_full_qwen.csv                              <- Model directory
+│   ├── country_data.csv                                        <- Utility directory
+│   ├── country_occurences.csv                                  <- Shell scripts
+│   └── publications_2007.csv                                   <- Shell scripts
 │
 ├── src                         <- Source code
-│   ├── data                            <- Data directory
-│   ├── models                          <- Model directory
-│   ├── utils                           <- Utility directory
-│   ├── scripts                         <- Shell scripts
+│   └── data                            <- Data directory
+│       └── dataloader.py                           <- Functions used to load the data
+│   └── models                          <- Model directory
+│       └── llm_classifier.py                       <- Generator class abstracting the LLM model
+│   └── utils                           <- Utility directory
+│       ├── functions.py                           <- Utility functions used to process the data and render the results in the notebooks
+│       ├── graphs.py                              <- Utility functions used to create the graphs
+│       └── plots.py                               <- Utility functions used to render the plots in the notebooks
+│   └── scripts                         <- External python scripts that are used to generate the data
+│       ├── article_to_country.py                  <- Script allowing to launch the LLM in different configurations.
+│       └── article_clicks_links.py                <- Scipt to generate the country_clicks_links.csv file
 │
-├── results.ipynb               <- a well-structured notebook showing the results
+├── results_P3.ipynb                <- a well-structured notebook showing the results for P3
+├── results.ipynb                   <- Old P2 notebook showing the results for P2
 │
 ├── .gitignore                  <- List of files ignored by git
 ├── pip_requirements.txt        <- File for installing python dependencies
+├── environment.yml             <- File for installing python dependencies
 └── README.md
 ```

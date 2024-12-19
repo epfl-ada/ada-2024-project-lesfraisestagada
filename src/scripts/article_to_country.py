@@ -220,9 +220,9 @@ if __name__ == "__main__":
     
     count_and_lama(use_counts=False, model_key="Qwen/Qwen2.5-7B-Instruct", model_family='qwen', file_name='country_data_full_qwen')
     
-    count_and_lama(use_counts=False, model_key="google/gemma-2-9b-it", model_family='gemma', file_name='country_data_full_gemma')
+    # count_and_lama(use_counts=False, model_key="google/gemma-2-9b-it", model_family='gemma', file_name='country_data_full_gemma')
     
-    count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved_normal', testing=False)
+    # count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved_normal', testing=False)
     
     # count_and_lama(use_counts=False, model_key="meta-llama/Meta-Llama-3.1-8B-Instruct", model_family='llama', file_name='country_data_full_llama_improved_reversed', testing=False)
     
