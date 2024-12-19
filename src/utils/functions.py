@@ -469,6 +469,16 @@ def rank_diff(
 
 
 def generate_annotations_and_show_agreement(data, write = False, write_agreement = False):
+    """Generate annotations and show agreement between annotators
+
+    Args:
+        data (dictionnary): dictionary containing the data of the different country annotation methods
+        write (bool, optional): If the agreement csv should be saved. Defaults to False.
+        write_agreement (bool, optional): If the agreement dataframe should be printed. Defaults to False.
+
+    Returns:
+        _type_: _description_
+    """
     articles = pd.DataFrame(data["Text search"].index)
 
     subset_1 = articles.sample(10, random_state=0).values.flatten().tolist()
