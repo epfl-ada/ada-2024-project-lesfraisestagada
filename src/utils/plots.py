@@ -158,9 +158,6 @@ def top_player_vs_pagerank_article_frequencies(df_player_frequencies, df_pageran
 
 
 def top_player_vs_pagerank_country_frequencies(df_player_frequencies, df_pagerank, k=40):
-    df_pagerank = df_pagerank[['country_name', 'rank']].groupby(['country_name'], as_index=False).sum()
-    df_player_frequencies = df_player_frequencies[['country_name', 'rank']].groupby(['country_name'], as_index=False).sum()
-
     df_player_frequencies['type'] = 'Player'
     df_pagerank['type'] = 'Pagerank'
     rank_v_freq = pd.concat([df_player_frequencies, df_pagerank], ignore_index=True)
@@ -169,7 +166,7 @@ def top_player_vs_pagerank_country_frequencies(df_player_frequencies, df_pageran
     first_k_country_names = df_pagerank.sort_values(by='rank', ascending=False).head(k).country_name
     truncated_r_v_f = rank_v_freq[rank_v_freq.country_name.isin(first_k_country_names.values)].reset_index(drop=True)
     plt.figure(figsize=(8, 14), dpi=80)
-    plt.title(f'Figure 2: Player vs PageRank for top {k} PageRank countries')
+    plt.title(f'Figure 1: Player vs PageRank for top {k} PageRank countries')
     sns.barplot(truncated_r_v_f, y='country_name', x='rank', hue='type', orient='y')
 
 
