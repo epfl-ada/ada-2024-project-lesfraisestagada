@@ -335,3 +335,49 @@ def analyze_last_articles_in_unfinished_paths(unfinished_paths, unique_dead_end_
     )
 
     return last_dead_end_countries
+
+def normalize_clicks():
+    """Computes the normalization of click counts of each country as described in part 5 of the notebook"""
+    articles = pd.read_csv("data/country_clicks_links.csv", index_col=0).reset_index().rename(columns={'index': 'article'})
+    countries_links_in = articles[['Top_1_name', 'num_links_in']].groupby('Top_1_name').agg('sum')
+    countries_clicks = articles[['Top_1_name', 'click_count']].groupby('Top_1_name').agg('sum')
+    countries = pd.concat([countries_links_in, countries_clicks], axis=1)
+    countries['click_count_normalized'] = countries['click_count'] / countries['num_links_in']
+    countries = countries.reset_index()
+
+    return countries
+
+def compute_player_frequencies():
+    """Compute the players rank as described in PageRank analysis (part 5 of notebook)"""
+    df_player_frequencies = pd.read_csv("data/country_clicks_links.csv", index_col=0)
+    df_player_frequencies['rank'] = df_player_frequencies.click_count / df_player_frequencies.click_count.sum()
+    df_player_frequencies.index.name = 'article_name'
+    df_player_frequencies.reset_index(inplace=True)
+    df_player_frequencies.sort_values(by='rank', ascending=False, inplace=True, ignore_index=True)
+    df_player_frequencies = df_player_frequencies[['article_name', 'rank']]
+
+    return df_player_frequencies
+
+def aggregate_ranks_by_country(
+    df_ranks
+):
+    """Aggregate player ranks and PageRanks by country as described PageRank analysis (part 5 of notebook)"""
+
+    df_ranks = df_ranks[['country_name', 'rank']].groupby(['country_name'], as_index=False).sum()
+
+    return df_ranks
+
+def rank_diff(
+    df_pagerank,
+    df_player_frequencies
+):
+    """Computing rank difference between players rank and PageRank (part 5 of notebook)"""
+
+    rank_v_freq_2_columns = pd.merge(df_pagerank[['article_name', 'rank']], df_player_frequencies[['country_name', 'article_name', 'rank']], on='article_name', suffixes=('_pagerank', '_players'), how='right')
+    rank_v_freq_2_columns = rank_v_freq_2_columns.fillna({'rank_pagerank': 0}) # fill missing pagerank values (those where isolated articles that were not added to the graph, they all have click_count 0 anyway and the pagerank should be 0 too)
+    rank_v_freq_2_columns['rank_diff'] = rank_v_freq_2_columns['rank_players'] - rank_v_freq_2_columns['rank_pagerank']
+    rank_v_freq_2_columns.sort_values(by='rank_pagerank', inplace=True, ignore_index=True, ascending=False)
+    rank_v_freq_countries = rank_v_freq_2_columns.drop(columns=['article_name']).groupby('country_name', as_index=False, dropna=False).sum()
+    rank_v_freq_countries.sort_values(by='rank_pagerank', inplace=True, ignore_index=True, ascending=False)
+    
+    return rank_v_freq_countries
