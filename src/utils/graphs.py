@@ -591,7 +591,7 @@ def plot_start_stop_count(df_top_start, df_top_stop):
                 type="buttons",
                 direction="left",
                 x=0.5,  # Center the buttons horizontally
-                y=1.15,  # Position the buttons above the graph
+                y=1.1,  # Position the buttons above the graph
                 xanchor="center",
                 yanchor="bottom",
                 buttons=[
@@ -615,10 +615,9 @@ def plot_start_stop_count(df_top_start, df_top_stop):
                 showactive=True,
             )
         ],
-        height=600,
-        width=800,
-        title_x=0.5,  # Center the plot title
-        margin=dict(l=50, r=50, t=100, b=50)  # Add padding around the plot
+        height=450,
+        width=600,
+        margin=dict(l=120, r=120, t=50, b=50), # Add margins to the plot
     )
 
     # Save to HTML and display
@@ -718,6 +717,6 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
     fig.data[0].visible = True  # Before scaling
     fig.data[1].visible = False  # After scaling
 
-    fig.write_html('graphs/top_country_dead_end_articles.html')
+    # fig.write_html('graphs/top_country_dead_end_articles.html')
    
     fig.show()
