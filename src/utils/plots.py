@@ -161,13 +161,172 @@ def top_player_vs_pagerank_country_frequencies(df_player_frequencies, df_pageran
     df_player_frequencies['type'] = 'Player'
     df_pagerank['type'] = 'Pagerank'
     rank_v_freq = pd.concat([df_player_frequencies, df_pagerank], ignore_index=True)
-    rank_v_freq.sort_values(by=['type', 'rank'], ignore_index=True, inplace=True, ascending=[True, False])
+
     # Get k article names with highest pagerank, we will plot that
     first_k_country_names = df_pagerank.sort_values(by='rank', ascending=False).head(k).country_name
+    
+    # Sort top make top pagerank appear first
+    def sorter(column):
+        """Sort function"""
+        correspondence = {country: order for order, country in enumerate(first_k_country_names)}
+        return column.map(correspondence)
+    
+    rank_v_freq.sort_values(by="country_name", key=sorter, ignore_index=True, inplace=True)
     truncated_r_v_f = rank_v_freq[rank_v_freq.country_name.isin(first_k_country_names.values)].reset_index(drop=True)
-    plt.figure(figsize=(8, 14), dpi=80)
-    plt.title(f'Figure 1: Player vs PageRank for top {k} PageRank countries')
-    sns.barplot(truncated_r_v_f, y='country_name', x='rank', hue='type', orient='y')
+    pagerank_truncated = truncated_r_v_f[truncated_r_v_f['type'] == 'Pagerank']
+    player_truncated = truncated_r_v_f[truncated_r_v_f['type'] == 'Player']
+
+    frames = [
+        go.Frame(
+            data = go.Bar(
+                x=pagerank_truncated["rank"],
+                y=pagerank_truncated["country_name"],
+                orientation="h",
+                name="PageRank",
+                marker=dict(
+                    color="steelblue",
+                )
+            ),
+            name = 'pagerank'
+        ),
+        go.Frame(
+            data = go.Bar(
+                x=player_truncated["rank"],
+                y=player_truncated["country_name"],
+                orientation="h",
+                name="Player",
+                marker=dict(
+                    color="goldenrod",
+                )
+            ),
+            name='player'
+        ),
+        go.Frame(
+            data = go.Bar(
+                x=player_truncated["rank"].reset_index(drop=True) - pagerank_truncated["rank"].reset_index(drop=True),
+                y=player_truncated["country_name"],
+                orientation="h",
+                name="Difference",
+                marker=dict(
+                    color="olivedrab",
+                )
+            ),
+            name='diff'
+        )
+    ]
+
+    layout = go.Layout(
+        xaxis=dict(title=f"Player vs PageRank for top {k} PageRank countries", range=[-0.02, 0.15], autorange=False),
+        yaxis=dict(title="Country"),
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction = "left",
+                x=0.5,
+                xanchor="left",
+                y=1.2,
+                yanchor="top",
+                pad={"l": -120},
+                showactive=True,
+                buttons=[
+                    dict(
+                        label="PageRank",
+                        method="animate",
+                        args=[['pagerank']]
+                    ),
+                    dict(
+                        label="Player",
+                        method="animate",
+                        args=[['player']]
+                    ),
+                    dict(
+                        label="Difference",
+                        method="animate",
+                        args=[['diff']]
+                    )
+                ]
+            )
+        ],
+    )
+
+    fig = go.Figure(
+        data=frames[0].data,
+        layout=layout,
+        frames=frames
+    )
+
+    return fig
+
+def top_bottom_rank_diff(rank_v_freq_countries, k=40):
+
+    rank_v_freq_countries = rank_v_freq_countries.dropna().sort_values(by='rank_diff', ascending=False)
+
+    top = rank_v_freq_countries.head(k)
+    bottom = rank_v_freq_countries.tail(k).sort_values(by='rank_diff', ascending=True)
+
+    frames = [
+        go.Frame(
+            data = go.Bar(
+                x=top["rank_diff"],
+                y=top["country_name"],
+                orientation="h",
+                name=f"Top 10",
+                marker=dict(
+                    color="olivedrab",
+                )
+            ),
+            name = 'top'
+        ),
+        go.Frame(
+            data = go.Bar(
+                x=bottom["rank_diff"],
+                y=bottom["country_name"],
+                orientation="h",
+                name=f"Bottom 10",
+                marker=dict(
+                    color="olivedrab",
+                )
+            ),
+            name='bottom'
+        )
+    ]
+
+    layout = go.Layout(
+        xaxis=dict(title=f"Top and bottom {k} countries with respect to rank difference", range=[-0.02, 0.04], autorange=False),
+        yaxis=dict(title="Country"),
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction = "left",
+                x=0.5,
+                xanchor="left",
+                y=1.2,
+                yanchor="top",
+                pad={"l": -80},
+                showactive=True,
+                buttons=[
+                    dict(
+                        label="Top",
+                        method="animate",
+                        args=[['top']]
+                    ),
+                    dict(
+                        label="Bottom",
+                        method="animate",
+                        args=[['bottom']]
+                    ),
+                ]
+            )
+        ],
+    )
+
+    fig = go.Figure(
+        data=frames[0].data,
+        layout=layout,
+        frames=frames
+    )
+
+    return fig
 
 
 
