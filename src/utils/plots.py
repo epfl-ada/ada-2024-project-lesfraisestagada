@@ -270,7 +270,7 @@ def top_bottom_rank_diff(rank_v_freq_countries, k=40):
                 x=top["rank_diff"],
                 y=top["country_name"],
                 orientation="h",
-                name=f"Top {k}",
+                name=f"Top 10",
                 marker=dict(
                     color="olivedrab",
                 )
@@ -282,7 +282,7 @@ def top_bottom_rank_diff(rank_v_freq_countries, k=40):
                 x=bottom["rank_diff"],
                 y=bottom["country_name"],
                 orientation="h",
-                name=f"Bottom {k}",
+                name=f"Bottom 10",
                 marker=dict(
                     color="olivedrab",
                 )
@@ -306,12 +306,12 @@ def top_bottom_rank_diff(rank_v_freq_countries, k=40):
                 showactive=True,
                 buttons=[
                     dict(
-                        label=f"Top {k}",
+                        label="Top",
                         method="animate",
                         args=[['top']]
                     ),
                     dict(
-                        label=f"Bottom {k}",
+                        label="Bottom",
                         method="animate",
                         args=[['bottom']]
                     ),
