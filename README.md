@@ -158,12 +158,6 @@ conda activate ada-2024-project-lesfraisestagada
 pip install -r requirements.txt
 ```
 
-If you want to run the LLM part locally on cuda GPUs, you will need to use a different conda environment, named `ada` and defined in the `environment.yml` file. You can create and activate this environment by running the following command:
-```bash
-conda env create -f environment.yml
-conda activate ada
-```
-
 To run the scripts in the `src/scripts` folder, you can use the following commands:
 
 This will launch the country classification for the articles with LLM and Qwen. This will take nearly 40min per model and it assumes you have a GPU with at least 30GB of VRAM. The EPFL clusters were used to run this script.
@@ -218,6 +212,5 @@ The directory structure of the project looks like this:
 │
 ├── .gitignore                  <- List of files ignored by git
 ├── requirements.txt            <- File for installing python dependencies
-├── environment.yml             <- File for installing python dependencies
 └── README.md
 ```
