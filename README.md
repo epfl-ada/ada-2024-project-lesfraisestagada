@@ -190,14 +190,14 @@ The directory structure of the project looks like this:
 │   │   └── subset_theo.csv                                         <- Annotations of the articles by Theo
 │   │
 │   ├── country_clicks_links.csv                                <- File containing main features of the articles used in our analysis
-│   ├── country_data_full_llama_improved_normal.csv             <- Model directory
-│   ├── country_data_full_llama_improved_reversed.csv           <- Utility directory
-│   ├── country_data_full_llama_improved.csv                    <- Shell scripts
-│   ├── country_data_full_llama.csv                             <- Data directory
-│   ├── country_data_full_qwen.csv                              <- Model directory
-│   ├── country_data.csv                                        <- Utility directory
-│   ├── country_occurences.csv                                  <- Shell scripts
-│   └── publications_2007.csv                                   <- Shell scripts
+│   ├── country_data_full_llama_improved_normal.csv             <- Country classification file using the LLaMa model in nomal mode
+│   ├── country_data_full_llama_improved_reversed.csv           <- Country classification file using the LLaMa model with a reversed list of countries (for robustness)
+│   ├── country_data_full_llama_improved.csv                    <- Country classification file using the LLaMa model where a country is kept only if normal and reversed classifications are the same
+│   ├── country_data_full_llama.csv                             <- Country classification file using the LLaMa model (first version)
+│   ├── country_data_full_qwen.csv                              <- Country classification file using the Qwen model
+│   ├── country_data.csv                                        <- Country classification temporary file used for naive text search approach
+│   ├── country_occurences.csv                                  <- Country classification file using the naive text search approach with top 2 countries
+│   └── publications_2007.csv                                   <- File containing the number of citable publications per country in 2007
 │
 ├── src                         <- Source code
 │   └── data                            <- Data directory
