@@ -98,8 +98,6 @@ where
 * $c_a$ is the click count of the article $a$ (the number of times it appears in the recorded player paths)
 * $A$ is the set of all articles in the Wikipedia graph
 
-To remove as much bias from the graph as possible in the players rank (given that we want a fair comparison between the PageRanks which represents the graph's inherent bias and the players rank which represents the players' bias), we removed the start and target articles from the players paths before computing click counts. Those articles are not actually chosen by the players but are imposed by the game, so they do not represent the players' bias. Initial comparison of players vs PageRank was done.
-
 The players and PageRank ranks were then aggregated by country for further analysis. The rank of a country was defined as: <br/>
 
 $$r_c = \sum_{a \in A_c} r_a$$
@@ -160,12 +158,6 @@ conda activate ada-2024-project-lesfraisestagada
 pip install -r requirements.txt
 ```
 
-If you want to run the LLM part locally on cuda GPUs, you will need to use a different conda environment, named `ada` and defined in the `environment.yml` file. You can create and activate this environment by running the following command:
-```bash
-conda env create -f environment.yml
-conda activate ada
-```
-
 To run the scripts in the `src/scripts` folder, you can use the following commands:
 
 This will launch the country classification for the articles with LLM and Qwen. This will take nearly 40min per model and it assumes you have a GPU with at least 30GB of VRAM. The EPFL clusters were used to run this script.
@@ -192,14 +184,14 @@ The directory structure of the project looks like this:
 │   │   └── subset_theo.csv                                         <- Annotations of the articles by Theo
 │   │
 │   ├── country_clicks_links.csv                                <- File containing main features of the articles used in our analysis
-│   ├── country_data_full_llama_improved_normal.csv             <- Model directory
-│   ├── country_data_full_llama_improved_reversed.csv           <- Utility directory
-│   ├── country_data_full_llama_improved.csv                    <- Shell scripts
-│   ├── country_data_full_llama.csv                             <- Data directory
-│   ├── country_data_full_qwen.csv                              <- Model directory
-│   ├── country_data.csv                                        <- Utility directory
-│   ├── country_occurences.csv                                  <- Shell scripts
-│   └── publications_2007.csv                                   <- Shell scripts
+│   ├── country_data_full_llama_improved_normal.csv             <- Country classification file using the LLaMa model in nomal mode
+│   ├── country_data_full_llama_improved_reversed.csv           <- Country classification file using the LLaMa model with a reversed list of countries (for robustness)
+│   ├── country_data_full_llama_improved.csv                    <- Country classification file using the LLaMa model where a country is kept only if normal and reversed classifications are the same
+│   ├── country_data_full_llama.csv                             <- Country classification file using the LLaMa model (first version)
+│   ├── country_data_full_qwen.csv                              <- Country classification file using the Qwen model
+│   ├── country_data.csv                                        <- Country classification temporary file used for naive text search approach
+│   ├── country_occurences.csv                                  <- Country classification file using the naive text search approach with top 2 countries
+│   └── publications_2007.csv                                   <- File containing the number of citable publications per country in 2007
 │
 ├── src                         <- Source code
 │   └── data                            <- Data directory
@@ -220,6 +212,5 @@ The directory structure of the project looks like this:
 │
 ├── .gitignore                  <- List of files ignored by git
 ├── requirements.txt            <- File for installing python dependencies
-├── environment.yml             <- File for installing python dependencies
 └── README.md
 ```
