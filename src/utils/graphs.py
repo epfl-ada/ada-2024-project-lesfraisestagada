@@ -559,11 +559,11 @@ def overlap_world_map_normalized_clicks(out_path, clicks_normalized, countries, 
 
 def plot_start_stop_count(df_top_start, df_top_stop):
     """
-    Plot the start and stop articles counts for the top 10 countries with animation.
+    Plot the source and target articles counts for the top 10 countries with animation.
 
     Args:
-        df_top_start (dataframe): Data containing the start and stop articles count (sorted by start articles count) for the top 10 countries.
-        df_top_stop (dataframe): Data containing the start and stop articles count (sorted by stop articles count) for the top 10 countries.
+        df_top_source (dataframe): Data containing the source and target articles count (sorted by source articles count) for the top 10 countries.
+        df_top_stop (dataframe): Data containing the source and target articles count (sorted by target articles count) for the top 10 countries.
     """
 
     fig = go.Figure(
@@ -571,13 +571,13 @@ def plot_start_stop_count(df_top_start, df_top_stop):
             go.Bar(
                 x=df_top_start['country'],
                 y=df_top_start['start'],
-                name='Start Articles',
+                name='Source Articles',
                 marker_color='#1f77b4'
             ),
             go.Bar(
                 x=df_top_start['country'],
                 y=df_top_start['stop'],
-                name='Stop Articles',
+                name='Target Articles',
                 marker_color='#ff7f0e'
             )
         ]
@@ -590,34 +590,34 @@ def plot_start_stop_count(df_top_start, df_top_stop):
                 go.Bar(
                     x=df_top_start['country'],
                     y=df_top_start['start'],
-                    name='Start Articles',
+                    name='Source Articles',
                     marker_color='#1f77b4'
                 ),
                 go.Bar(
                     x=df_top_start['country'],
                     y=df_top_start['stop'],
-                    name='Stop Articles',
+                    name='Target Articles',
                     marker_color='#ff7f0e'
                 )
             ],
-            name="Sort by Start"
+            name="Sort by Source"
         ),
         go.Frame(
             data=[
                 go.Bar(
                     x=df_top_stop['country'],
                     y=df_top_stop['start'],
-                    name='Start Articles',
+                    name='Source Articles',
                     marker_color='#1f77b4'
                 ),
                 go.Bar(
                     x=df_top_stop['country'],
                     y=df_top_stop['stop'],
-                    name='Stop Articles',
+                    name='Target Articles',
                     marker_color='#ff7f0e'
                 )
             ],
-            name="Sort by Stop"
+            name="Sort by Target"
         )
     ]
 
@@ -635,20 +635,20 @@ def plot_start_stop_count(df_top_start, df_top_stop):
                 yanchor="bottom",
                 buttons=[
                     dict(
-                        label="Sort by Start",
+                        label="Sort by Source",
                         method="animate",
                         args=[
-                            ["Sort by Start"],
+                            ["Sort by Source"],
                             {"frame": {"duration": 500, "redraw": True},
                              "mode": "immediate",
                              "transition": {"duration": 500}}
                         ]
                     ),
                     dict(
-                        label="Sort by Stop",
+                        label="Sort by Target",
                         method="animate",
                         args=[
-                            ["Sort by Stop"],
+                            ["Sort by Target"],
                             {"frame": {"duration": 500, "redraw": True},
                              "mode": "immediate",
                              "transition": {"duration": 500}}
@@ -658,13 +658,11 @@ def plot_start_stop_count(df_top_start, df_top_stop):
                 showactive=True,
             )
         ],
-        height=600,
-        width=750,
         margin=dict(l=140, r=140, t=70, b=70), 
         plot_bgcolor="white"
     )
 
-    # fig.write_html('graphs/topic_1/start_stop_count.html')
+    fig.write_html('graphs/topic_2/source_target_count.html')
 
     fig.show()
 
