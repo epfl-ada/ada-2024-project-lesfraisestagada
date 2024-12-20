@@ -557,31 +557,68 @@ def overlap_world_map_normalized_clicks(out_path, clicks_normalized, countries, 
 
 def plot_start_stop_count(df_top_start, df_top_stop):
     """
-    Plot the start and stop articles counts for the top 10 countries
+    Plot the start and stop articles counts for the top 10 countries with animation.
 
     Args:
-        df_top_start (dataframe): data containing the start and stop articles count (sorted by start articles count) for the top 10 countries
-        df_top_stop (dataframe): data containing the start and stop articles count (sorted by stop articles count) for the top 10 countries
+        df_top_start (dataframe): Data containing the start and stop articles count (sorted by start articles count) for the top 10 countries.
+        df_top_stop (dataframe): Data containing the start and stop articles count (sorted by stop articles count) for the top 10 countries.
     """
 
-    fig = go.Figure()
+    fig = go.Figure(
+        data=[
+            go.Bar(
+                x=df_top_start['country'],
+                y=df_top_start['start'],
+                name='Start Articles',
+                marker_color='#1f77b4'
+            ),
+            go.Bar(
+                x=df_top_start['country'],
+                y=df_top_start['stop'],
+                name='Stop Articles',
+                marker_color='#ff7f0e'
+            )
+        ]
+    )
 
-    # Add traces for start and stop articles
-    fig.add_trace(go.Bar(
-        x=df_top_start['country'],
-        y=df_top_start['start'],
-        name='Start Articles',
-        marker_color='#1f77b4'
-    ))
+    # frames for animation
+    fig.frames = [
+        go.Frame(
+            data=[
+                go.Bar(
+                    x=df_top_start['country'],
+                    y=df_top_start['start'],
+                    name='Start Articles',
+                    marker_color='#1f77b4'
+                ),
+                go.Bar(
+                    x=df_top_start['country'],
+                    y=df_top_start['stop'],
+                    name='Stop Articles',
+                    marker_color='#ff7f0e'
+                )
+            ],
+            name="Sort by Start"
+        ),
+        go.Frame(
+            data=[
+                go.Bar(
+                    x=df_top_stop['country'],
+                    y=df_top_stop['start'],
+                    name='Start Articles',
+                    marker_color='#1f77b4'
+                ),
+                go.Bar(
+                    x=df_top_stop['country'],
+                    y=df_top_stop['stop'],
+                    name='Stop Articles',
+                    marker_color='#ff7f0e'
+                )
+            ],
+            name="Sort by Stop"
+        )
+    ]
 
-    fig.add_trace(go.Bar(
-        x=df_top_start['country'],
-        y=df_top_start['stop'],
-        name='Stop Articles',
-        marker_color='#ff7f0e'
-    ))
-
-    # Update layout
     fig.update_layout(
         xaxis_title="Country",
         yaxis_title="Count",
@@ -590,25 +627,29 @@ def plot_start_stop_count(df_top_start, df_top_stop):
             dict(
                 type="buttons",
                 direction="left",
-                x=0.5,  # Center the buttons horizontally
-                y=1.05,  # Position the buttons above the graph
+                x=0.5,  # center the buttons horizontally
+                y=1.05,  # place the buttons above the plot
                 xanchor="center",
                 yanchor="bottom",
                 buttons=[
                     dict(
                         label="Sort by Start",
-                        method="update",
+                        method="animate",
                         args=[
-                            {"x": [df_top_start['country'], df_top_start['country']],
-                             "y": [df_top_start['start'], df_top_start['stop']]},
+                            ["Sort by Start"],
+                            {"frame": {"duration": 500, "redraw": True},
+                             "mode": "immediate",
+                             "transition": {"duration": 500}}
                         ]
                     ),
                     dict(
                         label="Sort by Stop",
-                        method="update",
+                        method="animate",
                         args=[
-                            {"x": [df_top_stop['country'], df_top_stop['country']],
-                             "y": [df_top_stop['start'], df_top_stop['stop']]},
+                            ["Sort by Stop"],
+                            {"frame": {"duration": 500, "redraw": True},
+                             "mode": "immediate",
+                             "transition": {"duration": 500}}
                         ]
                     )
                 ],
@@ -617,13 +658,14 @@ def plot_start_stop_count(df_top_start, df_top_stop):
         ],
         height=600,
         width=750,
-        margin=dict(l=140, r=140, t=70, b=70), # Add margins to the plot
+        margin=dict(l=140, r=140, t=70, b=70), 
         plot_bgcolor="white"
     )
 
-    # Save to HTML and display
-    # fig.write_html("graphs/topic_1/start_stop_count.html")
+    # fig.write_html('graphs/topic_1/start_stop_count.html')
+
     fig.show()
+
 
 
     # don't add title to the plot, will be added as html
