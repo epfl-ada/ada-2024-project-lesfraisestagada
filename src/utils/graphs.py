@@ -821,7 +821,7 @@ def plot_top_last_dead_end_countries_plotly(last_dead_end_countries, top_n=10):
     # layout with interactive button
     layout = go.Layout(
         xaxis=dict(title="Occurrences in Unfinished Paths"),
-        yaxis=dict(title="Last Article"),
+        yaxis=dict(title="Last Country"),
         updatemenus=[
             dict(
                 type="buttons",
@@ -916,7 +916,7 @@ def plot_articles_before_go_back_plotly(before_last_article_analysis, top_n=10):
     # Layout with centered buttons
     layout = go.Layout(
         xaxis=dict(title="Occurrences in Unfinished Paths"),
-        yaxis=dict(title="Article Before Backtracking"),
+        yaxis=dict(title="Country Before Backtracking"),
         updatemenus=[
             dict(
                 type="buttons",
@@ -957,5 +957,5 @@ def plot_articles_before_go_back_plotly(before_last_article_analysis, top_n=10):
     fig.data[1].visible = False  # Scaled count
 
 
-    fig.write_html('graphs/dead_ends_analysis3.html')
+    fig.write_html('graphs/topic_2/dead_ends_analysis3.html')
     fig.show()
