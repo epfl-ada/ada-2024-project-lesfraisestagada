@@ -63,7 +63,9 @@ def draw_circle_graph(df, out_path, project_path):
     net = Network(directed=True, 
                 notebook=True, 
                 font_color='#10000000', 
-                cdn_resources='in_line')
+                cdn_resources='in_line',
+                height='90vh',
+                width='100%')
 
     # Turn off physics so nodes stay fixed
     net.barnes_hut(gravity=-10000,  # Controls the strength of repulsion between nodes
