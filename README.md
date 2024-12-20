@@ -2,23 +2,19 @@
 # Analyzing cultural biases in Wikispeedia
 
 ## Abstract
-Today, content on the internet is still still mostly produced by Western societies [[1]](https://upload.wikimedia.org/wikipedia/commons/4/4a/Decolonizing_Wikipedia.pdf) [[2]](https://www.theguardian.com/commentisfree/2017/oct/05/internet-white-western-google-wikipedia-skewed#:~:text=of%20the%20world.-,For%20the%20first%20time%20in%20history%2C%20we%20are%20creating%20a,skewed%20towards%20rich%2C%20western%20countries.). Interestingly, those same societies also produce most of the human knowledge, which we proxy as the number of citable publications [[3]](https://www.scimagojr.com/countryrank.php?year=2007&order=it&ord=desc#google_vignette). [Wikispeedia](https://dlab.epfl.ch/wikispeedia/play/) is an online game built on Wikipedia articles from 2007 during which players are navigating from a given start to a target end article through the links contained in the articles. In this project we intend to investigate players’ behaviors and their biases. More precisely, we ask if the way players play Wikispeedia is dependent on how knowledge is produced in the world? Or are they influenced by the Wikipedia graph, which is itself biased towards countries that produce the most knowledge?
- 
-The first step will be to understand the relationship between the way players play Wikispeedia and the production of knowledge in the world.
-For this, we will compare two hypotheses, namely the “passive” and the “active” hypothesis. In the “passive” hypothesis, we assume that players “passively” play on a graph that is biased towards countries producing a lot of scientific knowledge. Thus, by removing the graph bias (i.e. by controlling for the number of articles per country, the number of links in and out of articles, balancing, propensity score matching, PageRank), there should be no bias anymore in the way players play. We consider that the Wikipedia graph is biased if it over or under represents some countries. On the other hand, the “active” hypothesis states that players “actively” add their own intrinsic biases when playing on that graph. A player bias can be defined as the inclination for or against one or several countries. By removing the graph bias, the player’s preference for some countries should still be visible.
-
+Today, content on the internet is still mostly skewed towards Western societies [[1]](https://upload.wikimedia.org/wikipedia/commons/4/4a/Decolonizing_Wikipedia.pdf) [[2]](https://www.theguardian.com/commentisfree/2017/oct/05/internet-white-western-google-wikipedia-skewed#:~:text=of%20the%20world.-,For%20the%20first%20time%20in%20history%2C%20we%20are%20creating%20a,skewed%20towards%20rich%2C%20western%20countries.). Interestingly, those same societies also produce most of the human knowledge, which can be proxied by the number of citable publications [[3]](https://www.scimagojr.com/countryrank.php?year=2007&order=it&ord=desc#google_vignette). [Wikispeedia](https://dlab.epfl.ch/wikispeedia/play/) is an online game built on 4604 Wikipedia articles from 2007, during which players are navigating from a given start to a target end article through the links contained in the articles. In this project we intend to investigate how players navigate through the game and how this navigation is influenced by the production of scientific knowledge in the world. More precisely, we are interested in understanding whether players are attracted towards articles linked to countries producing a lot of scientific knowledge.
 
 ## Data
-The articles that we will use have been borrowed from a 4,600-article version of Wikipedia that was once available at the 2007 Wikipedia Selection for schools. We have the content of the articles (*data/plaintext_articles*) as well as data of the Wikispeedia games (*data/wikispeedia-paths-and-graph*). 
+The Wikispeedia dataset is from [here](https://snap.stanford.edu/data/wikispeedia.html). It contains around 4600 articles from the [Wikipedia for Schools selection of 2007](https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_for_Schools). For each article, we have access to their text content, as well as a list of links between articles. The dataset also contains paths recordings from players of the [Wikispeedia game](https://en.wikipedia.org/wiki/Wikipedia:Wiki_Game).
 
-Additionnaly to this in order to quantify the knowledge produced by each country, we will use the number of citable publications per country in 2007. This data is available on the [Science and Engineering indicators](https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field#utm_source=chatgpt.com) website.
+Additionnaly to this, in order to quantify the knowledge produced by each country, we will use the number of citable publications per country in 2007. This data is available on the [Science and Engineering indicators](https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field#utm_source=chatgpt.com) website.
 
 
 ## Research questions
 Is the way players play Wikispeedia dependent on how knowledge is produced in the world? Or are they influenced by the Wikipedia graph, which is itself biased towards countries that produce the most knowledge?
 This main question can be subdivided into different smaller questions: 
 
-1. Which countries are most represented in the Wikispeedia? Are there cultural biases intrinsic to the Wikipedia graph?
+1. Which countries are most represented in Wikispeedia? Are there cultural biases intrinsic to the Wikipedia graph?
 2. Are there countries that are clicked more often by players in Wikispeedia? Are there "highway paths" that are very often used by players? 
 3. What articles are most likely to cause a player to stop the game? What makes those articles "dead ends"? 
 4. Can controlling for different cofactors be enough to remove the observed bias? Can we explain the variance in player's click counts with the number of links leading in and out of articles? Are players significantly more biased than a random walk on the graph?
@@ -26,9 +22,9 @@ This main question can be subdivided into different smaller questions:
 6. is the Wikpedia graph acutely representing the knowledge produced by each country?
 
 ## Data story
-Our data story is available on the following [website](https://brygotti.github.io/lesfraisestagada/analysis.html). Happy reading!
+Our data story is available on the following [website](https://brygotti.github.io/lesfraisestagada/). Happy reading!
 
-In case you want to look at the code of the website it is available [here](https://github.com/brygotti/lesfraisestagada)
+In case you want to look at the code of the website it is available [here](https://github.com/brygotti/lesfraisestagada).
 ## Methods
 
 ### 1. Are there cultural biases intrinsic to the Wikipedia graph?
@@ -121,7 +117,7 @@ This will be analyzed on graphical representations showing world knowledge produ
 
 ## Team organization
 
-### Week 28.10 - 15.11 (P2)
+### Weeks 28.10 - 15.11 (P2)
 
 Jeremy
 - [x]  Group articles by country first naïve approach, refine country calssification with help of an llm in order to have more articles (1.1)
@@ -146,7 +142,7 @@ Claire
 - [x]  Explain the variance in player's click counts with the number of links leading in and out of articles (3.2)
 - [x]  Connection between countries (1.2)
 
-### Week 29.11 - 20.12 (P3)
+### Weeks 29.11 - 20.12 (P3)
 
 Jeremy
 - [x] Refined the country classification for all the methods and improve the LLM generations. 
@@ -192,14 +188,16 @@ conda create -n ada-2024-project-lesfraisestagada python=3.11
 conda activate ada-2024-project-lesfraisestagada
 
 # install requirements
-pip install -r pip_requirements.txt
+pip install -r requirements.txt
+```
 
-# or create conda environment in case you want to run the llm locally on cuda GPUs
+If you want to run the LLM part locally on cuda GPUs, you will need to use a different conda environment, named `ada` and defined in the `environment.yml` file. You can create and activate this environment by running the following command:
+```bash
 conda env create -f environment.yml
 conda activate ada
 ```
 
-To run the scripts in the `src/scripts` folder, you can use the following command:
+To run the scripts in the `src/scripts` folder, you can use the following commands:
 
 This will launch the country classification for the articles with LLM and Qwen. This will take nearly 40min per model and it assumes you have a GPU with at least 30GB of VRAM. The EPFL clusters were used to run this script.
 ```bash
@@ -211,12 +209,12 @@ This will generate the country_clicks_links.csv file that is used in the analysi
 python src/scripts/article_clicks_links.py
 ```
 
-## Project Structure
+## Project structure
 The directory structure of the project looks like this:
 
 ```
 ├── data                                                    <- Project data files
-│   ├── country_clicks_links.csv                                <- Data directory
+|   ├── annotated                                               <- Directory containing the annotated articles
 │   │   ├── consensus.csv                                           <- Consensus file for the country classification (only the articles that were classified as the same from both annotators)
 │   │   ├── subset_bryan.csv                                        <- Annotations of the articles by Bryan
 │   │   ├── subset_claire.csv                                       <- Annotations of the articles by Claire
@@ -224,7 +222,7 @@ The directory structure of the project looks like this:
 │   │   ├── subset_oriane.csv                                       <- Annotations of the articles by Oriane
 │   │   └── subset_theo.csv                                         <- Annotations of the articles by Theo
 │   │
-│   ├── country_clicks_links.csv                                <- Data directory
+│   ├── country_clicks_links.csv                                <- File containing main features of the articles used in our analysis
 │   ├── country_data_full_llama_improved_normal.csv             <- Model directory
 │   ├── country_data_full_llama_improved_reversed.csv           <- Utility directory
 │   ├── country_data_full_llama_improved.csv                    <- Shell scripts
@@ -247,11 +245,10 @@ The directory structure of the project looks like this:
 │       ├── article_to_country.py                  <- Script allowing to launch the LLM in different configurations.
 │       └── article_clicks_links.py                <- Scipt to generate the country_clicks_links.csv file
 │
-├── results_P3.ipynb                <- a well-structured notebook showing the results for P3
-├── results.ipynb                   <- Old P2 notebook showing the results for P2
+├── results.ipynb               <- Main notebook showing the results
 │
 ├── .gitignore                  <- List of files ignored by git
-├── pip_requirements.txt        <- File for installing python dependencies
+├── requirements.txt            <- File for installing python dependencies
 ├── environment.yml             <- File for installing python dependencies
 └── README.md
 ```
