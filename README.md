@@ -20,12 +20,15 @@ This main question can be subdivided into different sub-questions:
 4. Can controlling for different cofactors be enough to remove the observed bias? Can we explain the variance in player's click counts with the number of links leading in and out of articles? Are players significantly more biased than a random walk on the graph?
 5. Is the Wikipedia graph accurately representing the knowledge produced by each country? Is this also observed after scaling and controlling for any confounding factors?
 
+
 ## Data story
 Our data story is available on the following [website](https://brygotti.github.io/lesfraisestagada/). Happy reading!
 
 In case you want to look at the code of the website it is available [here](https://github.com/brygotti/lesfraisestagada).
 
 ## Methods
+
+In this project, we will do analyses using graphical representations showing world knowledge production, the number of articles in the Wikipedia graph, the number of clicks on articles by players along with the main paths used by players in the game.
 
 ### 0. Data preprocessing
 #### Assign countries to articles
