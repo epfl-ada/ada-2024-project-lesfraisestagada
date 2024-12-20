@@ -304,7 +304,7 @@ def get_articles_before_go_back(unfinished_paths, unique_dead_end_countries):
 
 def analyze_last_articles_in_unfinished_paths(unfinished_paths, unique_dead_end_countries):
     """
-    Analyzes the last articles in unfinished paths and identifies which of them are known dead-end countries.
+    Identifies the last articles in unfinished paths that correspond to known dead-end countries.
 
     Args:
         unfinished_paths (pd.DataFrame): DataFrame containing paths in unfinished articles, with 'path' column.
