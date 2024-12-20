@@ -591,7 +591,7 @@ def plot_start_stop_count(df_top_start, df_top_stop):
                 type="buttons",
                 direction="left",
                 x=0.5,  # Center the buttons horizontally
-                y=1.1,  # Position the buttons above the graph
+                y=1.05,  # Position the buttons above the graph
                 xanchor="center",
                 yanchor="bottom",
                 buttons=[
@@ -615,9 +615,9 @@ def plot_start_stop_count(df_top_start, df_top_stop):
                 showactive=True,
             )
         ],
-        height=450,
-        width=600,
-        margin=dict(l=120, r=120, t=50, b=50), # Add margins to the plot
+        height=600,
+        width=750,
+        margin=dict(l=140, r=140, t=70, b=70), # Add margins to the plot
     )
 
     # Save to HTML and display
