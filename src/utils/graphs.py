@@ -618,6 +618,7 @@ def plot_start_stop_count(df_top_start, df_top_stop):
         height=600,
         width=750,
         margin=dict(l=140, r=140, t=70, b=70), # Add margins to the plot
+        plot_bgcolor="white"
     )
 
     # Save to HTML and display
@@ -639,10 +640,10 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
     """
     # get the top N data for both "before scaling" and "after scaling"
     top_before_scaling = unique_dead_end_countries.sort_values(
-        by="click_count", ascending=False
+        by=["click_count", "mean_failure_ratio_unique"], ascending=[False, False]
     ).head(top_n)
     top_after_scaling = unique_dead_end_countries.sort_values(
-        by="scaled_click_count", ascending=False
+        by=["scaled_click_count", "mean_failure_ratio_unique"], ascending=[False, False]
     ).head(top_n)
     
     # get global min and max for "Sum Links Out" across both datasets
@@ -685,8 +686,11 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
             dict(
                 type="buttons",
                 direction="left",
-                x=0.7,
+
+                x=0.5,
                 y=1.2,
+                xanchor="center",
+                yanchor="top",
                 showactive=True,
                 buttons=[
                     dict(
@@ -708,6 +712,9 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
                 ],
             )
         ],
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(l=160, r=100, t=100, b=100),
+        
     )
 
     # combine traces
@@ -717,6 +724,6 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
     fig.data[0].visible = True  # Before scaling
     fig.data[1].visible = False  # After scaling
 
-    # fig.write_html('graphs/top_country_dead_end_articles.html')
+    fig.write_html('graphs/highest_fail_ratio_countries.html')
    
     fig.show()
