@@ -95,8 +95,6 @@ where
 * $c_a$ is the click count of the article $a$ (the number of times it appears in the recorded player paths)
 * $A$ is the set of all articles in the Wikipedia graph
 
-To remove as much bias from the graph as possible in the players rank (given that we want a fair comparison between the PageRanks which represents the graph's inherent bias and the players rank which represents the players' bias), we removed the start and target articles from the players paths before computing click counts. Those articles are not actually chosen by the players but are imposed by the game, so they do not represent the players' bias. Initial comparison of players vs PageRank was done.
-
 The players and PageRank ranks were then aggregated by country for further analysis. The rank of a country was defined as: <br/>
 
 $$r_c = \sum_{a \in A_c} r_a$$
