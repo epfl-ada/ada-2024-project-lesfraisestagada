@@ -622,7 +622,7 @@ def plot_start_stop_count(df_top_start, df_top_stop):
     )
 
     # Save to HTML and display
-    fig.write_html("graphs/topic_1/start_stop_count.html")
+    # fig.write_html("graphs/topic_1/start_stop_count.html")
     fig.show()
 
 
@@ -724,6 +724,6 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
     fig.data[0].visible = True  # Before scaling
     fig.data[1].visible = False  # After scaling
 
-    fig.write_html('graphs/highest_fail_ratio_countries.html')
+    # fig.write_html('graphs/highest_fail_ratio_countries.html')
    
     fig.show()

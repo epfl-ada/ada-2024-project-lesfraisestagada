@@ -604,3 +604,24 @@ def rank_diff(
     rank_v_freq_countries.sort_values(by='rank_pagerank', inplace=True, ignore_index=True, ascending=False)
     
     return rank_v_freq_countries
+
+
+# map start and stop articles to countries
+def article_to_country(df_country_clicks_links, article):
+    """Gets the country of the article from df_country_clicks_links_sorted.
+    
+    Args:
+        df_country_clicks_links (pd.DataFrame): DataFrame with country data
+        article (str): Article name
+        
+    Returns:
+        str: Country name"""
+    try:
+        country_series = df_country_clicks_links.loc[df_country_clicks_links['article'] == article, 'Top_1_name']
+        if not country_series.empty:
+            return country_series.iloc[0] 
+        else:
+            return None  # return None if no match is found
+    except Exception as e:
+        print(f"Error for article {article}: {e}")
+        return None
