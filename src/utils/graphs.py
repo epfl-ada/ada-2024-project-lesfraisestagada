@@ -736,7 +736,7 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
                 showactive=True,
                 buttons=[
                     dict(
-                        label="Before Scaling",
+                        label="Raw Count",
                         method="update",
                         args=[
                             {"visible": [True, False]},
@@ -744,7 +744,7 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
                         ],
                     ),
                     dict(
-                        label="After Scaling",
+                        label="Scaled Count",
                         method="update",
                         args=[
                             {"visible": [False, True]},
@@ -766,6 +766,102 @@ def plot_top_dead_end_countries_plotly(unique_dead_end_countries, top_n=10):
     fig.data[0].visible = True  # Before scaling
     fig.data[1].visible = False  # After scaling
 
-    # fig.write_html('graphs/highest_fail_ratio_countries.html')
+    fig.write_html('graphs/topic_2/dead_ends_analysis1.html')
    
+    fig.show()
+
+def plot_top_last_dead_end_countries_plotly(last_dead_end_countries, top_n=10):
+    """
+    Plots the top N last articles in unfinished paths that are also known dead-end countries
+    with interactive buttons for switching between raw and scaled counts.
+
+    Args:
+        last_dead_end_countries (pd.DataFrame): DataFrame with last articles in unfinished paths
+                                                that match dead-end countries, containing count data.
+        top_n (int): Number of top articles to display (default is 10).
+    """
+    # select top N articles based on counts
+    top_raw = last_dead_end_countries.sort_values(by='count', ascending=False).head(top_n)
+    top_scaled = last_dead_end_countries.sort_values(by='scaled_count', ascending=False).head(top_n)
+
+    
+    # get global min and max for "Sum Links Out" across both datasets
+    global_min = top_raw["sum_num_links_out"].min()
+    global_max = top_scaled["sum_num_links_out"].max()
+
+    # create traces for raw and scaled counts
+    trace_raw = go.Bar(
+        x=top_raw['count'],
+        y=top_raw['last_article'],
+        orientation='h',
+        marker=dict(
+            color=top_raw["sum_num_links_out"], 
+            colorscale="Viridis", 
+            cmin=global_min,
+            cmax=global_max,
+            colorbar=dict(title="Sum Links Out", x=1.02),  
+        ),
+        name="Raw Count"
+    )
+
+    trace_scaled = go.Bar(
+        x=top_scaled['scaled_count'],
+        y=top_scaled['last_article'],
+        marker=dict(
+            color=top_scaled["sum_num_links_out"], 
+            colorscale="Viridis", 
+            cmin=global_min,
+            cmax=global_max,
+            colorbar=dict(title="Sum Links Out", x=1.02),  
+        ),
+        orientation='h',
+        name="Scaled Count"
+    )
+
+    # layout with interactive button
+    layout = go.Layout(
+        xaxis=dict(title="Occurrences in Unfinished Paths"),
+        yaxis=dict(title="Last Article"),
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="left",
+                x=0.5,
+                y=1.2,
+                xanchor="center",
+                yanchor="top",
+                showactive=True,
+                buttons=[
+                    dict(
+                        label="Raw Count",
+                        method="update",
+                        args=[
+                            {"visible": [True, False]},
+                            {"xaxis.title.text": "Occurrences in Unfinished Paths (Raw Count)"}
+                        ],
+                    ),
+                    dict(
+                        label="Scaled Count",
+                        method="update",
+                        args=[
+                            {"visible": [False, True]},
+                            {"xaxis.title.text": "Occurrences in Unfinished Paths (Scaled Count)"}
+                        ],
+                    ),
+                ],
+            )
+        ],
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(l=160, r=100, t=100, b=100),
+    )
+
+    # Create figure
+    fig = go.Figure(data=[trace_raw, trace_scaled], layout=layout)
+
+    # Initially set visibility
+    fig.data[0].visible = True  # Raw count
+    fig.data[1].visible = False  # Scaled count
+
+    # Save and show
+    fig.write_html('graphs/topic_2/dead_ends_analysis2.html')
     fig.show()
